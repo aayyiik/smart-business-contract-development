@@ -69,6 +69,12 @@
                                 <span class="badge badge-success">SENIOR VICE PRESIDENT</span>
                                 @elseif ($contract->pivot->status_id == 8)
                                 <span class="badge badge-success">DIREKTUR KEUANGAN DAN UMUM</span>
+                                @elseif ($contract->pivot->status_id == 9)
+                                <span class="badge badge-success">APPROVE</span>
+                                @elseif ($contract->pivot->status_id == 10)
+                                <span class="badge badge-success">VENDOR TANDA TANGAN KONTRAK</span>
+                                @elseif ($contract->pivot->status_id == 11)
+                                <span class="badge badge-success">FINAL KONTRAK</span>
                                 @endif
                             </td>
                             <td class="text-center" style="vertical-align: middle;"> <a href="{{ route('vendor.contract', ['contract' => $contract->pivot->contract_id, 'vendor' => $contract->pivot->vendor_id]) }}" class="btn btn-primary btn-xs"><b>Rincian</b></a>

@@ -133,8 +133,10 @@ class VendorController extends Controller
 
     public function sign_contracts()
     {
-        $contracts = ContractVendor::whereIn('status_id', [10,11])->get();
-        return view('vendor.sign-contracts', compact('contracts'));
+        $vendor = Vendor::where('user_detail_id', Auth::id())->first();
+        $contracts = $vendor->contracts()->where('status_id', [10])->get();
+        // $sign = ContractVendor::whereIn('status_id', [10,11])->get();
+        return view('vendor.sign-contracts', compact('contracts','vendor'));
     }
 
     public function sign_contract(Contract $contract, Vendor $vendor)

@@ -34,7 +34,6 @@
                             <th class="text-center pr-0" style="vertical-align: middle; width: 5%;">No.</th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Nomor Kontrak</th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 30%;">Nama Pekerjaan</th>
-                            <th class="text-center pr-0" style="vertical-align: middle; width: 20%;">Vendor</th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Prosentase
                             <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Nilai Kontrak (Rp)
                             </th>
@@ -46,39 +45,38 @@
                         @foreach ($contracts as $contract)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->number }}</td>
-                            <td style="vertical-align: middle;">{{ $contract->contract->name }}</td>
-                            <td style="vertical-align: middle;">{{ $contract->vendor->vendor }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->prosentase }}%
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->number }}</td>
+                            <td style="vertical-align: middle;">{{ $contract->name }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->prosentase }}%
                             </td>
-                            <td class="text-right" style="vertical-align: middle;">@currency($contract->nilai_kontrak)
+                            <td class="text-right" style="vertical-align: middle;">@currency($contract->pivot->nilai_kontrak)
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-                                @if ($contract->status_id == 1)
+                                @if ($contract->pivot->status_id == 1)
                                 <span class="badge badge-success">VENDOR</span>
-                                @elseif ($contract->status_id == 2)
+                                @elseif ($contract->pivot->status_id == 2)
                                 <span class="badge badge-success">BUYER</span>
-                                @elseif ($contract->status_id == 3)
+                                @elseif ($contract->pivot->status_id == 3)
                                 <span class="badge badge-success">HUKUM</span>
-                                @elseif ($contract->status_id == 4)
+                                @elseif ($contract->pivot->status_id == 4)
                                 <span class="badge badge-success">APPROVE HUKUM</span>
-                                @elseif ($contract->status_id == 5)
+                                @elseif ($contract->pivot->status_id == 5)
                                 <span class="badge badge-success">ASSISTANT VICE PRESIDENT</span>
-                                @elseif ($contract->status_id == 6)
+                                @elseif ($contract->pivot->status_id == 6)
                                 <span class="badge badge-success">VICE PRESIDENT</span>
-                                @elseif ($contract->status_id == 7)
+                                @elseif ($contract->pivot->status_id == 7)
                                 <span class="badge badge-success">SENIOR VICE PRESIDENT</span>
-                                @elseif ($contract->status_id == 8)
+                                @elseif ($contract->pivot->status_id == 8)
                                 <span class="badge badge-success">DIREKTUR KEUANGAN DAN UMUM</span>
-                                @elseif ($contract->status_id == 9)
+                                @elseif ($contract->pivot->status_id == 9)
                                 <span class="badge badge-success">APPROVE</span>
-                                @elseif ($contract->status_id == 10)
+                                @elseif ($contract->pivot->status_id == 10)
                                 <span class="badge badge-success">VENDOR TANDA TANGAN KONTRAK</span>
-                                @elseif ($contract->status_id == 11)
+                                @elseif ($contract->pivot->status_id == 11)
                                 <span class="badge badge-success">FINAL KONTRAK</span>
                                 @endif
                             </td>
-                            <td class="text-center" style="vertical-align: middle;"> <a href="{{ route('vendor.sign-contract', ['contract' => $contract->contract_id, 'vendor' => $contract->vendor_id]) }}" class="btn btn-primary btn-xs"><b>Rincian</b></a>
+                            <td class="text-center" style="vertical-align: middle;"> <a href="{{ route('vendor.sign-contract', ['contract' => $contract->pivot->contract_id, 'vendor' => $contract->pivot->vendor_id]) }}" class="btn btn-primary btn-xs"><b>Rincian</b></a>
                         </tr>
                         @endforeach
                     </tbody>

@@ -50,12 +50,12 @@ class SVPController extends Controller
         Approval::create([
             'contract_vendor_id' => $contract_detail->pivot->id,
             'name' => Auth::user()->name,
-            'status' => 7,
+            'status' => 2,
             'description' => $request->description,
         ]);
 
         $contract->vendors()->updateExistingPivot($vendor->id, [
-            'status_id' => 6,
+            'status_id' => 2,
         ]);
 
         $flasher->addSuccess('Berhasil mengembalikan!');
@@ -86,7 +86,7 @@ class SVPController extends Controller
             $flasher->addSuccess('Draft Kontrak Approved!');
         } else {
             $contract->vendors()->updateExistingPivot($vendor->id, [
-                'status_id' => 9,
+                'status_id' => 8,
             ]);
 
             $flasher->addSuccess('Berhasil memproses lanjut!');

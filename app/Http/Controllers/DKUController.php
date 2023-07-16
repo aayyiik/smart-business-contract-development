@@ -50,12 +50,12 @@ class DKUController extends Controller
         Approval::create([
             'contract_vendor_id' => $contract_detail->pivot->id,
             'name' => Auth::user()->name,
-            'status' => 8,
+            'status' => 2,
             'description' => $request->description,
         ]);
 
         $contract->vendors()->updateExistingPivot($vendor->id, [
-            'status_id' => 7,
+            'status_id' => 2,
         ]);
 
         $flasher->addSuccess('Berhasil mengembalikan!');
@@ -87,27 +87,4 @@ class DKUController extends Controller
         return redirect()->route('dku.review-contracts');
     }
 
-    public function final_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
-    {
-        $request->validate([
-            'description' => 'required'
-        ]);
-
-        $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-
-        Approval::create([
-            'contract_vendor_id' => $contract_detail->pivot->id,
-            'name' => Auth::user()->name,
-            'status' => 9,
-            'description' => $request->description,
-        ]);
-
-        $contract->vendors()->updateExistingPivot($vendor->id, [
-            'status_id' => 9,
-        ]);
-
-        $flasher->addSuccess('Berhasil Final Approval!');
-
-        return redirect()->back();
-    }
 }

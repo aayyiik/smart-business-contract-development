@@ -52,12 +52,12 @@ class VPController extends Controller
         Approval::create([
             'contract_vendor_id' => $contract_detail->pivot->id,
             'name' => Auth::user()->name,
-            'status' => 6,
+            'status' => 2,
             'description' => $request->description,
         ]);
 
         $contract->vendors()->updateExistingPivot($vendor->id, [
-            'status_id' => 5,
+            'status_id' => 2,
         ]);
 
         $flasher->addSuccess('Berhasil mengembalikan!');

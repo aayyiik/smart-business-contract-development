@@ -29,7 +29,7 @@
         <div class="card-body">
             <div class="mb-3">
                 <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#kembalikan">Kembalikan</a>
-                <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#vp">ACC Draft Kontrak</a>
+                <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#acc">ACC Draft Kontrak</a>
             </div>
             <form>
                 <div class="form-group row">
@@ -141,7 +141,7 @@
 </div>
 
 <!-- ACC FINAL -->
-<div class="modal fade" id="vp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="acc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
