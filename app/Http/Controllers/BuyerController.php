@@ -103,6 +103,8 @@ class BuyerController extends Controller
         //     'address' => 'required',
         // ]);
 
+        // $template = Template::all();
+
         $fileName = now()->format('Ymd') . "_" .  Str::random(20);
 
         $contract->vendors()->updateExistingPivot($vendor->id, [
@@ -123,6 +125,7 @@ class BuyerController extends Controller
         $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date)->format('d-m-Y');
 
         // .docx
+        // $templateProcessor = new TemplateProcessor('word-template/template-kontrak-jasa-angkutan-darat.docx');
         $templateProcessor = new TemplateProcessor('word-template/template-kontrak-jasa-angkutan-darat.docx');
         $templateProcessor->setValue('number', $request->number);
 
