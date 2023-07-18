@@ -12,7 +12,7 @@ class Unit extends Model
     protected $table = "units";
 
     protected $fillable = ['id', 'unit', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function userDetail()
     {
         return $this->hasMany(UserDetail::class, 'unit_id');

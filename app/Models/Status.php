@@ -12,7 +12,7 @@ class Status extends Model
     protected $table = "statuses";
 
     protected $fillable = ['id', 'status', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function contractVendor()
     {
         return $this->hasMany(ContractVendor::class, 'status_id');

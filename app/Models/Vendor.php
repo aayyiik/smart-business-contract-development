@@ -12,7 +12,7 @@ class Vendor extends Model
     protected $table = "vendors";
 
     protected $fillable = ['id', 'user_detail_id', 'vendor', 'no_sap', 'no_eproc', 'phone', 'address', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function userDetail()
     {
         return $this->belongsTo(UserDetail::class, 'user_detail_id');

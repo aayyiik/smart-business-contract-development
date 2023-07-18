@@ -24,7 +24,7 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label class="col-form-label col-form-label-xs" for="number">Nomor Kontrak<span
+                        <label class="col-form-label col-form-label-xs" for="number">Nomor DOF<span
                                 class="required">*</span></label>
                         <input type="text" class="form-control form-control-sm @error('number') is-invalid @enderror"
                             value="{{ $contract->pivot->number ?? old('number') }}" id="number" name="number">
@@ -37,8 +37,7 @@
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="date_dof">Tanggal Terbit No DOF<span
                                 class="required">*</span></label>
-                        <input type="date"
-                            class="form-control form-control-sm @error('date_dof') is-invalid @enderror"
+                        <input type="date" class="form-control form-control-sm @error('date_dof') is-invalid @enderror"
                             id="date_dof" name="date_dof">
                         @error('date_dof')
                             <div class="invalid-feedback">
@@ -49,8 +48,7 @@
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="date_name">Terbilang Tanggal DOF<span
                                 class="required">*</span></label>
-                        <input type="text"
-                            class="form-control form-control-sm @error('date_name') is-invalid @enderror"
+                        <input type="text" class="form-control form-control-sm @error('date_name') is-invalid @enderror"
                             id="date_name" name="date_name">
                         @error('date_name')
                             <div class="invalid-feedback">
@@ -58,6 +56,22 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-xs" for="no_sp">Nomor SP</label>
+                        <input type="text" class="form-control form-control-sm @error('no_sp') is-invalid @enderror"
+                            value="{{ $contracts->no_sp }}" id="no_sp" name="no_sp" readonly>
+                        @error('no_sp')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Terbit No SP</label>
+                        <input type="text" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
+                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp" >
+                    </div>
+
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
                                 class="required">*</span></label>
@@ -192,13 +206,15 @@
                     @enderror
                 </div>
                 {{-- mulai --}}
-           
+
                 <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="management_executives">Pejabat PG Yang Bertanda Tangan<span
-                            class="required">*</span></label>
+                    <label class="col-form-label col-form-label-xs" for="management_executives">Pejabat PG Yang Bertanda
+                        Tangan<span class="required">*</span></label>
                     <input type="text"
                         class="form-control form-control-sm @error('management_executives') is-invalid @enderror"
-                        id="management_executives" name="management_executives">
+                        id="management_executives" name="management_executives"
+                        value="{{ $contracts->oe < 100000000 ? 'Haris Sulistiyana' : ($contracts->oe > 100000000 && $contracts->oe < 500000000 ? 'I Gusti Manacika' : ($contracts->oe > 500000000 ? 'Budi Wahyu Soesilo' : 'DEFAULT')) }}"
+                        readonly>
                     @error('management_executives')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -210,7 +226,9 @@
                             class="required">*</span></label>
                     <input type="text"
                         class="form-control form-control-sm @error('management_job') is-invalid @enderror"
-                        id="management_job" name="management_job">
+                        id="management_job" name="management_job"
+                        value="{{ $contracts->oe < 100000000 ? 'VP Pengadaan Jasa' : ($contracts->oe > 100000000 && $contracts->oe < 500000000 ? 'SVP Teknik' : ($contracts->oe > 500000000 ? 'Direktur Keuangan dan Umum' : 'DEFAULT')) }}"
+                        readonly>
                     @error('management_job')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -244,8 +262,7 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="start_date">Waktu Mulai<span
                             class="required">*</span></label>
-                    <input type="date"
-                        class="form-control form-control-sm @error('start_date') is-invalid @enderror"
+                    <input type="date" class="form-control form-control-sm @error('start_date') is-invalid @enderror"
                         id="start_date" name="start_date">
                     @error('start_date')
                         <div class="invalid-feedback">
@@ -256,8 +273,7 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="date_sname">Terbilang Tanggal<span
                             class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('date_sname') is-invalid @enderror"
+                    <input type="text" class="form-control form-control-sm @error('date_sname') is-invalid @enderror"
                         id="date_sname" name="date_sname">
                     @error('date_sname')
                         <div class="invalid-feedback">
@@ -268,8 +284,7 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="end_date">Waktu Selesai<span
                             class="required">*</span></label>
-                    <input type="date"
-                        class="form-control form-control-sm @error('end_date') is-invalid @enderror"
+                    <input type="date" class="form-control form-control-sm @error('end_date') is-invalid @enderror"
                         id="end_date" name="end_date">
                     @error('end_date')
                         <div class="invalid-feedback">
@@ -280,8 +295,7 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="date_ename">Terbilang Tanggal<span
                             class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('date_ename') is-invalid @enderror"
+                    <input type="text" class="form-control form-control-sm @error('date_ename') is-invalid @enderror"
                         id="date_ename" name="date_ename">
                     @error('date_ename')
                         <div class="invalid-feedback">
@@ -352,58 +366,69 @@
                         </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="bank">Bank<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('bank') is-invalid @enderror"
-                        id="bank" name="bank">
-                    @error('bank')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="no_rek">No Rek<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('no_rek') is-invalid @enderror"
-                        id="no_rek" name="no_rek">
-                    @error('no_rek')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="no_sp">No SP<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('no_sp') is-invalid @enderror"
-                        id="no_sp" name="no_sp">
-                    @error('no_sp')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
 
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Penerbitan SP<span
-                            class="required">*</span></label>
-                    <input type="date" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
-                        id="date_sp" name="date_sp">
-                    @error('date_sp')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
                 {{-- <input type="file" name="file[]" multiple="true"> --}}
                 <div class="row justify-content-end mr-0">
                     <button type="submit" class="btn btn-success btn-xs text-right" data-toggle="confirmation"
-                        data-placement="left">Simpan</button>
+                        data-placement="left" id="submit">Simpan</button>
                 </div>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#end_date').on('change', function() {
+                var startDate = new Date($('#start_date').val());
+                var endDate = new Date($(this).val());
+
+                if (endDate < startDate) {
+                    alert(
+                        'Tanggal Selesai tidak bisa dipilih sebelum Tanggal Mulai. Pilih tanggal dengan benar!'
+                        );
+                    $(this).val(''); // Menghapus nilai end date yang tidak valid
+                }
+            });
+        });
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            // Mengatur header X-CSRF-TOKEN untuk setiap permintaan AJAX
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#submit').on('click', function(event) {
+                event.preventDefault();
+
+                var inputVal = $('#number').val();
+
+                // Contoh:
+                $.ajax({
+                    url: '/check_unique', // Ganti dengan URL yang sesuai di sisi server
+                    method: 'POST',
+                    data: {
+                        number: inputVal
+                    },
+                    success: function(response) {
+                        if (response.exists) {
+                            alert('Number sudah digunakan. Harap gunakan email yang unik.');
+                        } else {
+                            // Submit form jika inputan unik
+                            $('#form').submit();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Tangani error jika ada
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script> --}}
+@endpush

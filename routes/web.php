@@ -69,6 +69,10 @@ Route::get('/vendor/contract/signs', [VendorController::class, 'sign_contracts']
 Route::get('/vendor/contract/{contract}/vendor/{vendor}/sign', [VendorController::class, 'sign_contract'])->name('vendor.sign-contract');
 Route::patch('/vendor/contract/{contract}/vendor/{vendor}/upload', [VendorController::class, 'sign_contract_upload'])->name('vendor.contract-upload');
 
+//coba vendor 1
+Route::post('/check_unique', [VendorController::class, 'check_unique']);
+
+
 //Legal Contract
 Route::get('/legal/contract', [LegalController::class, 'contracts'])->name('legal.contracts');
 Route::get('/legal/contract/{contract}/vendor/{vendor}', [LegalController::class, 'contract'])->name('legal.contract');
@@ -163,3 +167,4 @@ Route::get('/contract/{contract}/legal/edit', [ContractController::class, 'editL
 
 // coba barcode
 Route::get('generate-pdf', [BuyerController::class,'generatePdf'])->name('generate-pdf');
+

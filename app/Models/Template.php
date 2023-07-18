@@ -12,7 +12,7 @@ class Template extends Model
     protected $table = "templates";
 
     protected $fillable = ['id', 'template', 'unit', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function contract()
     {
         return $this->hasMany(Contract::class, 'template_id');

@@ -176,6 +176,39 @@
         </div>
     </div>
 </div>
+
+<!-- Kirim ke AVP -->
+<div class="modal fade" id="avp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kirim ke AVP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="d-inline" action="{{ route('buyer.contract-vendor-avp', ['contract' => $contracts->pivot->contract_id, 'vendor' => $contracts->pivot->vendor_id]) }}" method="POST">
+                    @csrf
+                    @method('post')
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea class="form-control z-depth-1" name="description" id="description" rows="3"></textarea>
+                        @error('description')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
+                <button class="btn btn-warning btn-xs" type="submit">Kirim ke AVP</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @push('script')
 <script type="text/javascript">

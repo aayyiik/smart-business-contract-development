@@ -11,7 +11,7 @@ class Contract extends Model
 
     protected $table = "contracts";
 
-    protected $fillable = ['id', 'user_detail_id', 'template_id', 'name', 'oe', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_detail_id', 'template_id', 'name', 'oe', 'no_sp', 'date_sp', 'created_at', 'updated_at'];
 
     public function userDetail()
     {

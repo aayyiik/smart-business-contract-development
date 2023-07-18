@@ -44,6 +44,24 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label class="col-form-label col-form-label-xs" for="no_sp">No SP<span class="required">*</span></label>
+                    <input type="int" class="form-control form-control-sm @error('no_sp') is-invalid @enderror" value="{{old('no_sp')}}" id="no_sp" name="no_sp">
+                    @error('no_sp')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Penerbitan SP<span class="required">*</span></label>
+                    <input type="date" class="form-control form-control-sm @error('date_sp') is-invalid @enderror" value="{{old('date_sp')}}" id="date_sp" name="date_sp">
+                    @error('date_sp')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="template_id">Template<span class="required">*</span></label>
                     <select id="template_id" name="template_id" class="form-control form-control-sm select2bs4 @error('template_id') is-invalid @enderror" style="width: 100%;" data-placeholder="-- Pilih --">
                         <option value=''></option>

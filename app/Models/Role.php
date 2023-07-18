@@ -12,7 +12,7 @@ class Role extends Model
     protected $table = "roles";
 
     protected $fillable = ['id', 'role', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function userDetail()
     {
         return $this->hasMany(UserDetail::class, 'role_id');

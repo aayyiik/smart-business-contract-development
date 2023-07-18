@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
+        DB::table('users')->insert([
             [
                 'name' => 'Bagus Permadi Ardiansyah',
                 'nik' => '2325736',
@@ -44,25 +45,25 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Akhmad Ali Affandi',
-                'nik' => '',
+                'nik' => '2105091',
                 'password' => Hash::make('avpdistribusi1'),
                 'status' => '1',
             ],
             [
                 'name' => 'Haris Sulistiyana',
-                'nik' => '',
+                'nik' => '2944780',
                 'password' => Hash::make('vpjasa1'),
                 'status' => '1',
             ],
             [
                 'name' => 'I Gusti Manacika',
-                'nik' => '',
+                'nik' => '2944769',
                 'password' => Hash::make('svpteknik1'),
                 'status' => '1',
             ],
             [
                 'name' => 'Budi Wahyu Soesilo',
-                'nik' => '',
+                'nik' => '2210019',
                 'password' => Hash::make('dku1'),
                 'status' => '1',
             ],
@@ -78,20 +79,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('gcs1'),
                 'status' => '1',
             ],
-        ];
+        ]);
 
-           // Tambahkan data user_details sesuai dengan data pengguna
-           foreach ($users as $user) {
-            $userData = User::create($user);
-
-            UserDetail::create([
-                'user_id' => $userData->id,
-                'role_id' => '',
-                'unit_id' => '',
-                'department_id' => '',
-                'email' => 'bagus@gmail.com',
-                'phone' => '081234567890',
-            ]);
-        }
     }
 }

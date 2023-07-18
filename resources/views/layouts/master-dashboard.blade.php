@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- CSRF --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('../../assets/admin-lte/plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -424,6 +426,9 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <!-- Sweet Alert -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
     <!-- Pace -->
     <script src="{{asset('../../assets/pace/pace.js')}}"></script>
     @stack('script')

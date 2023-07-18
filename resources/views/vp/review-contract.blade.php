@@ -146,7 +146,7 @@
     </div>
 </div>
 
-<!-- Kirim ke VP -->
+<!-- Kirim ke SVP -->
 <div class="modal fade" id="svp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -190,7 +190,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="d-inline" action="{{ route('final-approval', ['contract' => $contracts->pivot->contract_id, 'vendor' => $contracts->pivot->vendor_id]) }}" method="POST">
+                <form class="d-inline" action="{{ route('vp.contract-approval', ['contract' => $contracts->pivot->contract_id, 'vendor' => $contracts->pivot->vendor_id]) }}" method="POST">
                     @csrf
                     @method('post')
                     <div class="form-group">

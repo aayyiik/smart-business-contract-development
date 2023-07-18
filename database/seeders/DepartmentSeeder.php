@@ -17,7 +17,7 @@ class DepartmentSeeder extends Seeder
     {
         DB::table('departments')->insert([
             [
-                'departement' => 'Pengadaan Jasa',
+                'department' => 'Pengadaan Jasa',
             ],
             [
                 'department' => 'Legal',

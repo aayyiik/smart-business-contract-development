@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('status_id');
             $table->string('number')->nullable();
+            $table->date('date_dof')->nullable();
             $table->double('prosentase')->nullable();
             $table->integer('nilai_kontrak')->nullable();
             $table->string('director')->nullable();

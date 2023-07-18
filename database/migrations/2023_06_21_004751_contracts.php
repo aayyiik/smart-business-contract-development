@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('template_id');
             $table->string('name');
             $table->integer('oe');
+            $table->string('no_sp');
+            $table->date('date_sp');
             $table->foreign('user_detail_id')->references('id')->on('user_details');
             $table->foreign('template_id')->references('id')->on('templates');
             $table->timestamps();

@@ -19,12 +19,12 @@
             </div>
             <div class="card-body">
                 <form
-                    action="{{ route('buyer.contract-update', ['contract' => $contract->pivot->contract_id, 'vendor' => $contract->pivot->vendor_id]) }}"
+                    action="{{ route('vendor.contract-update', ['contract' => $contract->pivot->contract_id, 'vendor' => $contract->pivot->vendor_id]) }}"
                     method="POST">
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label class="col-form-label col-form-label-xs" for="number">Nomor Kontrak<span
+                        <label class="col-form-label col-form-label-xs" for="number">Nomor DOF<span
                                 class="required">*</span></label>
                         <input type="text" class="form-control form-control-sm @error('number') is-invalid @enderror"
                             value="{{ $contract->pivot->number ?? old('number') }}" id="number" name="number">
@@ -56,6 +56,22 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-xs" for="no_sp">Nomor SP</label>
+                        <input type="text" class="form-control form-control-sm @error('no_sp') is-invalid @enderror"
+                            value="{{ $contracts->no_sp }}" id="no_sp" name="no_sp" readonly>
+                        @error('no_sp')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Terbit No SP</label>
+                        <input type="text" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
+                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp" >
+                    </div>
+
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
                                 class="required">*</span></label>
@@ -196,7 +212,9 @@
                         Tangan<span class="required">*</span></label>
                     <input type="text"
                         class="form-control form-control-sm @error('management_executives') is-invalid @enderror"
-                        id="management_executives" name="management_executives">
+                        id="management_executives" name="management_executives"
+                        value="{{ $contracts->oe < 100000000 ? 'Haris Sulistiyana' : ($contracts->oe > 100000000 && $contracts->oe < 500000000 ? 'I Gusti Manacika' : ($contracts->oe > 500000000 ? 'Budi Wahyu Soesilo' : 'DEFAULT')) }}"
+                        readonly>
                     @error('management_executives')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -208,7 +226,9 @@
                             class="required">*</span></label>
                     <input type="text"
                         class="form-control form-control-sm @error('management_job') is-invalid @enderror"
-                        id="management_job" name="management_job">
+                        id="management_job" name="management_job"
+                        value="{{ $contracts->oe < 100000000 ? 'VP Pengadaan Jasa' : ($contracts->oe > 100000000 && $contracts->oe < 500000000 ? 'SVP Teknik' : ($contracts->oe > 500000000 ? 'Direktur Keuangan dan Umum' : 'DEFAULT')) }}"
+                        readonly>
                     @error('management_job')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -346,51 +366,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="bank">Bank<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('bank') is-invalid @enderror"
-                        id="bank" name="bank">
-                    @error('bank')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="no_rek">No Rek<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('no_rek') is-invalid @enderror"
-                        id="no_rek" name="no_rek">
-                    @error('no_rek')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="no_sp">No SP<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('no_sp') is-invalid @enderror"
-                        id="no_sp" name="no_sp">
-                    @error('no_sp')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Penerbitan SP<span
-                            class="required">*</span></label>
-                    <input type="date" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
-                        id="date_sp" name="date_sp">
-                    @error('date_sp')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+               
                 {{-- <input type="file" name="file[]" multiple="true"> --}}
                 <div class="row justify-content-end mr-0">
                     <button type="submit" class="btn btn-success btn-xs text-right" data-toggle="confirmation"
@@ -401,3 +377,20 @@
         </div>
     </div>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function() {
+        $('#end_date').on('change', function() {
+            var startDate = new Date($('#start_date').val());
+            var endDate = new Date($(this).val());
+
+            if (endDate < startDate) {
+                alert(
+                    'Tanggal Selesai tidak bisa dipilih sebelum Tanggal Mulai. Pilih tanggal dengan benar!'
+                    );
+                $(this).val(''); // Menghapus nilai end date yang tidak valid
+            }
+        });
+    });
+</script>
+@endpush

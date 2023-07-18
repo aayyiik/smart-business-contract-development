@@ -8,6 +8,7 @@ use App\Models\Vendor;
 use App\Models\ContractVendor;
 use Illuminate\Support\Facades\Auth;
 use Flasher\Prime\FlasherInterface;
+use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Http\Request;
 
 use Milon\Barcode\DNS1D;
@@ -80,10 +81,12 @@ class VPController extends Controller
             'description' => $request->description,
         ]);
 
+       // dd($contract->oe);
         if ($contract->oe < 100000000) {
             $contract->vendors()->updateExistingPivot($vendor->id, [
                 'status_id' => 9,
             ]);
+
             $flasher->addSuccess('Draft Kontrak Approved!');
         } else {
             $contract->vendors()->updateExistingPivot($vendor->id, [
@@ -93,11 +96,6 @@ class VPController extends Controller
             $flasher->addSuccess('Berhasil memproses lanjut!');
         }
 
-        $contract->vendors()->updateExistingPivot($vendor->id, [
-            'status_id' => 7,
-        ]);
-
-        $flasher->addSuccess('Berhasil memproses lanjut!');
 
         return redirect()->route('vp.review-contracts');
     }

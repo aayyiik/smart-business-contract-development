@@ -7,6 +7,7 @@ use App\Models\Approval;
 use App\Models\Contract;
 use App\Models\ContractVendor;
 use App\Models\ReviewLegal;
+use App\Models\User;
 use Carbon\Carbon;
 use Flasher\Prime\FlasherInterface;
 use Illuminate\Http\Request;
@@ -40,14 +41,15 @@ class VendorController extends Controller
     public function contract_edit(Contract $contract, Vendor $vendor)
     {
         $contracts = Contract::where('id', $contract->id)->first();
+        $dateSPFormat = Carbon::createFromFormat('Y-m-d', $contracts->date_sp)->format('d-M-Y');
+
         $contract = $contracts->vendors()->where('vendor_id', $vendor->id)->first();
-        return view('vendor.contract-edit', compact('contract'));
+        return view('vendor.contract-edit', compact('contract','contracts','dateSPFormat'));
     }
 
     public function contract_update(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
         $request->validate([
-            'number' => 'required',
             'prosentase' => 'required',
             'nilai_kontrak' => 'required',
             'director' => 'required',
@@ -115,6 +117,11 @@ class VendorController extends Controller
         $PDFWriter = \PhpOffice\PhpWord\IOFactory::createWriter($Content, 'PDF');
         $PDFWriter->save(public_path($fileName . '.pdf'));
 
+        // .docx
+        // $Content = \PhpOffice\PhpWord\IOFactory::load(public_path($fileName . '.docx'));
+        // $docxWriter = \PhpOffice\PhpWord\IOFactory::createWriter($Content, 'Word2007');
+        // $docxWriter->save(public_path($fileName . '.docx'));
+
         // get contract_detail id
         $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
 
@@ -176,5 +183,19 @@ class VendorController extends Controller
     public function show_final(Contract $contract, Vendor $vendor)
     {
 
+    }
+
+    public function check_unique(Request $request)
+    {
+        $number = $request->input('number');
+
+        // Periksa apakah email sudah ada di database
+        $dof = ContractVendor::where('number', $number)->first();
+
+        if ($dof) {
+            return response()->json(['exists' => true]);
+        } else {
+            return response()->json(['exists' => false]);
+        }
     }
 }

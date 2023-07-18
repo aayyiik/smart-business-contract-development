@@ -10,9 +10,8 @@ class Departement extends Model
     use HasFactory;
 
     protected $table = "departments";
-
     protected $fillable = ['id', 'department', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function userDetail()
     {
         return $this->hasMany(UserDetail::class, 'department_id');

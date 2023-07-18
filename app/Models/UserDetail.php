@@ -12,7 +12,7 @@ class UserDetail extends Model
     protected $table = "user_details";
 
     protected $fillable = ['id', 'user_id', 'role_id', 'unit_id', 'department_id', 'email', 'phone', 'created_at', 'updated_at'];
-
+    public $timestamps = true;
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

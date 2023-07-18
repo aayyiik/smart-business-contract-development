@@ -58,6 +58,8 @@ class BuyerController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'oe' => 'required|numeric',
+            'no_sp' => 'required',
+            'date_sp' => 'required|date',
             'template_id' => 'required',
             'vendor' => 'required',
         ]);
@@ -65,6 +67,8 @@ class BuyerController extends Controller
         $contract = Contract::create([
             'name' => $request->name,
             'oe' => $request->oe,
+            'no_sp' => $request->no_sp,
+            'date_sp' => $request->date_sp,
             'user_detail_id' => Auth::user()->id,
             'template_id' => $request->template_id,
         ]);
@@ -89,7 +93,7 @@ class BuyerController extends Controller
     {
         $contracts = Contract::where('id', $contract->id)->first();
         $contract = $contracts->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-        return view('buyer.contract-edit', compact('contract'));
+        return view('buyer.contract-edit', compact('contract','contracts'));
     }
 
     public function contract_update(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
@@ -128,7 +132,6 @@ class BuyerController extends Controller
         // $templateProcessor = new TemplateProcessor('word-template/template-kontrak-jasa-angkutan-darat.docx');
         $templateProcessor = new TemplateProcessor('word-template/template-kontrak-jasa-angkutan-darat.docx');
         $templateProcessor->setValue('number', $request->number);
-
         $templateProcessor->setValue('date_dof', $date_dof);
         $templateProcessor->setValue('date_name', $request->date_name);
         $templateProcessor->setValue('prosentase', $request->prosentase);
@@ -153,8 +156,6 @@ class BuyerController extends Controller
         $templateProcessor->setValue('terbilang_rupiah', $request->terbilang_rupiah);
         $templateProcessor->setValue('email', $request->email);
         $templateProcessor->setValue('place_vendor', $request->place_vendor);
-        $templateProcessor->setValue('no_sp', $request->no_sp);
-        $templateProcessor->setValue('date_sp', $date_sp);
         $templateProcessor->setValue('management_executives', $request->management_executives);
         $templateProcessor->setValue('management_job', $request->management_job);
         $templateProcessor->saveAs($fileName . '.docx');
