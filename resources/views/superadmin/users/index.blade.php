@@ -1,10 +1,10 @@
 @extends('layouts.master-dashboard')
-@section('page-title', 'Monitoring Kontrak')
+@section('page-title', 'Data Pengguna')
 @section('monitoring-contract', 'active')
 @section('address')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Data Pegawai</li>
+    <li class="breadcrumb-item active">Data Pengguna</li>
 </ol>
 @endsection
 @push('styles')
@@ -18,7 +18,7 @@
 <div>
     <div class="card">
         <div class="card-header card-forestgreen">
-            <h6 class="card-title pt-1">Data Pegawai</h6>
+            <h6 class="card-title pt-1">Data Pengguna</h6>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool btn-xs pr-0" data-card-widget="maximize"><i class="fas fa-expand fa-xs icon-border-default"></i>
                 </button>

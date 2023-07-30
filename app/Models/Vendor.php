@@ -12,7 +12,7 @@ class Vendor extends Model
     protected $table = "vendors";
 
     protected $fillable = ['id', 'user_detail_id', 'vendor', 'no_sap', 'no_eproc', 'phone', 'address', 'created_at', 'updated_at'];
-    public $timestamps = true;
+    
     public function userDetail()
     {
         return $this->belongsTo(UserDetail::class, 'user_detail_id');
@@ -20,7 +20,7 @@ class Vendor extends Model
 
     public function contracts()
     {
-        return $this->belongsToMany(Contract::class)->withPivot('number','prosentase', 'nilai_kontrak', 'director', 'address', 'phone','filename', 'final_vendor', 'status_id');
+        return $this->belongsToMany(Contract::class)->withPivot('number', 'date_dof','prosentase', 'nilai_kontrak', 'director', 'address', 'phone','filename', 'final_vendor', 'status_id');
     }
 
     public function contractVendor()

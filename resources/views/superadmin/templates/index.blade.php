@@ -79,6 +79,17 @@
                         </div>
                         @enderror
                     </div>
+                    <div class="form-group row">
+                        <label for="unit" class="col-sm-2 col-form-label">Unit</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="unit" name="unit">
+                        </div>
+                        @error('unit')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>

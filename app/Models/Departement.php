@@ -10,6 +10,7 @@ class Departement extends Model
     use HasFactory;
 
     protected $table = "departments";
+    protected $primaryKey = 'id';
     protected $fillable = ['id', 'department', 'created_at', 'updated_at'];
     public $timestamps = true;
     public function userDetail()

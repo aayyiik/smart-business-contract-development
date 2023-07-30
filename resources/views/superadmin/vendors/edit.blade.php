@@ -35,10 +35,12 @@
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Nama PIC</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $vendors->userDetail->user->name }}">
-                            <input type="hidden" name="user_id" value="{{ $vendors->userDetail->user_id }}">
+                            <input type="text" class="form-control" id="text" value="{{ $vendors->userDetail->user->name }}" readonly>
+                            <input type="hidden" name="user_detail_id" value="{{ $vendors->user_detail_id }}">
                         </div>
                     </div>
+                    
+                    
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Vendor</label>
                         <div class="col-sm-10">

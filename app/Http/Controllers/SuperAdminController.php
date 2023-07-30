@@ -42,7 +42,7 @@ class SuperAdminController extends Controller
         $roles = Role::all();
         $units = Unit::all();
         $departments = Departement::all();
-        return view('superadmin.users.edit', ['usersdetail' => $usersdetail], compact('roles', 'units', 'departments'));
+        return view('superadmin.users.edit', compact('usersdetail','roles', 'units', 'departments'));
     }
 
     public function users_update(Request $request, $id)
@@ -211,6 +211,8 @@ class SuperAdminController extends Controller
     public function vendors_edit($id)
     {
         $vendors = Vendor::find($id);
+
+        // dd($vendors);
         $usersdetail = UserDetail::all();
         return view('superadmin.vendors.edit', compact('vendors', 'usersdetail'));
     }
@@ -233,9 +235,9 @@ class SuperAdminController extends Controller
             'address' => $request->address,
         ]);
 
-        $flasher->addSuccess('Berhasil menambahkan data departemen!');
+        $flasher->addSuccess('Berhasil menambahkan data vendor!');
 
-        return redirect()->route('superadmin.departments');
+        return redirect()->route('superadmin.vendors');
     }
 
     //TEMPLATES
@@ -249,6 +251,13 @@ class SuperAdminController extends Controller
     {
         $templates = Template::find($id);
         return view('superadmin.templates.edit', compact('templates'));
+    }
+
+    public function templates_update(Request $request, $id)
+    {
+        $templates = Template::find($id);
+        $templates->update($request->all());
+        return redirect()->route('superadmin.templates');
     }
 
     public function templates_store(Request $request, FlasherInterface $flasher){

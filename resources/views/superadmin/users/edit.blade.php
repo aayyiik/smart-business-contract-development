@@ -35,41 +35,162 @@
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Nama Pengguna</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $usersdetail->user->name }}">
+                            <input type="text" class="form-control" id="text"
+                                value="{{ $usersdetail->user->name }}">
                             <input type="hidden" name="user_id" value="{{ $usersdetail->user->id }}">
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group">
+                        <label for="role">Role</label>
+                        <select class="form-control" id="role" name="role_id">
+                            <option value=""> - Select Role - </option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}" @if ($usersdetail->role->role_id == $role->id) selected @endif>
+                                    {{ $role->role }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    {{-- <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Role</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $usersdetail->role->role }}" name="role_id">
+                            <input type="text" class="form-control" id="text" value="{{ $usersdetail->role->role }}"
+                                name="role_id">
                             <input type="hidden"value="{{ $usersdetail->role->id }}" name="role_id">
                         </div>
-                    </div>
+                    </div> --}}
+                    {{-- <div class="form-group row">
+                        <label for="department" class="col-sm-2 col-form-label">Role</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="role" name="role_id">
+                                <option value=""> - Select Role - </option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->role_id }}"
+                                        @if ($usersdetail->role->id == $role->role_id) selected @endif>
+                                        {{ $role->role }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
                     <div class="form-group row">
+                        <label for="role" class="col-sm-2 col-form-label">Role</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="role" name="role_id">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" @if ($usersdetail->role->role_id == $role->id) selected @endif>
+                                        {{ $role->role }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    
+
+
+                    {{-- <div class="form-group row">
                         <label for="prosentase" class="col-sm-2 col-form-label">Departemen</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="prosentase" value="{{ $usersdetail->department ? $usersdetail->department->department : ' - ' }}">
                             <input type="hidden" value="{{ $usersdetail->department ? $usersdetail->department->id : null }}" name="department_id">
                             </div>
-                    </div>
-                    <div class="form-group row">
+                    </div> --}}
+
+                    {{-- <div class="form-group row">
+                        <label for="department" class="col-sm-2 col-form-label">Departemen</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="department" name="department_id">
+                                <option value=""> - Select Departemen - </option>
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->department_id }}" @if ($usersdetail->department->department_id == $department->department_id) selected @endif>
+                                        {{ $department->department }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
+
+
+
+
+                    {{-- <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Unit</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="number" value="{{ $usersdetail->unit ? $usersdetail->unit->unit : ' - ' }}">
-                            <input type="hidden" value="{{ $usersdetail->unit ? $usersdetail->unit->unit : null }}" name="unit_id">
+                            <input type="hidden" value="{{ $usersdetail->unit_id ? $usersdetail->unit_id : null }}" name="unit_id">
+                        </div>
+                    </div> --}}
+                    {{-- <div class="form-group row">
+                        <label for="unit" class="col-sm-2 col-form-label">Unit</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="unit" name="unit_id">
+                                <option value=""> - Select Unit - </option>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id ? $unit->id : null }}" @if ($usersdetail->unit->unit_id == $unit->id) selected @endif>
+                                        {{ $unit->unit }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
+
+                    <div class="form-group row">
+                        <label for="unit" class="col-sm-2 col-form-label">Unit</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="unit" name="unit_id">
+                                <option value=""> - Select Unit - </option>
+                                @foreach ($units as $unit)
+                                    @if ($usersdetail->unit_id != null)
+                                  
+                                    <option value="{{ $unit->id }}" @if ($usersdetail->unit->unit_id == $unit->id) selected @endif>
+                                        {{ $unit->unit }}
+                                    </option>
+                                    @else
+                                    <option value="{{ null}}" selected>
+                                    </option>
+                                    @endif
+                                    <option value="{{ $unit->id }}">
+                                        {{ $unit->unit }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="unit" class="col-sm-2 col-form-label">Department</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="unit" name="department_id">
+                                <option value=""> - Select Department - </option>
+                                @foreach ($departments as $department)
+                                    @if ($usersdetail->department_id != null)
+                                  
+                                    <option value="{{ $department->id }}" @if ($usersdetail->department->department_id == $department->id) selected @endif>
+                                        {{ $department->department }}
+                                    </option>
+                                    @else
+                                    <option value="{{ null}}" selected>
+                                    </option>
+                                    @endif
+                                    <option value="{{ $department->id }}">
+                                        {{ $department->department }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="director" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="director" value="{{ $usersdetail->email }}" name="email">
+                            <input type="text" class="form-control" id="director" value="{{ $usersdetail->email }}"
+                                name="email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="phone" class="col-sm-2 col-form-label">Kontak</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" value="{{ $usersdetail->phone }}" name="phone">
+                            <input type="text" class="form-control" id="phone" value="{{ $usersdetail->phone }}"
+                                name="phone">
                         </div>
                     </div>
                     <div class="row justify-content-end mr-0">

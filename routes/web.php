@@ -156,6 +156,7 @@ Route::get('/superadmin/templates', [SuperAdminController::class, 'templates'])-
 Route::get('/superadmin/templates/{id}/edit', [SuperAdminController::class, 'templates_edit'])->name('superadmin.templates-edit');
 Route::get('/superadmin/templates/{id}/delete', [SuperAdminController::class, 'templates_delete'])->name('superadmin.templates-delete');
 Route::post('/superadmin/templates/store', [SuperAdminController::class, 'templates_store'])->name('superadmin.templates-store');
+Route::put('/superadmin/templates/{id}/update', [SuperAdminController::class, 'templates_update'])->name('superadmin.templates-update');
 
 //Final Approval
 Route::post('/contract/{contract}/vendor/{vendor}/final-approval', [DKUController::class, 'final_approval'])->name('final-approval');

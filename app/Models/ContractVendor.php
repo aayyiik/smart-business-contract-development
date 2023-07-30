@@ -11,7 +11,7 @@ class ContractVendor extends Model
 
     protected $table = "contract_vendor";
 
-    protected $fillable = ['id', 'contract_id', 'status_id', 'vendor_id', 'number', 'prosentase', 'nilai_kontrak', 'director', 'address', 'phone', 'filename', 'final_vendor', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'contract_id', 'status_id', 'vendor_id', 'number', 'date_dof','prosentase', 'nilai_kontrak', 'director', 'address', 'phone', 'filename', 'final_vendor', 'created_at', 'updated_at'];
 
     public function status()
     {
