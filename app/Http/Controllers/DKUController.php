@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class DKUController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:DKU');
+    }
+
+
     public function contracts()
     {
         $user_id = Auth::id();

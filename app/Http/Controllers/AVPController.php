@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 
 class AVPController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:AVP');
+    }
+
     public function contracts()
     {
         $user_id = Auth::id();

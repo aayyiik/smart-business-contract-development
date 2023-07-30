@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 class LegalController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:Legal');
+    }
+
     //Menu Monitoring Contract
     public function contracts()
     {

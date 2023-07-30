@@ -25,7 +25,7 @@ use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('login');
 
 // Auth
 Route::post('/login', [AuthController::class, "login"])->name('signin');

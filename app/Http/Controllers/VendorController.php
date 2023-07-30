@@ -21,6 +21,12 @@ use function Ramsey\Uuid\v1;
 
 class VendorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:Vendor');
+    }
+
     public function contracts()
     {
         $vendor = Vendor::where('user_detail_id', Auth::id())->first();

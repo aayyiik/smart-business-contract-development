@@ -31,6 +31,12 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BuyerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:Buyer');
+    }
+
     // CONTRACT MONITORING
     public function contracts_monitoring()
     {
