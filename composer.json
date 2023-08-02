@@ -6,8 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "bacon/bacon-qr-code": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
-        "endroid/qr-code": "^4.8",
+        "endroid/qr-code": "4.0",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.0",
@@ -16,6 +17,7 @@
         "milon/barcode": "^10.0",
         "php-flasher/flasher-laravel": "^1.15",
         "phpoffice/phpword": "^1.1",
+        "setasign/fpdf": "^1.8",
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {

@@ -99,7 +99,14 @@
         </div>
         <div class="card-body">
             <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px" type="application/pdf">
-        </div>
+        <!-- Display the embedded PDF -->
+        {{-- <iframe src="data:application/pdf;base64,{{ $pdfContent }}" width="100%" height="600px"></iframe> --}}
+            </div>
+            <div>
+                {{-- <embed src="{{ $pdfWithQRPath }}" width="100%" height="600px" type="application/pdf"> --}}
+                <iframe src="data:application/pdf;base64,{{ $pdfBase64 }}" width="100%" height="600px"></iframe>
+            </div>                </div>
+            
     </div>
     <div class="card">
         <div class="card-header card-forestgreen">
