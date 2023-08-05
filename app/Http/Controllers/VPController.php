@@ -7,8 +7,7 @@ use App\Models\Approval;
 use App\Models\Vendor;
 use App\Models\ContractVendor;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-
-;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Flasher\Prime\FlasherInterface;
 use SimpleSoftwareIO\QrCode\Generator;
@@ -54,7 +53,10 @@ class VPController extends Controller
 
         // Mendapatkan URL view tertentu yang ingin Anda jadikan konten QR code
         $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
-        $qrCodeImagePath = public_path('qr_code.png'); // Provide a proper path
+
+        $qrCodeName = $contract->id . $vendor->id . '_qrcode' ;
+        // Membuat QR Code nya
+        $qrCodeImagePath = public_path($qrCodeName . '.png'); // Provide a proper path
 
         $this->generateQRCode($qrCodeText, $qrCodeImagePath);
 
@@ -88,22 +90,21 @@ class VPController extends Controller
 
         // Output the view with the PDF content
         return view('vp.contract', compact('contracts', 'contract', 'approvals',  'pdfBase64'));
+    }
 
-}
+    private function generateQRCode($text, $filename)
+    {
+        $renderer = new ImageRenderer(
+            new RendererStyle(200),
+            new ImagickImageBackEnd()
+        );
 
-private function generateQRCode($text, $filename)
-{
-    $renderer = new ImageRenderer(
-        new RendererStyle(200),
-        new ImagickImageBackEnd()
-    );
+        $writer = new Writer($renderer);
+        $qrCode = $writer->writeString($text);
 
-    $writer = new Writer($renderer);
-    $qrCode = $writer->writeString($text);
-
-    // Save the QR code image to a file
-    file_put_contents($filename, $qrCode);
-}
+        // Save the QR code image to a file
+        file_put_contents($filename, $qrCode);
+    }
 
     public function review_contracts()
     {
