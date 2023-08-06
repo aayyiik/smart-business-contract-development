@@ -18,7 +18,9 @@
         "php-flasher/flasher-laravel": "^1.15",
         "phpoffice/phpword": "^1.1",
         "setasign/fpdf": "^1.8",
-        "simplesoftwareio/simple-qrcode": "~4"
+        "simplesoftwareio/simple-qrcode": "~4",
+        "develoka/angka-terbilang-php": "*"
+
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -33,7 +35,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/AngkaTerbilang.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -65,6 +70,7 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    
     "minimum-stability": "dev",
     "prefer-stable": true
 }

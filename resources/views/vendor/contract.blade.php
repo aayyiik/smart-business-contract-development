@@ -34,9 +34,9 @@
             @endif
             <form>
                 <div class="form-group row">
-                    <label for="number" class="col-sm-2 col-form-label">Nomor Kontrak</label>
+                    <label for="number" class="col-sm-2 col-form-label">Nomor Surat Penunjukkan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="number" value="{{ $contracts->pivot->number }}" readonly>
+                        <input type="text" class="form-control" id="number" value="{{ $contract->no_sp }}" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -52,9 +52,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="number" class="col-sm-2 col-form-label">Nilai Kontrak</label>
+                    <label for="number" class="col-sm-2 col-form-label">Nilai OE</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="number" value="@currency($contracts->pivot->nilai_kontrak)" readonly>
+                        <input type="text" class="form-control" id="number" value="@currency($contract->oe)" readonly>
                     </div>
                 </div>
                 <div class="form-group row">

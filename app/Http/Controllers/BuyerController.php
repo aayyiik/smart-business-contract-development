@@ -67,19 +67,45 @@ class BuyerController extends Controller
             'no_sp' => 'required',
             'date_sp' => 'required|date',
             'template_id' => 'required',
-            'vendor' => 'required',
+            'vendor_id' => 'required',
+            'prosentase' => "required",
         ]);
 
-        $contract = Contract::create([
-            'name' => $request->name,
-            'oe' => $request->oe,
-            'no_sp' => $request->no_sp,
-            'date_sp' => $request->date_sp,
-            'user_detail_id' => Auth::user()->id,
-            'template_id' => $request->template_id,
-        ]);
+        $data = $request->all();
+        $contract = new Contract;
+        $contract->name = $data['name'];
+        $contract->oe = $data['oe'];
+        $contract->user_detail_id = Auth::user()->id;
+        $contract->template_id = $data['template_id'];
+        $contract->no_sp = $data['no_sp'];
+        $contract->date_sp = date('Y-m-d', strtotime($data['date_sp']));
+        $contract->save();
 
-        $contract->vendors()->attach($request->vendor, ["status_id" => 1]);
+        $vendorIds = $request->vendor_id;
+        $prosentase = $request->prosentase;
+        if (!is_null($vendorIds) && !is_null($prosentase) && count($vendorIds) === count($prosentase)) {
+            foreach ($vendorIds as $item => $value) {
+                $data2 = array(
+                    'contract_id' => $contract->id,
+                    'vendor_id' => $vendorIds[$item],
+                    'prosentase'=> $prosentase[$item],
+                    'status_id' => 1,
+                );
+                ContractVendor::create($data2);
+            }
+        }
+
+        // method lama
+        // $contract = Contract::create([
+        //     'name' => $request->name,
+        //     'oe' => $request->oe,
+        //     'no_sp' => $request->no_sp,
+        //     'date_sp' => $request->date_sp,
+        //     'user_detail_id' => Auth::user()->id,
+        //     'template_id' => $request->template_id,
+        // ]);
+
+        // $contract->vendors()->attach($request->vendor, ["status_id" => 1]);
 
         $flasher->addSuccess('Berhasil menambahkan pekerjaan!');
 

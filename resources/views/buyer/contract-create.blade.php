@@ -79,7 +79,7 @@
                     </div>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="vendor">Vendor<span class="required">*</span></label>
                     <select id="vendor" name="vendor[]" multiple data-reorder="1" class="form-control form-control-sm select2bs4 @error('vendor') is-invalid @enderror" style="width: 100%;" data-placeholder="-- Pilih --">
                         <option value=''></option>
@@ -96,7 +96,40 @@
                         {{ $message }}
                     </div>
                     @enderror
+                </div> --}}
+
+                
+                <div class="form-row">
+                    <div class="form-group col-md-7">
+                        <label class="col-form-label col-form-label-xs" for="vendor_id">Vendor<span
+                                class="required">*</span></label>
+                        <select class="form-control form-control-sm" name="vendor_id[]"
+                            data-placeholder="-- Pilih --">
+                            <option value=''></option>
+                            @foreach ($vendor as $rekanan)
+                                <option value="{{ $rekanan->id }}">{{ $rekanan->vendor }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
+                                class="required">*</span></label>
+                        <input type="double" class="form-control form-control-sm" id="prosentase"
+                            name="prosentase[]">
+                    </div>
+                    <div class="col-md-1">
+                        <label class="col-form-label col-form-label-xs" for="">Tambah</label>
+                        <button type="button" id="tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus">
+                            </i>
+                        </button>
+                    </div>
                 </div>
+
+                <div id="form_dinamis">
+
+                </div>
+
+
                 <div class="row justify-content-end mr-0">
                     <button type="submit" class="btn btn-success btn-xs text-right" data-toggle="confirmation" data-placement="left">Simpan</button>
                 </div>
@@ -106,6 +139,52 @@
 </div>
 @endsection
 @push('script')
+
+<script>
+    $(document).ready(function() {
+        var id = 0;
+
+        $('#tambah').click(function() {
+            id++;
+            var formRow = $('<div class="form-row"></div>');
+
+            var vendorGroup = $('<div class="form-group col-md-7"></div>');
+            vendorGroup.append(
+                '<label class="col-form-label col-form-label-xs" for="vendor_id">Vendor<span class="required">*</span></label>'
+            );
+            vendorGroup.append(
+                '<select class="form-control form-control-sm" name="vendor_id[]" data-placeholder="-- Pilih --"><option value=""></option>@foreach ($vendor as $rekanan)<option value="{{ $rekanan->id }}">{{ $rekanan->vendor }}</option>@endforeach</select>'
+            );
+
+            var prosentaseGroup = $('<div class="form-group col-md-2"></div>');
+            prosentaseGroup.append(
+                '<label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span class="required">*</span></label>'
+            );
+            prosentaseGroup.append(
+                '<input type="double" class="form-control form-control-sm" id="prosentase" name="prosentase[]">'
+            );
+
+            var buttonGroup = $('<div class="col-md-1"></div>');
+            buttonGroup.append(
+                '<label class="col-form-label col-form-label-xs" for="">Kosongkan </label>');
+            buttonGroup.append(
+                '<button type="button" class="btn btn-danger btn-sm hapus"><i class="fa fa-minus"></i></button>'
+            );
+
+            formRow.append(vendorGroup);
+            formRow.append(prosentaseGroup);
+            formRow.append(buttonGroup);
+
+            $('#form_dinamis').append(formRow);
+        });
+
+        $('#form_dinamis').on('click', '.hapus', function() {
+            $(this).closest('.form-row').remove();
+            id--;
+        });
+    });
+</script>
+
 <script>
     jQuery("select").each(function() {
         $this = jQuery(this);

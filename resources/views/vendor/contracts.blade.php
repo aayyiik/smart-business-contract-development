@@ -32,10 +32,10 @@
                     <thead>
                         <tr>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 5%;">No.</th>
-                            <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Nomor Kontrak</th>
+                            <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Nomor SP</th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 40%;">Nama Pekerjaan</th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Prosentase</th>
-                            <th class="text-center pr-0" style="vertical-align: middle; width: 20%;">Nilai Kontrak (Rp)
+                            <th class="text-center pr-0" style="vertical-align: middle; width: 20%;">Nilai OE (Rp)
                             </th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 15%;">Posisi</th>
                             <th class="text-center pr-0" style="vertical-align: middle; width: 10%;">Aksi</th>
@@ -45,13 +45,13 @@
                         @foreach ($contracts as $contract)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->number }}
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->no_sp }}
                             </td>
                             <td style="vertical-align: middle;">{{ $contract->name }}</td>
                             <td class="text-center" style="vertical-align: middle;">
                                 {{ $contract->pivot->prosentase }}%
                             </td>
-                            <td class="text-right" style="vertical-align: middle;">@currency($contract->pivot->nilai_kontrak)</td>
+                            <td class="text-right" style="vertical-align: middle;">@currency($contract->oe)</td>
                             <td class="text-center" style="vertical-align: middle;">
                                 @if ($contract->pivot->status_id == 1)
                                 <span class="badge badge-success">VENDOR</span>

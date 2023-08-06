@@ -24,11 +24,11 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label class="col-form-label col-form-label-xs" for="number">Nomor DOF<span
+                        <label class="col-form-label col-form-label-xs" for="no_dof">Nomor DOF<span
                                 class="required">*</span></label>
-                        <input type="text" class="form-control form-control-sm @error('number') is-invalid @enderror"
-                            value="{{ $contract->pivot->number ?? old('number') }}" id="number" name="number">
-                        @error('number')
+                        <input type="text" class="form-control form-control-sm @error('no_dof') is-invalid @enderror"
+                            value="{{ $contract->pivot->no_dof ?? old('no_dof') }}" id="no_dof" name="no_dof">
+                        @error('no_dof')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -40,17 +40,6 @@
                         <input type="date" class="form-control form-control-sm @error('date_dof') is-invalid @enderror"
                             id="date_dof" name="date_dof">
                         @error('date_dof')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label col-form-label-xs" for="date_name">Terbilang Tanggal DOF<span
-                                class="required">*</span></label>
-                        <input type="text" class="form-control form-control-sm @error('date_name') is-invalid @enderror"
-                            id="date_name" name="date_name">
-                        @error('date_name')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -147,7 +136,7 @@
                 <!-- /tool -->
             </div>
             <div class="card-body">
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="start_rute">Rute Pekerjaan (Asal)<span
                             class="required">*</span></label>
                     <input type="text" class="form-control form-control-sm @error('start_rute') is-invalid @enderror"
@@ -157,8 +146,8 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
-                <div class="form-group">
+                </div> --}}
+                {{-- <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="end_rute">Rute Pekerjaan (Tujuan)<span
                             class="required">*</span></label>
                     <input type="text" class="form-control form-control-sm @error('end_rute') is-invalid @enderror"
@@ -168,13 +157,23 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="state_rate">Wilayah Rate Pemuatan<span
                             class="required">*</span></label>
                     <input type="text" class="form-control form-control-sm @error('state_rate') is-invalid @enderror"
                         id="state_rate" name="state_rate">
                     @error('state_rate')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label col-form-label-xs" for="minimum_transport">Minimal Angkutan</label>
+                    <input type="text" class="form-control form-control-sm @error('minimum_transport') is-invalid @enderror"
+                        value="{{ $contracts->minimum_transport }}" id="minimum_transport" name="minimum_transport" readonly>
+                    @error('minimum_transport')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -193,18 +192,6 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="terbilang_rupiah">Terbilang Rupiah<span
-                            class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('terbilang_rupiah') is-invalid @enderror"
-                        id="terbilang_rupiah" name="terbilang_rupiah">
-                    @error('terbilang_rupiah')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
                 {{-- mulai --}}
 
                 <div class="form-group">
@@ -236,29 +223,18 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="vendor_upper">Nama Vendor (huruf besar)<span
+                    <label class="col-form-label col-form-label-xs" for="vendor">Nama Vendor<span
                             class="required">*</span></label>
                     <input type="text"
-                        class="form-control form-control-sm @error('vendor_upper') is-invalid @enderror"
-                        id="vendor_upper" name="vendor_upper">
-                    @error('vendor_upper')
+                        class="form-control form-control-sm @error('vendor') is-invalid @enderror"
+                        id="vendor" name="vendor">
+                    @error('vendor')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="vendor_capital">Nama Vendor (huruf capital)<span
-                            class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('vendor_capital') is-invalid @enderror"
-                        id="vendor_capital" name="vendor_capital">
-                    @error('vendor_capital')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="start_date">Waktu Mulai<span
                             class="required">*</span></label>
@@ -270,17 +246,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="date_sname">Terbilang Tanggal<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('date_sname') is-invalid @enderror"
-                        id="date_sname" name="date_sname">
-                    @error('date_sname')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+              
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="end_date">Waktu Selesai<span
                             class="required">*</span></label>
@@ -292,17 +258,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="date_ename">Terbilang Tanggal<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('date_ename') is-invalid @enderror"
-                        id="date_ename" name="date_ename">
-                    @error('date_ename')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+               
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="delivery_date">Berlaku Sampai<span
                             class="required">*</span></label>
@@ -315,18 +271,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="name_devdate">Terbilang Berlaku<span
-                            class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('name_devdate') is-invalid @enderror"
-                        id="name_devdate" name="name_devdate">
-                    @error('name_devdate')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+
             </div>
         </div>
         <div class="card">

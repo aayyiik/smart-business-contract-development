@@ -44,7 +44,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->integer('performance_bond')->nullable();
             $table->string('rupiah')->nullable();
-            $table->date('delivery_date')->nullable();
+            $table->integer('delivery_date')->nullable();
             $table->string('name_devdate')->nullable();
             //file
             $table->string('qrcode')->nullable();
