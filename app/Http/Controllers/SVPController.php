@@ -233,9 +233,6 @@ class SVPController extends Controller
 
     public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
-        $request->validate([
-            'description' => 'required'
-        ]);
 
         $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
 
@@ -282,7 +279,7 @@ class SVPController extends Controller
         $qrCodeName = $contract->id . $vendor->id . '_qrcode';
         $qrCodeImagePath = public_path($qrCodeName . '.png'); // Provide a proper path
         $this->generateQRCode($qrCodeText, $qrCodeImagePath);
-
+    
         return $qrCodeImagePath;
     }
 
@@ -340,7 +337,10 @@ class SVPController extends Controller
 
     private function setImageValueInTemplate($templateProcessor, $field, $imagePath)
     {
-        $templateProcessor->setImageValue($field, ['qrcode' => asset($imagePath), 'width' => 200, 'height' => 100]);
+        // Use the asset helper to generate the correct URL for the image
+        $imageUrl = asset($imagePath);
+
+        $templateProcessor->setImageValue($field, ['qrcode' => $imageUrl, 'width' => 200, 'height' => 100]);
     }
 
     private function saveTemplateAsDocx($templateProcessor, $fileName)
