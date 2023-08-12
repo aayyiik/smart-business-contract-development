@@ -29,7 +29,7 @@
         <div class="card-body">
             <div class="mb-3">
                 <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#kembalikan">Kembalikan</a>
-                @if ($contract->oe > 500000000)
+                @if ($contract->oe->500000000)
                     <a href="#" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#dku">Kirim Ke DKU</a>
                 @else
                     <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#acc">Final Persetujuan</a>

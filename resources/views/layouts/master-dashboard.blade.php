@@ -184,12 +184,20 @@
                             <a href="{{route('buyer.contracts-approval')}}" class="nav-link @yield('buyer-approval')">
                                 <i class="nav-icon fas fa-pencil-alt fa-xs"></i>
                                 <p>
-                                    Approval
+                                    Approval Manajemen
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('buyer.contracts-final')}}" class="nav-link @yield('buyer-final')">
+                            <a href="{{route('buyer.contracts-final-vendor')}}" class="nav-link @yield('buyer-final-vendor')">
+                                <i class="nav-icon fas fa-light fa-signature fa-xs"></i>
+                                <p>
+                                    Approval Rekanan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('buyer.contracts-final-buyer')}}" class="nav-link @yield('buyer-final')">
                                 <i class="nav-icon fas fa-solid fa-check-circle fa-xs"></i>
                                 <p>
                                     Final Rekanan

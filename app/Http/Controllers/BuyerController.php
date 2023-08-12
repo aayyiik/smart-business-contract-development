@@ -95,18 +95,6 @@ class BuyerController extends Controller
             }
         }
 
-        // method lama
-        // $contract = Contract::create([
-        //     'name' => $request->name,
-        //     'oe' => $request->oe,
-        //     'no_sp' => $request->no_sp,
-        //     'date_sp' => $request->date_sp,
-        //     'user_detail_id' => Auth::user()->id,
-        //     'template_id' => $request->template_id,
-        // ]);
-
-        // $contract->vendors()->attach($request->vendor, ["status_id" => 1]);
-
         $flasher->addSuccess('Berhasil menambahkan pekerjaan!');
 
         return redirect()->route('buyer.contracts-monitoring');
@@ -376,6 +364,21 @@ class BuyerController extends Controller
         return redirect()->back();
     }
 
+    //CONTRACT FINAL VENDOR
+    public function contracts_final_vendor()
+    {
+        $contracts = ContractVendor::whereIn('status_id', [10])->get();
+        return view('buyer.contracts-final-vendor', compact('contracts'));
+    }
+
+    public function contract_final_vendor(Contract $contract, Vendor $vendor)
+    {
+        $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
+        $review_hukum = ReviewLegal::where('contract_vendor_id', $contracts->pivot->id)->get();
+        $qrcode = QrCode::size(50)->generate(route('buyer.contract-final', ['contract' => $contract->id, 'vendor' => $vendor->id]));
+        return view('buyer.contract-final', compact('contracts', 'contract', 'review_hukum', 'qrcode'));
+    }
+
     // CONTRACT FINAL
     public function contracts_final()
     {
@@ -387,54 +390,9 @@ class BuyerController extends Controller
     {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
         $review_hukum = ReviewLegal::where('contract_vendor_id', $contracts->pivot->id)->get();
-
-        // $url = 'https://sangcahaya.id';
-        // $qr = DNS2D::getBarcodePNGPath($url, 'QRCODE');
-
-        // $renderer = new ImageRenderer(
-        //     new RendererStyle(400),
-        //     new ImagickImageBackEnd()
-        // );
-
-        // $renderer = new ImageRenderer(
-        //     new RendererStyle(400)
-        // );
-        // $writer = new Writer($renderer);
-        // $qrCode = $writer->writeFile('Hello World!', 'qrcode.png');
-
-        $qrcode = QrCode::size(300)->generate(route('buyer.contract-final', ['contract' => $contract->id, 'vendor' => $vendor->id]));
+        $qrcode = QrCode::size(50)->generate(route('buyer.contract-final', ['contract' => $contract->id, 'vendor' => $vendor->id]));
         return view('buyer.contract-final', compact('contracts', 'contract', 'review_hukum', 'qrcode'));
     }
 
-    public function generatePdf()
-{ 
-    // $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-    // $data = ContractVendor::all(); // Replace with your data retrieval logic
 
-    $data = [
-        [
-            'id' => 1,
-            'name' => 'John Doe',
-            'address' => '123 Main St',
-        ],
-        [
-            'id' => 2,
-            'name' => 'Jane Smith',
-            'address' => '456 Elm St',
-        ],
-    ];
-
-    // Generate the QR code
-    $url = route('generate-pdf');
-    $qrCode = QrCode::size(600)->generate($url);
-
-    // Generate the PDF
-    $pdf = new Dompdf();
-    $view = view('pdf-view', compact('data', 'qrCode'));
-    $html = $view->render();
-    $pdf->loadHtml($html);
-
-    dd($html);
-    // return $pdf->stream('filename.pdf');
-}
 }

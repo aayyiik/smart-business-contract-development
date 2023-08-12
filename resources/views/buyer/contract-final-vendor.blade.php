@@ -1,6 +1,6 @@
 @extends('layouts.master-dashboard')
 @section('page-title', 'Detail Kontrak')
-@section('buyer-approval', 'active')
+@section('buyer-final', 'active')
 @section('address')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -54,7 +54,7 @@
                 <div class="form-group row">
                     <label for="nilai_kontrak" class="col-sm-2 col-form-label">Nilai Kontrak</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->contract_amount)" readonly>
+                        <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->nilai_kontrak)" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -86,9 +86,22 @@
                         @elseif ($contracts->pivot->status_id == 6)value="VICE PRESIDENT"
                         @elseif ($contracts->pivot->status_id == 7)value="SENIOR VICE PRESIDENT"
                         @elseif ($contracts->pivot->status_id == 8)value="DIREKTUR KEUNGAN DAN UMUM"
-                        @elseif ($contracts->pivot->status_id == 9)value="APPROVE" @endif
+                        @elseif ($contracts->pivot->status_id == 9)value="APPROVE" 
+                        @elseif ($contracts->pivot->status_id == 10)value="TANDA TANGAN KONTRAK"
+                        @elseif ($contracts->pivot->status_id == 11)value="FINAL KONTRAK"@endif
                         readonly>
                     </div>
+                </div>
+                {{-- <div class="visible-print text-center">
+                    {!! QrCode::size(100)->generate(Request::url('budi')); !!}
+                    <p>Scan me to return to the original page.</p>
+                </div>
+
+                <img src="http://127.0.0.1:8000/{{ $qr }}">
+                <img src="https://sangcahaya.id/{{ DNS1D::getBarcodePNG('4', 'C39+', 3, 33) }}" /> --}}
+                {{-- <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code"> --}}
+                <div>
+                {!! $qrcode !!}
                 </div>
             </form>
         </div>
