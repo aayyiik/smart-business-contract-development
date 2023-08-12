@@ -49,30 +49,30 @@
                             @foreach ($contracts as $contract)
                                 <tr>
                                     <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                                    <td class="text-center" style="vertical-align: middle;">{{ $contract->number }}</td>
+                                    <td class="text-center" style="vertical-align: middle;">{{ $contract->no_dof }}</td>
                                     <td style="vertical-align: middle;">{{ $contract->contract->name }}</td>
                                     <td style="vertical-align: middle;">{{ $contract->vendor->vendor }}</td>
                                     <td class="text-center" style="vertical-align: middle;">{{ $contract->prosentase }}%
                                     </td>
-                                    <td class="text-right" style="vertical-align: middle;">@currency($contract->nilai_kontrak)
+                                    <td class="text-right" style="vertical-align: middle;">@currency($contract->contract_amount)
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;">
                                         @if ($contract->status_id == 1)
-                                            <span>REVIEW VENDOR</span>
+                                            <span class="badge badge-success">VENDOR</span>
                                         @elseif ($contract->status_id == 2)
-                                            <span>REVIEW BUYER</span>
+                                            <span class="badge badge-success">BUYER</span>
                                         @elseif ($contract->status_id == 3)
-                                            <span>REVIEW HUKUM</span>
+                                            <span class="badge badge-success">HUKUM</span>
                                         @elseif ($contract->status_id == 4)
-                                            <span>APPROVE HUKUM</span>
+                                            <span class="badge badge-success">APPROVE HUKUM</span>
                                         @elseif ($contract->status_id == 5)
-                                            <span>ASSISTANT VICE PRESIDENT</span>
+                                            <span class="badge badge-success">ASSISTANT VICE PRESIDENT</span>
                                         @elseif ($contract->status_id == 6)
-                                            <span>VICE PRESIDENT</span>
+                                            <span class="badge badge-success">VICE PRESIDENT</span>
                                         @elseif ($contract->status_id == 7)
-                                            <span>SENIOR VICE PRESIDENT</span>
+                                            <span class="badge badge-success">SENIOR VICE PRESIDENT</span>
                                         @elseif ($contract->status_id == 8)
-                                            <span>DIREKTUR KEUANGAN DAN UMUM</span>
+                                            <span class="badge badge-success">DIREKTUR KEUANGAN DAN UMUM</span>
                                         @endif
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;"> <a

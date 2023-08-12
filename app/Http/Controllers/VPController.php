@@ -17,6 +17,7 @@ use BaconQrCode\Renderer\Image\Png;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
+use Carbon\Carbon;
 use Dompdf\Frame as DompdfFrame;
 use Dompdf\FrameDecorator\Page;
 use Dompdf\Options;
@@ -50,60 +51,8 @@ class VPController extends Controller
     {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
         $approvals = Approval::where('contract_vendor_id', $contracts->pivot->id)->orderBy('created_at', 'DESC')->get();
-
-        // Mendapatkan URL view tertentu yang ingin Anda jadikan konten QR code
-        $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
-
-        $qrCodeName = $contract->id . $vendor->id . '_qrcode' ;
-        // Membuat QR Code nya
-        $qrCodeImagePath = public_path($qrCodeName . '.png'); // Provide a proper path
-
-        $this->generateQRCode($qrCodeText, $qrCodeImagePath);
-
-        // Pastikan file PDF ada sebelum melanjutkan
-        $pdfPath = public_path($contracts->pivot->filename . '.pdf');
-        if (!file_exists($pdfPath)) {
-            abort(404, 'PDF not found');
-        }
-
-        // Load the existing PDF using Dompdf
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($pdfPath);
-
-        // Render the PDF
-        $dompdf->render();
-
-        // Get the number of pages in the PDF
-        $numPages = $dompdf->getCanvas()->get_page_count();
-
-        // Add the QR code image to each page of the PDF
-        for ($pageNum = 1; $pageNum <= $numPages; $pageNum++) {
-            $qrCodeImgTag = '<img src="' . $qrCodeImagePath . '" style="position: absolute; top: 10px; left: 10px;" />';
-            $dompdf->getCanvas()->page_text(10, 10, $qrCodeImgTag, null, 10, array(0, 0, 0));
-        }
-
-        // Output PDF to the browser
-        $pdfContent = $dompdf->output();
-
-        // Convert the PDF content to base64
-        $pdfBase64 = base64_encode($pdfContent);
-
         // Output the view with the PDF content
-        return view('vp.contract', compact('contracts', 'contract', 'approvals',  'pdfBase64'));
-    }
-
-    private function generateQRCode($text, $filename)
-    {
-        $renderer = new ImageRenderer(
-            new RendererStyle(200),
-            new ImagickImageBackEnd()
-        );
-
-        $writer = new Writer($renderer);
-        $qrCode = $writer->writeString($text);
-
-        // Save the QR code image to a file
-        file_put_contents($filename, $qrCode);
+        return view('vp.contract', compact('contracts', 'contract', 'approvals'));
     }
 
     public function review_contracts()
@@ -145,7 +94,7 @@ class VPController extends Controller
         return redirect()->route('vp.review-contracts');
     }
 
-    public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
+    public function contract_approval2(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
         $request->validate([
             'description' => 'required'
@@ -178,5 +127,143 @@ class VPController extends Controller
 
 
         return redirect()->route('vp.review-contracts');
+    }
+
+    public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
+    {
+
+        $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
+
+        Approval::create([
+            'contract_vendor_id' => $contract_detail->pivot->id,
+            'name' => Auth::user()->name,
+            'status' => 6,
+            'description' => $request->description,
+        ]);
+
+        if ($contract->oe < 100000000) {
+
+            $fileName = $this->generateFileName();
+            $date_dof = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->date_dof)->format('d-m-Y');
+            $date_sp = Carbon::createFromFormat('Y-m-d', $contract->date_sp)->format('d-m-Y');
+            $start_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->start_date)->format('d-m-Y');
+            $end_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->end_date)->format('d-m-Y');
+
+            $templateProcessor = $this->generateTemplateProcessor();
+
+            $this->setValuesInTemplate($templateProcessor, $contract_detail, $date_dof, $date_sp, $start_date, $end_date);
+
+            // Generate QR Code data
+            $qrCodeData = $this->generateQRCode($contract, $vendor);
+
+            $this->setImageValueInTemplate($templateProcessor, 'qrcode', $qrCodeData);
+
+            $this->saveTemplateAsDocx($templateProcessor, $fileName);
+
+            $this->convertDocxToPdf($fileName);
+
+            $this->updateContractVendor($contract, $vendor, $fileName);
+
+            $flasher->addSuccess('Draft Kontrak Approved!');
+
+            return redirect()->route('svp.review-contracts');
+        } else {
+            $this->updateContractVendor($contract, $vendor, null, 8);
+
+            $flasher->addSuccess('Berhasil memproses lanjut!');
+        }
+
+        return redirect()->route('vp.review-contracts');
+    }
+
+  
+    private function generateQRCode($contract, $vendor)
+    {
+        $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
+        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(200)->generate($qrCodeText);
+        $qrCodeData = 'data:image/png;base64,' . base64_encode($qrCode);
+
+        return $qrCodeData;
+    }
+    private function generateFileName()
+    {
+        return now()->format('Ymd') . "_approved_" .  Str::random(20);
+    }
+
+    private function generateTemplateProcessor()
+    {
+        return new TemplateProcessor('word-template/template-kontrak-jasa-angkutan-darat.docx');
+    }
+
+    private function setValuesInTemplate($templateProcessor, $contract_detail, $date_dof, $date_sp, $start_date, $end_date)
+    {
+        $replaceValues = [
+            'no_dof' => $contract_detail->pivot->no_dof,
+            'date_dof' => $date_dof,
+            'date_name' => $contract_detail->pivot->date_name,
+            'prosentase' => $contract_detail->pivot->prosentase,
+            'management_executives' => $contract_detail->pivot->management_executives,
+            'management_job' => $contract_detail->pivot->management_job,
+            'vendor_upper' => $contract_detail->pivot->vendor_upper,
+            'vendor_capital' => $contract_detail->pivot->vendor_capital,
+            'director' => $contract_detail->pivot->director,
+            'phone' => $contract_detail->pivot->phone,
+            'address' => $contract_detail->pivot->address,
+            'email' => $contract_detail->pivot->email,
+            'place_vendor' => $contract_detail->pivot->place_vendor,
+            'contract_amount' => $contract_detail->pivot->contract_amount,
+            'state_rate' => $contract_detail->pivot->state_rate,
+            'minimum_transport' => $contract_detail->pivot->minimum_transport,
+            'start_date' => $start_date,
+            'date_sname' => $contract_detail->pivot->date_sname,
+            'end_date' => $end_date,
+            'date_ename' => $contract_detail->pivot->date_ename,
+            'performance_bond' => $contract_detail->pivot->performance_bond,
+            'rupiah' => $contract_detail->pivot->rupiah,
+            'delivery_date' => $contract_detail->pivot->delivery_date,
+            'name_devdate' => $contract_detail->pivot->name_devdate,
+            'no_sp' => $contract_detail->pivot->no_sp,
+            'date_sp' => $date_sp
+        ];
+
+        foreach ($replaceValues as $field => $value) {
+            $templateProcessor->setValue($field, $value);
+        }
+
+        // Set date values
+        $templateProcessor->setValue('date_dof', $date_dof);
+        $templateProcessor->setValue('date_sp', $date_sp);
+        $templateProcessor->setValue('start_date', $start_date);
+        $templateProcessor->setValue('end_date', $end_date);
+    }
+
+    private function setImageValueInTemplate($templateProcessor, $field, $qrCodeData)
+    {
+        $templateProcessor->setImageValue($field, ['qrcode' => $qrCodeData, 'width' => 100, 'height' => 50]);
+    } 
+
+    private function saveTemplateAsDocx($templateProcessor, $fileName)
+    {
+        $templateProcessor->saveAs($fileName . '.docx');
+    }
+
+    private function convertDocxToPdf($fileName)
+    {
+        $domPdfPath = base_path('vendor/dompdf/dompdf');
+        \PhpOffice\PhpWord\Settings::setPdfRendererPath($domPdfPath);
+        \PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
+        $Content = \PhpOffice\PhpWord\IOFactory::load(public_path($fileName . '.docx'));
+        $PDFWriter = \PhpOffice\PhpWord\IOFactory::createWriter($Content, 'PDF');
+        $PDFWriter->save(public_path($fileName . '.pdf'));
+    }
+
+    private function updateContractVendor($contract, $vendor, $fileName = null, $statusId = 9)
+    {
+        $updateData = ['status_id' => $statusId];
+        if ($fileName !== null) {
+            $updateData['filename'] = $fileName;
+        }
+
+        $contract->vendors()->updateExistingPivot($vendor->id, $updateData);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.master-dashboard')
 @section('page-title', 'Detail Kontrak')
-@section('active-contract', 'active')
+@section('review-contract', 'active')
 @section('address')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -31,7 +31,7 @@
                 <div class="form-group row">
                     <label for="number" class="col-sm-2 col-form-label">Nomor Kontrak</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="number" value="{{ $contracts->pivot->number }}" readonly>
+                        <input type="text" class="form-control" id="number" value="{{ $contracts->pivot->no_dof }}" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -49,7 +49,7 @@
                 <div class="form-group row">
                     <label for="nilai_kontrak" class="col-sm-2 col-form-label">Nilai Kontrak</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->nilai_kontrak)" readonly>
+                        <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->contract_amount)" readonly>
                     </div>
                 </div>
                 <div class="form-group row">

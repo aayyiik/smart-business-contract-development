@@ -20,7 +20,7 @@ class Vendor extends Model
 
     public function contracts()
     {
-        return $this->belongsToMany(Contract::class)->withPivot('no_dof', 'date_dof', 'date_name', 'management_executives', 'management_job', 'vendor_upper', 'vendor_capital',  'director', 'address', 'phone', 'email', 'place_vendor', 'prosentase', 'contract_amount', 'state_rate', 'minimum_transport', 'date_sname', 'start_date', 'date_ename', 'end_date', 'performance_bond', 'rupiah', 'delivery_date', 'name_devdate', 'qrcode', 'filename', 'final_vendor');
+        return $this->belongsToMany(Contract::class)->withPivot('status_id', 'no_dof', 'date_dof', 'date_name', 'management_executives', 'management_job', 'vendor_upper', 'vendor_capital',  'director', 'address', 'phone', 'email', 'place_vendor', 'prosentase', 'contract_amount', 'state_rate', 'minimum_transport', 'date_sname', 'start_date', 'date_ename', 'end_date', 'performance_bond', 'rupiah', 'delivery_date', 'name_devdate', 'qrcode', 'filename', 'final_vendor');
     }
 
     public function contractVendor()

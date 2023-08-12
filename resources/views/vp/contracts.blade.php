@@ -46,12 +46,12 @@
                         @foreach ($contracts as $contract)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->number }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->no_dof }}</td>
                             <td style="vertical-align: middle;">{{ $contract->contract->name }}</td>
                             <td style="vertical-align: middle;">{{ $contract->vendor->vendor }}</td>
                             <td class="text-center" style="vertical-align: middle;">{{ $contract->prosentase }}%
                             </td>
-                            <td class="text-right" style="vertical-align: middle;">@currency($contract->nilai_kontrak)
+                            <td class="text-right" style="vertical-align: middle;">@currency($contract->contract_amount)
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
                                 @if ($contract->status_id == 1)
@@ -70,6 +70,12 @@
                                 <span class="badge badge-success">SENIOR VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 8)
                                 <span class="badge badge-success">DIREKTUR KEUANGAN DAN UMUM</span>
+                                @elseif ($contract->status_id == 9)
+                                <span class="badge badge-success">APPROVED</span>
+                                @elseif ($contract->status_id == 10)
+                                <span class="badge badge-success">TANDA TANGAN KONTRAK</span>
+                                @elseif ($contract->status_id == 11)
+                                <span class="badge badge-success">FINAL KONTRAK</span>
                                 @endif
                             </td>
                             <td class="text-center" style="vertical-align: middle;"> <a href="{{ route('vp.contract', ['contract' => $contract->contract_id, 'vendor' => $contract->vendor_id]) }}" class="btn btn-primary btn-xs"><b>Rincian</b></a>

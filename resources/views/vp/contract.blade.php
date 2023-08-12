@@ -34,7 +34,7 @@
                         <label for="number" class="col-sm-2 col-form-label">Nomor Kontrak</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="number"
-                                value="{{ $contracts->pivot->number }}" readonly>
+                                value="{{ $contracts->pivot->no_dof }}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label for="nilai_kontrak" class="col-sm-2 col-form-label">Nilai Kontrak</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->nilai_kontrak)"
+                            <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->contract_amount)"
                                 readonly>
                         </div>
                     </div>
@@ -90,7 +90,10 @@
                         @elseif ($contracts->pivot->status_id == 5)value="ASSISTANT VICE PRESIDENT"
                         @elseif ($contracts->pivot->status_id == 6)value="VICE PRESIDENT"
                         @elseif ($contracts->pivot->status_id == 7)value="SENIOR VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 8)value="DIREKTUR KEUNGAN DAN UMUM" @endif
+                        @elseif ($contracts->pivot->status_id == 8)value="DIREKTUR KEUNGAN DAN UMUM" 
+                        @elseif ($contracts->pivot->status_id == 9)value="APPROVED"
+                        @elseif ($contracts->pivot->status_id == 10)value="TANDA TANGAN KONTRAK"
+                        @elseif ($contracts->pivot->status_id == 8)value="FINAL KONTRAK" @endif
                                 readonly>
                         </div>
                     </div>
@@ -101,36 +104,16 @@
             <div class="card-header card-forestgreen">
                 <h6 class="card-title pt-1">Kontrak</h6>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool btn-xs pr-0" data-card-widget="maximize"><i
-                            class="fas fa-expand fa-xs icon-border-default"></i>
+                    <button type="button" class="btn btn-tool btn-xs pr-0" data-card-widget="maximize"><i class="fas fa-expand fa-xs icon-border-default"></i>
                     </button>
-                    <button type="button" class="btn btn-tool btn-xs" data-card-widget="collapse"><i
-                            class="fas fa-minus fa-xs icon-border-yellow"></i>
+                    <button type="button" class="btn btn-tool btn-xs" data-card-widget="collapse"><i class="fas fa-minus fa-xs icon-border-yellow"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body">
-                <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px"
-                    type="application/pdf">
-                <!-- Display the embedded PDF -->
-                {{-- <iframe src="data:application/pdf;base64,{{ $pdfContent }}" width="100%" height="600px"></iframe> --}}
+                <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px" type="application/pdf">
             </div>
-            <div>
-                {{-- <embed src="{{ $pdfWithQRPath }}" width="100%" height="600px" type="application/pdf"> --}}
-                <iframe src="data:application/pdf;base64,{{ $pdfBase64 }}" width="100%" height="600px"></iframe>
-            </div>
-            <!-- Embed the PDF using the <embed> tag -->
-            {{-- <embed src="{{ asset($contracts->pivot->filename) }}.pdf#page=1 {{ asset('qr_code.png') }}" width="100%" height="600px"
-                type="application/pdf"> --}}
-
-                {{-- ini yang mau digabung --}}
-            <!-- Display the QR code image using an <img> tag -->
-            <img src="{{ asset('qr_code.png') }}" style="position: absolute; top: 10px; left: 10px;">
-            <img src="data:image/png;base64,{{ asset($pdfBase64) }}" style="position: absolute; top: 10px; left: 10px;">
-
-
         </div>
-
     </div>
     <div class="card">
         <div class="card-header card-forestgreen">

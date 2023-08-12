@@ -376,7 +376,7 @@ class BuyerController extends Controller
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
         $review_hukum = ReviewLegal::where('contract_vendor_id', $contracts->pivot->id)->get();
         $qrcode = QrCode::size(50)->generate(route('buyer.contract-final', ['contract' => $contract->id, 'vendor' => $vendor->id]));
-        return view('buyer.contract-final', compact('contracts', 'contract', 'review_hukum', 'qrcode'));
+        return view('buyer.contract-final-vendor', compact('contracts', 'contract', 'review_hukum', 'qrcode'));
     }
 
     // CONTRACT FINAL

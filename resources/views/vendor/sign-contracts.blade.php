@@ -45,11 +45,11 @@
                         @foreach ($contracts as $contract)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->number }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->no_dof }}</td>
                             <td style="vertical-align: middle;">{{ $contract->name }}</td>
                             <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->prosentase }}%
                             </td>
-                            <td class="text-right" style="vertical-align: middle;">@currency($contract->pivot->nilai_kontrak)
+                            <td class="text-right" style="vertical-align: middle;">@currency($contract->pivot->contract_amount)
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
                                 @if ($contract->pivot->status_id == 1)

@@ -46,12 +46,12 @@
                         @foreach ($contracts as $contract)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->number }}</td>
-                            <td style="vertical-align: middle;">{{ $contract->contract->name }}</td>
-                            <td style="vertical-align: middle;">{{ $contract->vendor->vendor }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->no_dof }}</td>
+                            <td style="vertical-align: middle;">{{ $contract->name }}</td>
+                            <td style="vertical-align: middle;">{{ $contract->vendor }}</td>
                             <td class="text-center" style="vertical-align: middle;">{{ $contract->prosentase }}%
                             </td>
-                            <td class="text-right" style="vertical-align: middle;">@currency($contract->nilai_kontrak)
+                            <td class="text-right" style="vertical-align: middle;">@currency($contract)
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
                                 @if ($contract->status_id == 1)
