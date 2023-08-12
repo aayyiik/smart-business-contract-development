@@ -217,19 +217,19 @@ class SVPController extends Controller
     //         return redirect()->route('svp.review-contracts');
     //     }
 
-        private function generateQRCode($text, $filename)
-        {
-            $renderer = new ImageRenderer(
-                new RendererStyle(200),
-                new ImagickImageBackEnd()
-            );
+    //     private function generateQRCode($text, $filename)
+    //     {
+    //         $renderer = new ImageRenderer(
+    //             new RendererStyle(200),
+    //             new ImagickImageBackEnd()
+    //         );
 
-            $writer = new Writer($renderer);
-            $qrCode = $writer->writeString($text);
+    //         $writer = new Writer($renderer);
+    //         $qrCode = $writer->writeString($text);
 
-            // Save the QR code image to a file
-            file_put_contents($filename, $qrCode);
-       }
+    //         // Save the QR code image to a file
+    //         file_put_contents($filename, $qrCode);
+    //    }
 
     public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
@@ -244,7 +244,24 @@ class SVPController extends Controller
         ]);
 
         if ($contract->oe < 500000000) {
-            $qrCodeImagePath = $this->generateQRCodeImage($contract, $vendor);
+            // $qrCodeImagePath = $this->generateQRCodeImage($contract, $vendor);
+
+            // $fileName = $this->generateFileName();
+            // $date_dof = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->date_dof)->format('d-m-Y');
+            // $date_sp = Carbon::createFromFormat('Y-m-d', $contract->date_sp)->format('d-m-Y');
+            // $start_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->start_date)->format('d-m-Y');
+            // $end_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->end_date)->format('d-m-Y');
+
+            // $templateProcessor = $this->generateTemplateProcessor();
+
+            // $this->setValuesInTemplate($templateProcessor, $contract_detail, $date_dof, $date_sp, $start_date, $end_date);
+            // $this->setImageValueInTemplate($templateProcessor, 'qrcode', $qrCodeImagePath);
+
+            // $this->saveTemplateAsDocx($templateProcessor, $fileName);
+
+            // $this->convertDocxToPdf($fileName);
+
+            // $this->updateContractVendor($contract, $vendor, $fileName);
 
             $fileName = $this->generateFileName();
             $date_dof = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->date_dof)->format('d-m-Y');
@@ -255,7 +272,11 @@ class SVPController extends Controller
             $templateProcessor = $this->generateTemplateProcessor();
 
             $this->setValuesInTemplate($templateProcessor, $contract_detail, $date_dof, $date_sp, $start_date, $end_date);
-            $this->setImageValueInTemplate($templateProcessor, 'qrcode', $qrCodeImagePath);
+
+            // Generate QR Code data
+            $qrCodeData = $this->generateQRCode($contract, $vendor);
+
+            $this->setImageValueInTemplate($templateProcessor, 'qrcode', $qrCodeData);
 
             $this->saveTemplateAsDocx($templateProcessor, $fileName);
 
@@ -264,6 +285,8 @@ class SVPController extends Controller
             $this->updateContractVendor($contract, $vendor, $fileName);
 
             $flasher->addSuccess('Draft Kontrak Approved!');
+
+            return redirect()->route('svp.review-contracts');
         } else {
             $this->updateContractVendor($contract, $vendor, null, 8);
 
@@ -273,16 +296,25 @@ class SVPController extends Controller
         return redirect()->route('svp.review-contracts');
     }
 
-    private function generateQRCodeImage(Contract $contract, Vendor $vendor)
+  
+
+    // private function generateQRCodeImage(Contract $contract, Vendor $vendor)
+    // {
+    //     $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
+    //     $qrCodeName = $contract->id . $vendor->id . '_qrcode';
+    //     $qrCodeImagePath = public_path($qrCodeName . '.png'); // Provide a proper path
+    //     $this->generateQRCode($qrCodeText, $qrCodeImagePath);
+    
+    //     return $qrCodeImagePath;
+    // }
+    private function generateQRCode($contract, $vendor)
     {
         $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
-        $qrCodeName = $contract->id . $vendor->id . '_qrcode';
-        $qrCodeImagePath = public_path($qrCodeName . '.png'); // Provide a proper path
-        $this->generateQRCode($qrCodeText, $qrCodeImagePath);
-    
-        return $qrCodeImagePath;
-    }
+        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(200)->generate($qrCodeText);
+        $qrCodeData = 'data:image/png;base64,' . base64_encode($qrCode);
 
+        return $qrCodeData;
+    }
     private function generateFileName()
     {
         return now()->format('Ymd') . "approved" .  Str::random(20);
@@ -335,13 +367,14 @@ class SVPController extends Controller
         $templateProcessor->setValue('end_date', $end_date);
     }
 
-    private function setImageValueInTemplate($templateProcessor, $field, $imagePath)
+    private function setImageValueInTemplate($templateProcessor, $field, $qrCodeData)
     {
         // Use the asset helper to generate the correct URL for the image
-        $imageUrl = asset($imagePath);
+        // $imageUrl = asset($imagePath);
 
-        $templateProcessor->setImageValue($field, ['qrcode' => $imageUrl, 'width' => 200, 'height' => 100]);
-    }
+        // $templateProcessor->setImageValue($field, ['qrcode' => $imageUrl, 'width' => 200, 'height' => 100]);
+        $templateProcessor->setImageValue($field, ['qrcode' => $qrCodeData, 'width' => 200, 'height' => 100]);
+    } 
 
     private function saveTemplateAsDocx($templateProcessor, $fileName)
     {
