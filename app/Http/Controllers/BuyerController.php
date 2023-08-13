@@ -9,6 +9,8 @@ use App\Models\ReviewLegal;
 use Flasher\Prime\FlasherInterface;
 use App\Models\Vendor;
 use App\Models\Template;
+use App\Models\User;
+use App\Models\UserDetail;
 use BaconQrCode\Encoder\QrCode as EncoderQrCode;
 use Illuminate\Support\Str;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -305,6 +307,10 @@ class BuyerController extends Controller
 
         // get contract_detail id
         $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
+
+        // $pic = Auth::user()->unit_id;
+
+        // $avp_unit = UserDetail::where('unit_id', $pic)->get();
 
         // create approval
         Approval::create([

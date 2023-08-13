@@ -168,7 +168,7 @@ class VPController extends Controller
 
             return redirect()->route('svp.review-contracts');
         } else {
-            $this->updateContractVendor($contract, $vendor, null, 8);
+            $this->updateContractVendor($contract, $vendor, null, 7);
 
             $flasher->addSuccess('Berhasil memproses lanjut!');
         }

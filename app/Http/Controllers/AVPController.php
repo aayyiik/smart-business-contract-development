@@ -6,6 +6,7 @@ use App\Models\Approval;
 use App\Models\Contract;
 use App\Models\Vendor;
 use App\Models\ContractVendor;
+use App\Models\User;
 use Flasher\Prime\FlasherInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -20,14 +21,20 @@ class AVPController extends Controller
 
     public function contracts()
     {
-        $user_id = Auth::id();
-        $contracts = ContractVendor::where('status_id', '>=', 5)->get();
-        return view('avp.contracts', compact('user_id', 'contracts'));
+
+        $avpUnitId = Auth::user()->userDetail->unit_id;
+
+        $contracts = ContractVendor::whereHas('contract.userDetail', function ($query) use ($avpUnitId) {
+            $query->where('unit_id', $avpUnitId)->where('status_id', '>=', 5);
+        })->get();
+        return view('avp.contracts', compact('contracts'));
     }
 
     public function contract(Contract $contract, Vendor $vendor)
     {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
+
+     
         $approvals = Approval::where('contract_vendor_id', $contracts->pivot->id)->orderBy('created_at', 'DESC')->get();
 
         return view('avp.contract', compact('contracts', 'contract', 'approvals'));
@@ -35,7 +42,12 @@ class AVPController extends Controller
 
     public function review_contracts()
     {
-        $contracts = ContractVendor::whereIn('status_id', [5])->get();
+        $avpUnitId = Auth::user()->userDetail->unit_id;
+
+        $contracts = ContractVendor::whereHas('contract.userDetail', function ($query) use ($avpUnitId) {
+            $query->where('unit_id', $avpUnitId)->where('status_id', '=', 5);
+        })->get();
+        
         return view('avp.review-contracts', compact('contracts'));
     }
 
