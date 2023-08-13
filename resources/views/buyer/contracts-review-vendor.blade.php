@@ -47,7 +47,7 @@
                         @if($contract->contract->user_detail_id == Auth::user()->userDetail->id)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td class="text-center" style="vertical-align: middle;">{{ $contract->number }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ $contract->no_dof }}</td>
                             <td style="vertical-align: middle;">{{ $contract->contract->name }}</td>
                             <td style="vertical-align: middle;">{{ $contract->vendor->vendor }}</td>
                             <td class="text-center" style="vertical-align: middle;">{{ $contract->prosentase }}%

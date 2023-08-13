@@ -57,19 +57,14 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Terbit No SP</label>
-                        <input type="text" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
-                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp" >
+                        <input type="date" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
+                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp"readonly >
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="oe">OE</label>
                         <input type="text" class="form-control form-control-sm @error('oe') is-invalid @enderror"
                         value="{{ number_format($contracts->oe, 0, ',', '.') }}" id="oe" readonly>
-                        @error('oe')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
                                 class="required">*</span></label>
@@ -145,28 +140,7 @@
                 <!-- /tool -->
             </div>
             <div class="card-body">
-                {{-- <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="start_rute">Rute Pekerjaan (Asal)<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('start_rute') is-invalid @enderror"
-                        id="start_rute" name="start_rute">
-                    @error('start_rute')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div> --}}
-                {{-- <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="end_rute">Rute Pekerjaan (Tujuan)<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('end_rute') is-invalid @enderror"
-                        id="end_rute" name="end_rute">
-                    @error('end_rute')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div> --}}
+              
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="state_rate">Wilayah Rate Pemuatan<span
                             class="required">*</span></label>
@@ -181,7 +155,7 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="minimum_transport">Minimal Angkutan</label>
                     <input type="text" class="form-control form-control-sm @error('minimum_transport') is-invalid @enderror"
-                        value="{{ $contracts->minimum_transport }}" id="minimum_transport" name="minimum_transport">
+                        id="minimum_transport" name="minimum_transport">
                     @error('minimum_transport')
                         <div class="invalid-feedback">
                             {{ $message }}

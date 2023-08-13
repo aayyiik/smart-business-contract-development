@@ -58,7 +58,7 @@ class VendorController extends Controller
     {
         $request->validate([
             'prosentase' => 'required',
-            'nilai_kontrak' => 'required',
+            'contract_amount' => 'required',
             'director' => 'required',
             'phone' => 'required',
             'address' => 'required',
@@ -133,6 +133,7 @@ class VendorController extends Controller
             'filename' => $fileName,
         ]);
 
+       
         //mengubah date ('Y-m-d') ke ('d-m-Y)
         $date_dof = Carbon::createFromFormat('Y-m-d', $request->date_dof)->format('d-m-Y');
         $date_sp = Carbon::createFromFormat('Y-m-d', $request->date_sp)->format('d-m-Y');
