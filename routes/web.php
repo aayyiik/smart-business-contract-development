@@ -24,11 +24,12 @@ use App\Http\Controllers\SuperAdminController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+    return view('auth.login2');
+})->name('login2');
 
 // Auth
 Route::post('/login', [AuthController::class, "login"])->name('signin');
+Route::get('/login2', [AuthController::class, "login2"])->name('signin-2');
 Route::post('/logout', [AuthController::class, "logout"])->name('signout');
 
 // Dashboard
