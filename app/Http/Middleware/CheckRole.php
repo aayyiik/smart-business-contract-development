@@ -18,16 +18,16 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        // if (Auth::check() && Auth::user()->roles()->where('role', $role)->exists()) {
-        //     return $next($request);
-        // }
-
-        // abort(401, 'Unauthorized');
-        // return $next($request);
+     
 
         if (! $request->user()->hasRole($role)) {
             abort(401, 'This action is unauthorized.');
         }
+
+        // if(Auth::check() && Auth::user()->status != 1){
+        //     Auth::logout();
+        //     return redirect('/login');
+        // }
         return $next($request);
     }
 }
