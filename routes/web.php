@@ -11,6 +11,7 @@ use App\Http\Controllers\VPController;
 use App\Http\Controllers\SVPController;
 use App\Http\Controllers\DKUController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\UrlHistoryController;
 
 /*
 |--------------------------------------------------------------------------

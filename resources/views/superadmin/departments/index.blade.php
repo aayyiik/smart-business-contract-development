@@ -17,9 +17,6 @@
 @section('dashboard')
 <div>
     <div class="card">
-        <div class="mb-3">
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#add">Tambah Data</a>
-        </div>
         <div class="card-header card-forestgreen">
             <h6 class="card-title pt-1">Data Departemen</h6>
             <div class="card-tools">
@@ -30,6 +27,9 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="mb-3">
+                <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#add">Tambah Data</a>
+            </div>
             <div class="table-responsive">
                 <table id="pekerjaanTable" class="table table-sm table-hovered table-bordered table-hover table-striped datatable2">
                     <thead>

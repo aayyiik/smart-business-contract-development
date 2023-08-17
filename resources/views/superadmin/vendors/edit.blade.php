@@ -35,40 +35,46 @@
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Nama PIC</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $vendors->userDetail->user->name }}" readonly>
+                            <input type="text" class="form-control" id="text"
+                                value="{{ $vendors->userDetail->user->name }}" readonly>
                             <input type="hidden" name="user_detail_id" value="{{ $vendors->user_detail_id }}">
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Vendor</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $vendors->vendor }}" name="vendor">
+                            <input type="text" class="form-control" id="text" value="{{ $vendors->vendor }}"
+                                name="vendor">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="director" class="col-sm-2 col-form-label">No Eproc</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="director" value="{{ $vendors->no_eproc }}" name="no_eproc">
+                            <input type="text" class="form-control" id="director" value="{{ $vendors->no_eproc }}"
+                                name="no_eproc">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="phone" class="col-sm-2 col-form-label">No SAP</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" value="{{ $vendors->no_sap }}" name="no_sap">
+                            <input type="text" class="form-control" id="phone" value="{{ $vendors->no_sap }}"
+                                name="no_sap">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="director" class="col-sm-2 col-form-label">Alamat</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="director" value="{{ $vendors->address }}" name="address">
+                            <input type="text" class="form-control" id="director" value="{{ $vendors->address }}"
+                                name="address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="phone" class="col-sm-2 col-form-label">Kontak</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" value="{{ $vendors->phone }}" name="phone">
+                            <input type="text" class="form-control" id="phone" value="{{ $vendors->phone }}"
+                                name="phone">
                         </div>
                     </div>
                     <div class="row justify-content-end mr-0">
