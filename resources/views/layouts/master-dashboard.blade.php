@@ -101,7 +101,7 @@
                             <a href="{{route('superadmin.users')}}" class="nav-link @yield('active-contract')">
                                 <i class="nav-icon fas fa-light fa-paper-plane fa-xs"></i>
                                 <p>
-                                    Tambah Pegawai
+                                    Data Pengguna
                                 </p>
                             </a>
                         </li>
@@ -109,7 +109,7 @@
                             <a href="{{route('superadmin.units')}}" class="nav-link @yield('superadmin-units')">
                                 <i class="nav-icon fas fa-light fa-paper-plane fa-xs"></i>
                                 <p>
-                                    Tambah Unit
+                                    Data Unit
                                 </p>
                             </a>
                         </li>
@@ -117,7 +117,7 @@
                             <a href="{{route('superadmin.vendors')}}" class="nav-link @yield('superadmin-vendors')">
                                 <i class="nav-icon fas fa-light fa-business-time fa-xs"></i>
                                 <p>
-                                    Tambah Vendor
+                                    Data Vendor
                                 </p>
                             </a>
                         </li>
@@ -125,7 +125,7 @@
                             <a href="{{route('superadmin.templates')}}" class="nav-link @yield('superadmin-templates')">
                                 <i class="nav-icon fas fa-light fa-paper-plane fa-xs"></i>
                                 <p>
-                                    Tambah Templates
+                                    Data Templates
                                 </p>
                             </a>
                         </li>
@@ -133,7 +133,7 @@
                             <a href="{{route('superadmin.departments')}}" class="nav-link @yield('superadmin-departments')">
                                 <i class="nav-icon fas fa-pencil-alt fa-xs"></i>
                                 <p>
-                                    Tambah Departemen
+                                    Data Departemen
                                 </p>
                             </a>
                         </li>
@@ -141,7 +141,7 @@
                             <a href="{{route('superadmin.statuses')}}" class="nav-link @yield('superadmin-statuses')">
                                 <i class="nav-icon fas fa-solid fa-check-circle fa-xs"></i>
                                 <p>
-                                    Tambah Status
+                                    Data Status
                                 </p>
                             </a>
                         </li>
@@ -149,7 +149,7 @@
                             <a href="{{route('superadmin.roles')}}" class="nav-link @yield('superadmin-roles')">
                                 <i class="nav-icon fas fa-solid fa-check-circle fa-xs"></i>
                                 <p>
-                                    Tambah Role
+                                    Data Role
                                 </p>
                             </a>
                         </li> 

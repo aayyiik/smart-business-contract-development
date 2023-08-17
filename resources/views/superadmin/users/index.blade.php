@@ -50,7 +50,7 @@
                             <td class="text-center" style="vertical-align: middle;">
                                 @if ($user->status == 1)
                                 <span class="badge badge-success">Aktif</span>
-                                @elseif ($user->status_id == 2)
+                                @elseif ($user->status_id == 0)
                                 <span class="badge badge-danger">Non-aktif</span>
                                 @endif
                             </td>

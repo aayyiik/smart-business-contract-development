@@ -38,23 +38,40 @@ class SuperAdminController extends Controller
         $usersdetail = UserDetail::find($id);
         $roles = Role::all();
         $units = Unit::all();
+        $users = User::all();
         $departments = Departement::all();
-        return view('superadmin.users.detail', ['usersdetail' => $usersdetail], compact('roles', 'units', 'departments'));
+        return view('superadmin.users.detail', ['usersdetail' => $usersdetail], compact('roles', 'units', 'departments','users'));
     }
 
     public function users_edit($id)
     {
         $usersdetail = UserDetail::find($id);
+        $users = User::all();
         $roles = Role::all();
         $units = Unit::all();
         $departments = Departement::all();
-        return view('superadmin.users.edit', compact('usersdetail','roles', 'units', 'departments'));
+        return view('superadmin.users.edit', compact('usersdetail','roles', 'units', 'departments','users'));
     }
 
     public function users_update(Request $request, $id)
     {
+
         $usersdetail = UserDetail::find($id);
-        $usersdetail->update($request->all());
+        $usersdetail->update([
+            'role_id' => $request->role_id,
+            'unit_id' => $request->unit_id,
+            'department_id' => $request->department_id,
+            'email' => $request->email,
+            'phone' => $request->phone
+        ]);
+
+        $user = $usersdetail->user;
+        $user->update ([
+            'name' => $request->name,
+            'nik' => $request->nik,
+            'status' => $request->status
+        ]);
+
         return redirect()->route('superadmin.users-detail', ['id' => $usersdetail->id]);
     }
 
