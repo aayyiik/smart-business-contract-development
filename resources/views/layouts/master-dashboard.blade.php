@@ -79,7 +79,7 @@
         <aside class="main-sidebar sidebar-color">
             <!-- Logo -->
             <a href="{{route('dashboard')}}" class="brand-link text-center py-2" style="background-color: white;">
-                <img src="{{asset('../../assets/img/logo.png')}}" height="40" class="text-center">
+                <img src="{{ asset('../../assets/img/sintract-02.png') }}" height="40" class="text-center">
             </a>
 
             <!-- Sidebar -->
