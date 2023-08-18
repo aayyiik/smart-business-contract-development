@@ -103,6 +103,12 @@
             <div class="sidebar">
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
+                    <div class="profile text-center mt-4 mb-2">
+                        <img src="{{ asset('../../assets/img/user.png') }}" alt="Profile Picture" style="width: 30%; ">
+                        <h6 style="color: white; margin-top: 15px">{{ Auth::user()->name}}</h6>
+                        <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->unit->unit}}</p>
+                    </div>
+                    <br>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
