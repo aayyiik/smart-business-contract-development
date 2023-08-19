@@ -1,6 +1,6 @@
 @extends('layouts.master-dashboard')
 @section('page-title', 'Data Pengguna')
-@section('monitoring-contract', 'active')
+@section('superadmin-user', 'active')
 @section('address')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>

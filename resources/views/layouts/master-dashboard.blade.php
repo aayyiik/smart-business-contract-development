@@ -122,7 +122,7 @@
 
                         @if (Auth::user()->userDetail->role->role == 'Super Admin')
                             <li class="nav-item">
-                                <a href="{{ route('superadmin.users') }}" class="nav-link @yield('active-contract')">
+                                <a href="{{ route('superadmin.users') }}" class="nav-link @yield('superadmin-user')">
                                     <i class="nav-icon fas fa-light fa-paper-plane fa-xs"></i>
                                     <p>
                                         Data Pengguna
