@@ -60,11 +60,6 @@
                         <input type="date" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
                             value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp"readonly >
                     </div>
-                    {{-- <div class="form-group">
-                        <label class="col-form-label col-form-label-xs" for="oe">OE</label>
-                        <input type="text" class="form-control form-control-sm @error('oe') is-invalid @enderror"
-                        value="{{ number_format($contracts->oe, 0, ',', '.') }}" id="oe" readonly>
-                    </div> --}}
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
                                 class="required">*</span></label>
@@ -322,41 +317,4 @@
         });
     </script>
 
-    {{-- <script>
-        $(document).ready(function() {
-            // Mengatur header X-CSRF-TOKEN untuk setiap permintaan AJAX
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $('#submit').on('click', function(event) {
-                event.preventDefault();
-
-                var inputVal = $('#number').val();
-
-                // Contoh:
-                $.ajax({
-                    url: '/check_unique', // Ganti dengan URL yang sesuai di sisi server
-                    method: 'POST',
-                    data: {
-                        number: inputVal
-                    },
-                    success: function(response) {
-                        if (response.exists) {
-                            alert('Number sudah digunakan. Harap gunakan email yang unik.');
-                        } else {
-                            // Submit form jika inputan unik
-                            $('#form').submit();
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // Tangani error jika ada
-                        console.error(error);
-                    }
-                });
-            });
-        });
-    </script> --}}
 @endpush

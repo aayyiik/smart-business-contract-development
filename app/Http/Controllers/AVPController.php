@@ -6,7 +6,6 @@ use App\Models\Approval;
 use App\Models\Contract;
 use App\Models\Vendor;
 use App\Models\ContractVendor;
-use App\Models\User;
 use Flasher\Prime\FlasherInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;

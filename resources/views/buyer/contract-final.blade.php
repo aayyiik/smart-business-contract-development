@@ -92,14 +92,6 @@
                         readonly>
                     </div>
                 </div>
-                {{-- <div class="visible-print text-center">
-                    {!! QrCode::size(100)->generate(Request::url('budi')); !!}
-                    <p>Scan me to return to the original page.</p>
-                </div>
-
-                <img src="http://127.0.0.1:8000/{{ $qr }}">
-                <img src="https://sangcahaya.id/{{ DNS1D::getBarcodePNG('4', 'C39+', 3, 33) }}" /> --}}
-                {{-- <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code"> --}}
                 <div>
                 {!! $qrcode !!}
                 </div>

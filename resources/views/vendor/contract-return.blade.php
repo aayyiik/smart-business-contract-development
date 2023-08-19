@@ -145,28 +145,7 @@
                 <!-- /tool -->
             </div>
             <div class="card-body">
-                {{-- <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="start_rute">Rute Pekerjaan (Asal)<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('start_rute') is-invalid @enderror"
-                        id="start_rute" name="start_rute">
-                    @error('start_rute')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div> --}}
-                {{-- <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="end_rute">Rute Pekerjaan (Tujuan)<span
-                            class="required">*</span></label>
-                    <input type="text" class="form-control form-control-sm @error('end_rute') is-invalid @enderror"
-                        id="end_rute" name="end_rute">
-                    @error('end_rute')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div> --}}
+            
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="state_rate">Wilayah Rate Pemuatan<span
                             class="required">*</span></label>
@@ -348,41 +327,4 @@
         });
     </script>
 
-    {{-- <script>
-        $(document).ready(function() {
-            // Mengatur header X-CSRF-TOKEN untuk setiap permintaan AJAX
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $('#submit').on('click', function(event) {
-                event.preventDefault();
-
-                var inputVal = $('#number').val();
-
-                // Contoh:
-                $.ajax({
-                    url: '/check_unique', // Ganti dengan URL yang sesuai di sisi server
-                    method: 'POST',
-                    data: {
-                        number: inputVal
-                    },
-                    success: function(response) {
-                        if (response.exists) {
-                            alert('Number sudah digunakan. Harap gunakan email yang unik.');
-                        } else {
-                            // Submit form jika inputan unik
-                            $('#form').submit();
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // Tangani error jika ada
-                        console.error(error);
-                    }
-                });
-            });
-        });
-    </script> --}}
 @endpush

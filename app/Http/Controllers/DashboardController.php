@@ -11,8 +11,6 @@ use App\Models\Template;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\Vendor;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

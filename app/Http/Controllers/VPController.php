@@ -6,37 +6,12 @@ use App\Models\Contract;
 use App\Models\Approval;
 use App\Models\Vendor;
 use App\Models\ContractVendor;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Flasher\Prime\FlasherInterface;
-use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Http\Request;
-use Dompdf\Dompdf;
-use BaconQrCode\Renderer\Image\Png;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
 use Carbon\Carbon;
-use Dompdf\Frame as DompdfFrame;
-use Dompdf\FrameDecorator\Page;
-use Dompdf\Options;
-use Endroid\QrCode\Writer\Result\PngResult;
-use Illuminate\Support\Facades\Storage;
-use Milon\Barcode\DNS1D;
-use Dompdf\Frame\Frame;
-use Dompdf\Frame\Factory as FrameFactory;
-use Dompdf\Canvas;
-use PhpOffice\PhpWord\Style\Frame as StyleFrame;
 use PhpOffice\PhpWord\TemplateProcessor;
-use PhpOffice\PhpWord\Writer\Word2007\Style\Frame as Word2007StyleFrame;
-use SimpleSoftwareIO\QrCode\Facades\QrCode as FacadesQrCode;
-use Fpdf\Fpdf;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\Writer\PDF\MPDF;
-use PhpOffice\PhpWord\Writer\PDF\TCPDF;
-
-use Endroid\QrCode\QrCode;
 
 class VPController extends Controller
 {
@@ -64,8 +39,6 @@ class VPController extends Controller
     public function review_contract(Contract $contract, Vendor $vendor)
     {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-        // $qrcode = new Generator;
-        // $qrcode->size(500)->generate('approved');
 
         return view('vp.review-contract', compact('contracts', 'contract'));
     }

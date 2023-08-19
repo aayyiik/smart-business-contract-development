@@ -53,8 +53,7 @@ class LegalController extends Controller
         $request->validate([
             'review_contract' => 'required'
         ]);
-        // $processes = boolval($request->input('process'));
-        // $returns = boolval($request->input('return'));
+
         if($request->has('process')){
             // get contract_detail id
             $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
@@ -167,52 +166,6 @@ class LegalController extends Controller
         //
     }
 
-     // public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
-    // {
-    //     // validate input
-    //     $request->validate([
-    //         'review_contract' => 'required'
-    //     ]);
-
-    //     // get status
-    //     $status_id = null;
-
-    //     if ($request->has('return')) {
-    //         $status_id = 2;
-    //     } elseif ($request->has('process')) {
-    //         $status_id = 4;
-    //     }
-
-    //     // get contract_detail id
-    //     $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-
-    //     // create approval
-    //     Approval::create([
-    //         'contract_vendor_id' => $contract_detail->pivot->id,
-    //         'name' => Auth::user()->name,
-    //         'status' => 3,
-    //         'description' => 'Diproses oleh Hukum',
-    //     ]);
-
-    //     // create review
-    //     $reviews = ReviewLegal::create([
-    //         'contract_vendor_id' => $contract_detail->pivot->id,
-    //         'name' => Auth::user()->name,
-    //         'review_contract' => $request->review_contract,
-    //     ]);
-
-    //     ContractVendor::where('contract_id', $contract->id)->where('vendor_id', $vendor->id)
-    //         ->update([
-    //             'status_id' => $status_id,
-    //         ]);
-
-    //     if ($request->has('return')) {
-    //         $flasher->addSuccess('Berhasil mengembalikan!');
-    //     } elseif ($request->has('process')) {
-    //         $flasher->addSuccess('Berhasil memproses lanjut!');
-    //     }
-
-    //     return redirect()->route('legal.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
-    // }
+   
 
 }

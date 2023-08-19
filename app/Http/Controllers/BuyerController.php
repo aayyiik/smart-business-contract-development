@@ -9,26 +9,12 @@ use App\Models\ReviewLegal;
 use Flasher\Prime\FlasherInterface;
 use App\Models\Vendor;
 use App\Models\Template;
-use App\Models\User;
-use App\Models\UserDetail;
-use BaconQrCode\Encoder\QrCode as EncoderQrCode;
 use Illuminate\Support\Str;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Dompdf\Dompdf;
-use Milon\Barcode\DNS2D;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
 use Carbon\Carbon;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\View as FacadesView;
-use Illuminate\View\View as ViewView;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
-
 
 
 class BuyerController extends Controller
@@ -120,16 +106,6 @@ class BuyerController extends Controller
 
     public function contract_update(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
-        // $request->validate([
-        //     'number' => 'required',
-        //     'prosentase' => 'required',
-        //     'nilai_kontrak' => 'required',
-        //     'director' => 'required',
-        //     'phone' => 'required',
-        //     'address' => 'required',
-        // ]);
-
-        // $template = Template::all();
 
         $fileName = now()->format('Ymd') . "_" .  Str::random(20);
 

@@ -24,10 +24,6 @@ class CheckRole
             abort(401, 'This action is unauthorized.');
         }
 
-        // if(Auth::check() && Auth::user()->status != 1){
-        //     Auth::logout();
-        //     return redirect('/login');
-        // }
         return $next($request);
     }
 }

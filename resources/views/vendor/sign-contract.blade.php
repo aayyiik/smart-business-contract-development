@@ -159,23 +159,6 @@
             </div>
         </div>
     </div>
-    {{-- @foreach ($data as $item)
-        
-    @endforeach
-    <div id="modal-{{$item-id}}" class="modal">
-        <div class="mosal-content">
-            <div class="modal-header">
-                <h2>{{$item->nama}}</h2>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="ExternalFiles">
-                    <iframe src="/assets/file_upload/{{$item->file}}" frameborder="0"></iframe>
-                </div>
-            </div>
-            
-        </div>
-    </div> --}}
 </div>
 @endsection
 @push('script')

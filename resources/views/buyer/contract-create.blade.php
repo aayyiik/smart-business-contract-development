@@ -79,26 +79,6 @@
                     </div>
                     @enderror
                 </div>
-                {{-- <div class="form-group">
-                    <label class="col-form-label col-form-label-xs" for="vendor">Vendor<span class="required">*</span></label>
-                    <select id="vendor" name="vendor[]" multiple data-reorder="1" class="form-control form-control-sm select2bs4 @error('vendor') is-invalid @enderror" style="width: 100%;" data-placeholder="-- Pilih --">
-                        <option value=''></option>
-                        @foreach($vendor as $rekanan)   
-                        @if(old('vendor'))
-                        <option value="{{ $rekanan->id }}" {{ in_array($rekanan->id, old('vendor')) ? 'selected' : '' }}>{{ $rekanan->vendor }} ({{$rekanan->no_sap}})</option>
-                        @else
-                        <option value="{{ $rekanan->id }}">{{ $rekanan->vendor }} ({{$rekanan->no_sap}})</option>
-                        @endif
-                        @endforeach
-                    </select>
-                    @error('vendor')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div> --}}
-
-                
                 <div class="form-row">
                     <div class="form-group col-md-7">
                         <label class="col-form-label col-form-label-xs" for="vendor_id">Vendor<span

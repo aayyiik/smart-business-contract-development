@@ -27,12 +27,6 @@
             </div>
         </div>
         <div class="card-body">
-            {{-- @if($contracts->pivot->status_id == 3)
-            <div class="mb-3">
-                <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#kembalikan">Kembalikan</a>
-                <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lanjut">Proses Lanjut</a>
-            </div>
-            @endif --}}
             <form>
                 <div class="form-group row">
                     <label for="number" class="col-sm-2 col-form-label">Nomor Kontrak</label>
@@ -183,38 +177,6 @@
     </div>
 </div>
 
-<!-- Proses Lanjut -->
-{{-- <div class="modal fade" id="lanjut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Proses Lanjut</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="d-inline" action="{{ route('legal.contract-approval', ['contract' => $contracts->pivot->contract_id, 'vendor' => $contracts->pivot->vendor_id]) }}" method="POST">
-                    @csrf
-                    @method('post')
-                    <div class="form-group">
-                        <label for="review_contract">Deskripsi</label>
-                        <textarea class="form-control z-depth-1" name="review_contract" id="review_contract" rows="3"></textarea>
-                        @error('review_contract')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary btn-xs" type="submit">Proses Lanjut</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div> --}}
 @endsection
 @push('script')
 <script type="text/javascript">
