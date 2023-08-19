@@ -377,7 +377,7 @@
         </div>
     </div>
 @endsection
-@push('script')
+{{-- @push('script')
 <script>
     $(document).ready(function() {
         $('#end_date').on('change', function() {
@@ -393,4 +393,4 @@
         });
     });
 </script>
-@endpush
+@endpush --}}

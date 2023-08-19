@@ -69,7 +69,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="pekerjaanTable"
+                    <table id="datatable"
                         class="table table-sm table-hovered table-bordered table-hover table-striped datatable2">
                         <thead>
                             <tr>
@@ -129,7 +129,7 @@
 
     </div>
 @endsection
-@push('script')
+{{-- @push('script')
     <script type="text/javascript">
         // DataTable
         $(function() {
@@ -165,4 +165,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}

@@ -35,6 +35,9 @@
     <link rel="stylesheet"
         href="{{ asset('../../assets/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css
+    ">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/cr-1.5.5/date-1.1.2/fc-4.0.2/fh-3.2.2/kt-2.6.4/r-2.2.9/rg-1.1.4/rr-1.2.8/sc-2.0.5/sb-1.3.2/sp-2.0.0/sl-1.3.4/sr-1.1.0/datatables.min.css" />
     <!-- DataTable Button-->
@@ -47,6 +50,11 @@
     <link rel="stylesheet" href="{{ asset('../../assets/pace/themes/red/pace-theme-flash.css') }}"> <!-- custom CSS -->
     <link href="{{ asset('../../assets/css/style.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('../../assets/img/logo.png') }}">
+    <style>
+        thead input {
+        width: 100%;
+    }
+    </style>
     @stack('styles')
     <title>Draft Kontrak Online</title>
 </head>
@@ -552,6 +560,96 @@
             })
         })
     </script>
+    
+<script>
+
+    
+// $(document).ready(function () {
+
+// $('#pekerjaanTable').dataTable({
+//     "bDestroy": true
+// }).fnDestroy();
+
+// $('#datatable').dataTable({
+//     "aoColumnDefs": [{
+//         "bSortable": false,
+//         "aTargets": ["sorting_disabled"]
+//     }],
+//     "bDestroy": true
+// }).fnDestroy();
+
+// });
+    $(document).ready(function () {
+
+
+    // Setup - add a text input to each footer cell
+    $('#datatable thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('#datatable thead');
+ 
+    var table = $('#datatable').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+ 
+            // For each column
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+ 
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('change', function (e) {
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+ 
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+                        })
+                        .on('keyup', function (e) {
+                            e.stopPropagation();
+ 
+                            $(this).trigger('change');
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+        },
+    });
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+
+
+
+
 </body>
 
 </html>

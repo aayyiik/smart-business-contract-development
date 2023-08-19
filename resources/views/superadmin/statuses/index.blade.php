@@ -33,7 +33,7 @@
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#add">Tambah Data</a>
                 </div>
                 <div class="table-responsive">
-                    <table id="pekerjaanTable"
+                    <table id="datatable"
                         class="table table-sm table-hovered table-bordered table-hover table-striped datatable2">
                         <thead>
                             <tr>
@@ -94,7 +94,7 @@
         </div>
     </div>
 @endsection
-@push('script')
+{{-- @push('script')
     <script type="text/javascript">
         // DataTable
         $(function() {
@@ -130,4 +130,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}

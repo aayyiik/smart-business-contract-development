@@ -47,40 +47,4 @@
         </div>
     </div>
 @endsection
-@push('script')
-    <script type="text/javascript">
-        // DataTable
-        $(function() {
-            $('#pekerjaanTable .second-row th').each(function() {
-                var title = $(this).text();
-                $(this).html('<input type="text"  class="form-control" placeholder="" />');
-            });
-            $(document).ready(function() {
-                $('.datatable2').DataTable({
-                    lengthMenu: [
-                        [10, 25, 50, 100, -1],
-                        ['10', '25', '50', '100', 'All']
-                    ],
-                    ordering: false,
-                    scrollY: '500px',
-                    scrollCollapse: true,
-                    pageLength: 100,
-                    initComplete: function() {
-                        this.api().columns([0, 1, 2, 3, 4, 5]).every(function() {
-                            var that = this;
 
-                            $('input', this.header()).on('keyup change clear',
-                                function() {
-                                    if (that.search() !== this.value) {
-                                        that
-                                            .search(this.value)
-                                            .draw();
-                                    }
-                                });
-                        });
-                    },
-                });
-            });
-        });
-    </script>
-@endpush
