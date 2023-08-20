@@ -1,5 +1,5 @@
 @extends('layouts.master-dashboard')
-@section('page-title', 'Detail Kontrak')
+@section('page-title', 'Review Vendor Kontrak')
 @section('buyer-review-vendor', 'active')
 @section('address')
 <ol class="breadcrumb float-sm-right">

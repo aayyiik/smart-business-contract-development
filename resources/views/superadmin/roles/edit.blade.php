@@ -1,5 +1,5 @@
 @extends('layouts.master-dashboard')
-@section('page-title', 'Detail Kontrak')
+@section('page-title', 'Edit Roles')
 @section('superadmin-roles', 'active')
 @section('address')
     <ol class="breadcrumb float-sm-right">

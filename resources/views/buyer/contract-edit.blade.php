@@ -377,20 +377,4 @@
         </div>
     </div>
 @endsection
-{{-- @push('script')
-<script>
-    $(document).ready(function() {
-        $('#end_date').on('change', function() {
-            var startDate = new Date($('#start_date').val());
-            var endDate = new Date($(this).val());
 
-            if (endDate < startDate) {
-                alert(
-                    'Tanggal Selesai tidak bisa dipilih sebelum Tanggal Mulai. Pilih tanggal dengan benar!'
-                    );
-                $(this).val(''); // Menghapus nilai end date yang tidak valid
-            }
-        });
-    });
-</script>
-@endpush --}}
