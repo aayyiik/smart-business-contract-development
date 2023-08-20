@@ -77,10 +77,13 @@
                         @elseif ($contracts->pivot->status_id == 2)value="REVIEW BUYER"
                         @elseif ($contracts->pivot->status_id == 3)value="REVIEW HUKUM"
                         @elseif ($contracts->pivot->status_id == 4)value="APPROVE HUKUM"
-                        @elseif ($contracts->pivot->status_id == 5)value="ASSISTANT VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 6)value="VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 7)value="SENIOR VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 8)value="DIREKTUR KEUNGAN DAN UMUM" @endif
+                        @elseif ($contracts->pivot->status_id == 5)value="REVIEW ASSISTANT VICE PRESIDENT"
+                        @elseif ($contracts->pivot->status_id == 6)value="REVIEW VICE PRESIDENT"
+                        @elseif ($contracts->pivot->status_id == 7)value="REVIEW SENIOR VICE PRESIDENT"
+                        @elseif ($contracts->pivot->status_id == 8)value="REVIEW DIREKTUR KEUNGAN DAN UMUM"
+                        @elseif ($contracts->pivot->status_id == 9)value="APPROVED"
+                        @elseif ($contracts->pivot->status_id == 10)value="REVIEW REKANAN DAN TTD"
+                        @elseif ($contracts->pivot->status_id == 11)value="FINAL KONTRAK" @endif
                         readonly>
                     </div>
                 </div>

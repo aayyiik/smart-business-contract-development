@@ -55,21 +55,27 @@
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
                                 @if ($contract->status_id == 1)
-                                <span class="badge badge-success">VENDOR</span>
+                                <span class="badge badge-success">REVIEW VENDOR</span>
                                 @elseif ($contract->status_id == 2)
-                                <span class="badge badge-success">BUYER</span>
+                                <span class="badge badge-success">REVIEW BUYER</span>
                                 @elseif ($contract->status_id == 3)
-                                <span class="badge badge-success">HUKUM</span>
+                                <span class="badge badge-success">REVIEW HUKUM</span>
                                 @elseif ($contract->status_id == 4)
                                 <span class="badge badge-success">APPROVE HUKUM</span>
                                 @elseif ($contract->status_id == 5)
-                                <span class="badge badge-success">ASSISTANT VICE PRESIDENT</span>
+                                <span class="badge badge-success">REVIEW ASSISTANT VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 6)
                                 <span class="badge badge-success">VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 7)
-                                <span class="badge badge-success">SENIOR VICE PRESIDENT</span>
+                                <span class="badge badge-success">REVIEW SENIOR VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 8)
-                                <span class="badge badge-success">DIREKTUR KEUANGAN DAN UMUM</span>
+                                <span class="badge badge-success">REVIEW DIREKTUR KEUANGAN DAN UMUM</span>
+                                @elseif ($contract->status_id == 9)
+                                <span class="badge badge-success">APPROVED</span>
+                                @elseif ($contract->status_id == 10)
+                                <span class="badge badge-success">REVIEW REKANAN DAN TTD</span>
+                                @elseif ($contract->status_id == 11)
+                                <span class="badge badge-success">FINAL KONTRAK</span>
                                 @endif
                             </td>
                             <td class="text-center" style="vertical-align: middle;"> <a href="{{ route('svp.contract', ['contract' => $contract->contract_id, 'vendor' => $contract->vendor_id]) }}" class="btn btn-primary btn-xs"><b>Rincian</b></a>

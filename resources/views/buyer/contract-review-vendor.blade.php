@@ -80,15 +80,17 @@
                 <div class="form-group row">
                     <label for="status" class="col-sm-2 col-form-label">Posisi</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="status" @if ($contracts->pivot->status_id == 1) value="VENDOR"
-                        @elseif ($contracts->pivot->status_id == 2)value="BUYER"
-                        @elseif ($contracts->pivot->status_id == 3)value="HUKUM"
+                        <input type="text" class="form-control" id="status" @if ($contracts->pivot->status_id == 1) value="REVIEW VENDOR"
+                        @elseif ($contracts->pivot->status_id == 2)value="REVIEW BUYER"
+                        @elseif ($contracts->pivot->status_id == 3)value="REVIEW HUKUM"
                         @elseif ($contracts->pivot->status_id == 4)value="APPROVE HUKUM"
-                        @elseif ($contracts->pivot->status_id == 5)value="ASSISTANT VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 6)value="VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 7)value="SENIOR VICE PRESIDENT"
-                        @elseif ($contracts->pivot->status_id == 8)value="DIREKTUR KEUNGAN DAN UMUM"
-                        @elseif ($contracts->pivot->status_id == 9)value="FINAL" @endif
+                        @elseif ($contracts->pivot->status_id == 5)value="REVIEW ASSISTANT VICE PRESIDENT"
+                        @elseif ($contracts->pivot->status_id == 6)value="REVIEW VICE PRESIDENT"
+                        @elseif ($contracts->pivot->status_id == 7)value="REVIEW SENIOR VICE PRESIDENT"
+                        @elseif ($contracts->pivot->status_id == 8)value="REVIEW DIREKTUR KEUNGAN DAN UMUM"
+                        @elseif ($contracts->pivot->status_id == 9)value="APPROVED"
+                        @elseif ($contracts->pivot->status_id == 10)value="REVIEW REKANAN DAN TTD"
+                        @elseif ($contracts->pivot->status_id == 11)value="FINAL KONTRAK" @endif
                         readonly>
                     </div>
                 </div>
