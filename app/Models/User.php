@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class, 'user_id');
     }
 
+    public function userVendor()
+    {
+        return $this->hasOne(Vendor::class, 'user_detail_id');
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_details');
