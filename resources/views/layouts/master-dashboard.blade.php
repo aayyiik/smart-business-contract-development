@@ -114,7 +114,19 @@
                     <div class="profile text-center mt-4 mb-2">
                         <img src="{{ asset('../../assets/img/user.png') }}" alt="Profile Picture" style="width: 30%; ">
                         <h6 style="color: white; margin-top: 15px">{{ Auth::user()->name}}</h6>
-                        <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->unit->unit}}</p>
+                        @if (Auth::user()->userdetail->role->role == 'Buyer')
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->unit->unit}}</p>
+                        @elseif(Auth::user()->userdetail->role->role == 'AVP')
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->unit->unit}}</p>
+                        @elseif(Auth::user()->userdetail->role->role == 'VP')
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->department->department}}</p>
+                        @elseif(Auth::user()->userdetail->role->role == 'SVP')
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} TEKNIK</p>
+                        @elseif(Auth::user()->userdetail->role->role == 'DKU')
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}}</p>
+                        @elseif(Auth::user()->userdetail->role->role == 'Vendor')
+                            <p style="color: #F69016;">{{ Auth::user()->userdetail->vendor_user->vendor}}</p>
+                        @endif
                     </div>
                     <br>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"

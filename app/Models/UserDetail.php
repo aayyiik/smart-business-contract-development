@@ -38,6 +38,11 @@ class UserDetail extends Model
         return $this->hasOne(Vendor::class, 'vendor_id');
     }
 
+    public function vendor_user()
+    {
+        return $this->hasOne(Vendor::class, 'user_detail_id');
+    }
+
     public function contract()
     {
         return $this->hasMany(Contract::class, 'contract_id');

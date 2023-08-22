@@ -53,27 +53,27 @@
                             </td>
                             <td class="text-right" style="vertical-align: middle;">@currency($contract->oe)</td>
                             <td class="text-center" style="vertical-align: middle;">
-                                @if ($contract->status_id == 1)
+                                @if ($contract->pivot->status_id == 1)
                                 <span class="badge badge-success">REVIEW VENDOR</span>
-                                @elseif ($contract->status_id == 2)
+                                @elseif ($contract->pivot->status_id == 2)
                                 <span class="badge badge-success">REVIEW BUYER</span>
-                                @elseif ($contract->status_id == 3)
+                                @elseif ($contract->pivot->status_id == 3)
                                 <span class="badge badge-success">REVIEW HUKUM</span>
-                                @elseif ($contract->status_id == 4)
+                                @elseif ($contract->pivot->status_id == 4)
                                 <span class="badge badge-success">APPROVE HUKUM</span>
-                                @elseif ($contract->status_id == 5)
+                                @elseif ($contract->pivot->status_id == 5)
                                 <span class="badge badge-success">REVIEW ASSISTANT VICE PRESIDENT</span>
-                                @elseif ($contract->status_id == 6)
+                                @elseif ($contract->pivot->status_id == 6)
                                 <span class="badge badge-success">VICE PRESIDENT</span>
-                                @elseif ($contract->status_id == 7)
+                                @elseif ($contract->pivot->status_id == 7)
                                 <span class="badge badge-success">REVIEW SENIOR VICE PRESIDENT</span>
-                                @elseif ($contract->status_id == 8)
+                                @elseif ($contract->pivot->status_id == 8)
                                 <span class="badge badge-success">REVIEW DIREKTUR KEUANGAN DAN UMUM</span>
-                                @elseif ($contract->status_id == 9)
+                                @elseif ($contract->pivot->status_id == 9)
                                 <span class="badge badge-success">APPROVED</span>
-                                @elseif ($contract->status_id == 10)
+                                @elseif ($contract->pivot->status_id == 10)
                                 <span class="badge badge-success">REVIEW REKANAN DAN TTD</span>
-                                @elseif ($contract->status_id == 11)
+                                @elseif ($contract->pivot->status_id == 11)
                                 <span class="badge badge-success">FINAL KONTRAK</span>
                                 @endif
                             </td>

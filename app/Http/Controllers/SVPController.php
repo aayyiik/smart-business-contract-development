@@ -202,9 +202,16 @@ class SVPController extends Controller
 
     private function updateContractVendor($contract, $vendor, $fileName = null, $statusId = 9)
     {
+        // $updateData = ['status_id' => $statusId];
+        // if ($fileName !== null) {
+        //     $updateData['filename'] = $fileName;
+        // }
+
+        // $contract->vendors()->updateExistingPivot($vendor->id, $updateData);
+
         $updateData = ['status_id' => $statusId];
         if ($fileName !== null) {
-            $updateData['filename'] = $fileName;
+            $updateData['qrcode'] = $fileName;
         }
 
         $contract->vendors()->updateExistingPivot($vendor->id, $updateData);

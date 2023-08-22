@@ -74,29 +74,6 @@ class DKUController extends Controller
         return redirect()->route('dku.review-contracts');
     }
 
-    public function contract_approval2(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
-    {
-        $request->validate([
-            'description' => 'required'
-        ]);
-
-        $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-
-        Approval::create([
-            'contract_vendor_id' => $contract_detail->pivot->id,
-            'name' => Auth::user()->name,
-            'status' => 8,
-            'description' => $request->description,
-        ]);
-
-        $contract->vendors()->updateExistingPivot($vendor->id, [
-            'status_id' => 9,
-        ]);
-
-        $flasher->addSuccess('Berhasil memproses lanjut!');
-
-        return redirect()->route('dku.review-contracts');
-    }
 
     public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
@@ -109,8 +86,6 @@ class DKUController extends Controller
             'status' => 8,
             'description' => $request->description,
         ]);
-
-        if ($contract->oe < 500000000) {
 
             $fileName = $this->generateFileName();
             $date_dof = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->date_dof)->format('d-m-Y');
@@ -135,14 +110,10 @@ class DKUController extends Controller
 
             $flasher->addSuccess('Draft Kontrak Approved!');
 
-            return redirect()->route('svp.review-contracts');
-        } else {
-            $this->updateContractVendor($contract, $vendor, null, 9);
+            return redirect()->route('dku.review-contracts');
+        
 
-            $flasher->addSuccess('Berhasil memproses lanjut!');
-        }
-
-        return redirect()->route('svp.review-contracts');
+        return redirect()->route('dku.review-contracts');
     }
 
 
@@ -228,9 +199,16 @@ class DKUController extends Controller
 
     private function updateContractVendor($contract, $vendor, $fileName = null, $statusId = 9)
     {
+        // $updateData = ['status_id' => $statusId];
+        // if ($fileName !== null) {
+        //     $updateData['filename'] = $fileName;
+        // }
+
+        // $contract->vendors()->updateExistingPivot($vendor->id, $updateData);
+
         $updateData = ['status_id' => $statusId];
         if ($fileName !== null) {
-            $updateData['filename'] = $fileName;
+            $updateData['qrcode'] = $fileName;
         }
 
         $contract->vendors()->updateExistingPivot($vendor->id, $updateData);

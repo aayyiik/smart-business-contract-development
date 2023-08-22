@@ -31,7 +31,7 @@
                 <div class="form-group row">
                     <label for="number" class="col-sm-2 col-form-label">Nomor Kontrak</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="number" value="{{ $contracts->pivot->number }}" readonly>
+                        <input type="text" class="form-control" id="number" value="{{ $contracts->pivot->no_dof }}" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -49,7 +49,7 @@
                 <div class="form-group row">
                     <label for="nilai_kontrak" class="col-sm-2 col-form-label">Nilai Kontrak</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->nilai_kontrak)" readonly>
+                        <input type="text" class="form-control" id="nilai_kontrak" value="@currency($contracts->pivot->contract_amount)" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -101,7 +101,11 @@
             </div>
         </div>
         <div class="card-body">
+            @if ($contracts->pivot->status_id >= 9)
+                <embed src="{{ asset($contracts->pivot->qrcode) }}.pdf" width="100%" height="600px" type="application/pdf">
+            @else
             <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px" type="application/pdf">
+            @endif
         </div>
     </div>
     <div class="card">

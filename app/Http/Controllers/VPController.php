@@ -67,40 +67,6 @@ class VPController extends Controller
         return redirect()->route('vp.review-contracts');
     }
 
-    public function contract_approval2(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
-    {
-        $request->validate([
-            'description' => 'required'
-        ]);
-
-        $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-
-        Approval::create([
-            'contract_vendor_id' => $contract_detail->pivot->id,
-            'name' => Auth::user()->name,
-            'status' => 6,
-            'description' => $request->description,
-        ]);
-       
-
-       // dd($contract->oe);
-        if ($contract->oe < 100000000) {
-            $contract->vendors()->updateExistingPivot($vendor->id, [
-                'status_id' => 9,
-            ]);
-
-            $flasher->addSuccess('Draft Kontrak Approved!');
-        } else {
-            $contract->vendors()->updateExistingPivot($vendor->id, [
-                'status_id' => 7,
-            ]);
-
-            $flasher->addSuccess('Berhasil memproses lanjut!');
-        }
-
-
-        return redirect()->route('vp.review-contracts');
-    }
 
     public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
@@ -139,7 +105,7 @@ class VPController extends Controller
 
             $flasher->addSuccess('Draft Kontrak Approved!');
 
-            return redirect()->route('svp.review-contracts');
+            return redirect()->route('vp.review-contracts');
         } else {
             $this->updateContractVendor($contract, $vendor, null, 7);
 
@@ -232,9 +198,19 @@ class VPController extends Controller
 
     private function updateContractVendor($contract, $vendor, $fileName = null, $statusId = 9)
     {
+        //update status dan filename menjadi file yang sudah terapprover
+        // $updateData = ['status_id' => $statusId];
+        // if ($fileName !== null) {
+        //     $updateData['filename'] = $fileName;
+        // }
+
+        // $contract->vendors()->updateExistingPivot($vendor->id, $updateData);
+
+        // update status dan menambahkan data qrcode, namun filename tidak keubah 
+        // 3 file akan terpenuhi pada tabel contract vendor. 
         $updateData = ['status_id' => $statusId];
         if ($fileName !== null) {
-            $updateData['filename'] = $fileName;
+            $updateData['qrcode'] = $fileName;
         }
 
         $contract->vendors()->updateExistingPivot($vendor->id, $updateData);

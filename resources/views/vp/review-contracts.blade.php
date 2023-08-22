@@ -65,7 +65,7 @@
                                 @elseif ($contract->status_id == 5)
                                 <span class="badge badge-success">REVIEW ASSISTANT VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 6)
-                                <span class="badge badge-success">VICE PRESIDENT</span>
+                                <span class="badge badge-success">REVIEW VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 7)
                                 <span class="badge badge-success">REVIEW SENIOR VICE PRESIDENT</span>
                                 @elseif ($contract->status_id == 8)

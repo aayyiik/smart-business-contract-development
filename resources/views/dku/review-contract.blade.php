@@ -169,7 +169,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
-                <button class="btn btn-warning btn-xs" type="submit">Kirim ke VP</button>
+                <button class="btn btn-warning btn-xs" type="submit">ACC</button>
             </div>
             </form>
         </div>
