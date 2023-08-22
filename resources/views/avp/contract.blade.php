@@ -101,7 +101,11 @@
             </div>
         </div>
         <div class="card-body">
+            @if ($contracts->pivot->status_id >= 9)
+                <embed src="{{ asset($contracts->pivot->qrcode) }}.pdf" width="100%" height="600px" type="application/pdf">
+            @else
             <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px" type="application/pdf">
+            @endif
         </div>
     </div>
     <div class="card">
