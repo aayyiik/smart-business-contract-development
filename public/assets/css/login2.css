@@ -121,12 +121,6 @@ background-repeat: no-repeat;
   font-size: 14px;
 }
 
-.sign-up {
-  margin: 60px 0 0;
-  font-size: 14px;
-  text-align: center;
-}
-
 
 .input-button {
   padding: 8px 12px;
@@ -167,8 +161,11 @@ background-repeat: no-repeat;
   border: 0;
   padding: 4px 0 0;
   font-size: 14px;
+  width: 220px;
   font-family: "Nunito", sans-serif;
 }
+
+
 .input-block input::-moz-placeholder {
   color: #ccc;
   opacity: 1;
@@ -218,6 +215,23 @@ background-repeat: no-repeat;
   margin-top: 16px;
   width: 52px;
   fill: currentColor;
+}
+
+.input-group-text {
+  cursor: pointer;
+}
+
+.input-group-text i {
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.form-control .toggle-visible {
+  padding-right: 40px;
 }
 
 @media (max-width: 750px) {
