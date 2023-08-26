@@ -202,7 +202,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Jumlah Tender Aktif</h4>
+                                <h4>Tender Aktif</h4>
                             </div>
                             <div class="card-body">
                                 {{ $active_tender }}
@@ -247,7 +247,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Review</h4>
+                                <h4>Undangan Kontrak</h4>
                             </div>
                             <div class="card-body">
                                 {{ $review }}

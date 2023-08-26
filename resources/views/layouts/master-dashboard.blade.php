@@ -572,27 +572,12 @@
             })
         })
     </script>
-    
+
+
+{{-- Datatable new versi --}}
 <script>
 
-    
-// $(document).ready(function () {
-
-// $('#pekerjaanTable').dataTable({
-//     "bDestroy": true
-// }).fnDestroy();
-
-// $('#datatable').dataTable({
-//     "aoColumnDefs": [{
-//         "bSortable": false,
-//         "aTargets": ["sorting_disabled"]
-//     }],
-//     "bDestroy": true
-// }).fnDestroy();
-
-// });
     $(document).ready(function () {
-
 
     // Setup - add a text input to each footer cell
     $('#datatable thead tr')
@@ -655,6 +640,7 @@
     });
 });
 </script>
+
 {{-- data table Bisa dipakai kembali tapi jangan lupa destroy grid data table sebelumnya --}}
 {{-- <script type="text/javascript">
     // DataTable
@@ -694,8 +680,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
-
-
 
 
 </body>

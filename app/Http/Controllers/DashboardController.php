@@ -39,39 +39,28 @@ class DashboardController extends Controller
         $final = ContractVendor::where('status_id','=','11,12')->get()->count();
 
         //Vendor
-        // $active_tender = ContractVendor::where('vendor_id',  auth()->user()->userDetail->vendor->id)->get()->count();
-        // $user = User::find(auth()->user()->id);
+    
         $vendorId = Auth::user()->userDetail->vendor_id;
 
-        $active_tender = DB::table('contract_vendor as a')
-            ->join('contracts as b', 'a.contract_id', '=', 'b.id')
-            ->join('user_details as c', 'b.user_detail_id', '=', 'c.id')
-            ->where('a.status_id', '>=', 1)
-            ->where('a.status_id', '<=', 10)
-            ->where('a.vendor_id', $vendorId)
-            ->count();
 
+        $vendor = Vendor::where('user_detail_id', Auth::id())->first();
+        $active_tender = $vendor->contracts()
+                        ->where('status_id','>=','1')
+                        ->where('status_id','<=','9')
+                        ->count();
 
-        $sign_vendor = DB::table('contract_vendor as a')
-            ->join('contracts as b', 'a.contract_id', '=', 'b.id')
-            ->join('user_details as c', 'b.user_detail_id', '=', 'c.id')
-            ->where('a.status_id', '=', 10)
-            ->where('a.vendor_id', $vendorId)
-            ->count();
+        $sign_vendor = $vendor->contracts()
+                        ->where('status_id','10')
+                        ->count();
 
-        $final_vendor = DB::table('contract_vendor as a')
-            ->join('contracts as b', 'a.contract_id', '=', 'b.id')
-            ->join('user_details as c', 'b.user_detail_id', '=', 'c.id')
-            ->where('a.status_id', '>=', 11)
-            ->where('a.vendor_id', $vendorId)
-            ->count();
+        $final_vendor = $vendor->contracts()
+                        ->where('status_id','>=','11')
+                        ->count();
 
-        $review = DB::table('contract_vendor as a')
-            ->join('contracts as b', 'a.contract_id', '=', 'b.id')
-            ->join('user_details as c', 'b.user_detail_id', '=', 'c.id')
-            ->where('a.status_id', '=', 1)
-            ->where('a.vendor_id', $vendorId)
-            ->count();
+        $review = $vendor->contracts()
+                        ->where('status_id','1')
+                        ->count();
+
 
         //AVP
         $avpUnitId = Auth::user()->userDetail->unit_id;
