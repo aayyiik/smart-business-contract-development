@@ -58,12 +58,12 @@
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Terbit No SP</label>
                         <input type="text" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
-                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp" >
+                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="oe">OE</label>
                         <input type="text" class="form-control form-control-sm @error('oe') is-invalid @enderror"
-                        value="{{ number_format($contracts->oe, 0, ',', '.') }}" id="oe" readonly>
+                            value="{{ number_format($contracts->oe, 0, ',', '.') }}" id="oe" readonly>
                         @error('oe')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -74,8 +74,7 @@
                         <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
                                 class="required">*</span></label>
                         <input type="number" class="form-control form-control-sm @error('prosentase') is-invalid @enderror"
-                            value="{{ $contract->pivot->prosentase }}" id="prosentase"
-                            name="prosentase" readonly>
+                            value="{{ $contract->pivot->prosentase }}" id="prosentase" name="prosentase" readonly>
                         @error('prosentase')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -145,12 +144,13 @@
                 <!-- /tool -->
             </div>
             <div class="card-body">
-            
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="state_rate">Wilayah Rate Pemuatan<span
                             class="required">*</span></label>
                     <input type="text" class="form-control form-control-sm @error('state_rate') is-invalid @enderror"
-                        id="state_rate" name="state_rate" value="{{ $contract->pivot->state_rate ?? old('state_rate') }}">
+                        id="state_rate" name="state_rate"
+                        value="{{ $contract->pivot->state_rate ?? old('state_rate') }}">
                     @error('state_rate')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -159,8 +159,10 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="minimum_transport">Minimal Angkutan</label>
-                    <input type="text" class="form-control form-control-sm @error('minimum_transport') is-invalid @enderror"
-                         id="minimum_transport" name="minimum_transport" value="{{ $contract->pivot->minimum_transport ?? old('minimum_transport') }}">
+                    <input type="text"
+                        class="form-control form-control-sm @error('minimum_transport') is-invalid @enderror"
+                        id="minimum_transport" name="minimum_transport"
+                        value="{{ $contract->pivot->minimum_transport ?? old('minimum_transport') }}">
                     @error('minimum_transport')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -172,7 +174,8 @@
                             class="required">*</span></label>
                     <input type="number"
                         class="form-control form-control-sm @error('performance_bond') is-invalid @enderror"
-                        id="performance_bond" name="performance_bond" value="{{ $contract->pivot->performance_bond ?? old('performance_bond') }}">
+                        id="performance_bond" name="performance_bond"
+                        value="{{ $contract->pivot->performance_bond ?? old('performance_bond') }}">
                     @error('performance_bond')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -213,9 +216,9 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="vendor">Nama Vendor<span
                             class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('vendor') is-invalid @enderror"
-                        id="vendor" name="vendor" value="{{ $contract->pivot->vendor_capital ?? old('vendor_capital') }}">
+                    <input type="text" class="form-control form-control-sm @error('vendor') is-invalid @enderror"
+                        id="vendor" name="vendor"
+                        value="{{ $contract->pivot->vendor_capital ?? old('vendor_capital') }}">
                     @error('vendor')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -227,14 +230,15 @@
                     <label class="col-form-label col-form-label-xs" for="start_date">Waktu Mulai<span
                             class="required">*</span></label>
                     <input type="date" class="form-control form-control-sm @error('start_date') is-invalid @enderror"
-                        id="start_date" name="start_date" value="{{ $contract->pivot->start_date ?? old('start_date') }}">
+                        id="start_date" name="start_date"
+                        value="{{ $contract->pivot->start_date ?? old('start_date') }}">
                     @error('start_date')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-              
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="end_date">Waktu Selesai<span
                             class="required">*</span></label>
@@ -246,13 +250,14 @@
                         </div>
                     @enderror
                 </div>
-               
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="delivery_date">Berlaku Sampai<span
                             class="required">*</span></label>
                     <input type="int"
                         class="form-control form-control-sm @error('delivery_date') is-invalid @enderror"
-                        id="delivery_date" name="delivery_date" value="{{ $contract->pivot->delivery_date ?? old('delivery_date') }}">
+                        id="delivery_date" name="delivery_date"
+                        value="{{ $contract->pivot->delivery_date ?? old('delivery_date') }}">
                     @error('delivery_date')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -281,7 +286,8 @@
                     <label class="col-form-label col-form-label-xs" for="place">Domisili Perusahaan<span
                             class="required">*</span></label>
                     <input type="text" class="form-control form-control-sm @error('place') is-invalid @enderror"
-                        id="place" name="place_vendor" value="{{ $contract->pivot->place_vendor ?? old('place_vendor') }}">
+                        id="place" name="place_vendor"
+                        value="{{ $contract->pivot->place_vendor ?? old('place_vendor') }}">
                     @error('place')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -320,11 +326,10 @@
                 if (endDate < startDate) {
                     alert(
                         'Tanggal Selesai tidak bisa dipilih sebelum Tanggal Mulai. Pilih tanggal dengan benar!'
-                        );
+                    );
                     $(this).val(''); // Menghapus nilai end date yang tidak valid
                 }
             });
         });
     </script>
-
 @endpush

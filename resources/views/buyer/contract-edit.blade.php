@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Terbit No SP</label>
                         <input type="text" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
-                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp" >
+                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp">
                     </div>
 
                     <div class="form-group">
@@ -366,7 +366,7 @@
                         </div>
                     @enderror
                 </div>
-               
+
                 {{-- <input type="file" name="file[]" multiple="true"> --}}
                 <div class="row justify-content-end mr-0">
                     <button type="submit" class="btn btn-success btn-xs text-right" data-toggle="confirmation"
@@ -377,4 +377,3 @@
         </div>
     </div>
 @endsection
-

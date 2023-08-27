@@ -10,80 +10,78 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+  use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'nik',
-        'password',
-        'status'
-    ];
-    public $timestamps = true;
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password', 'remember_token'
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array<int, string>
+   */
+  protected $fillable = [
+    'name',
+    'nik',
+    'password',
+    'status'
+  ];
+  public $timestamps = true;
+  /**
+   * The attributes that should be hidden for serialization.
+   *
+   * @var array<int, string>
+   */
+  protected $hidden = [
+    'password', 'remember_token'
+  ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+  protected $casts = [
+    'email_verified_at' => 'datetime',
+  ];
 
 
-    public function authorizeRoles($roles)
-    {
-      if ($this->hasAnyRole($roles)) {
-        return true;
-      }
-      abort(401, 'This action is unauthorized.');
+  public function authorizeRoles($roles)
+  {
+    if ($this->hasAnyRole($roles)) {
+      return true;
     }
+    abort(401, 'This action is unauthorized.');
+  }
 
-    public function hasAnyRole($roles)
-    {
-      if (is_array($roles)) {
-        foreach ($roles as $role) {
-          if ($this->hasRole($role)) {
-            return true;
-          }
-        }
-      } else {
-        if ($this->hasRole($roles)) {
+  public function hasAnyRole($roles)
+  {
+    if (is_array($roles)) {
+      foreach ($roles as $role) {
+        if ($this->hasRole($role)) {
           return true;
         }
       }
-      return false;
-    }
-
-    public function hasRole($role)
-    {
-      if ($this->roles()->where('role', $role)->first()) {
+    } else {
+      if ($this->hasRole($roles)) {
         return true;
       }
-      return false;
     }
+    return false;
+  }
 
-    public function userDetail()
-    {
-        return $this->hasOne(UserDetail::class, 'user_id');
+  public function hasRole($role)
+  {
+    if ($this->roles()->where('role', $role)->first()) {
+      return true;
     }
+    return false;
+  }
 
-    public function userVendor()
-    {
-        return $this->hasOne(Vendor::class, 'user_detail_id');
-    }
+  public function userDetail()
+  {
+    return $this->hasOne(UserDetail::class, 'user_id');
+  }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'user_details');
-    }
+  public function userVendor()
+  {
+    return $this->hasOne(Vendor::class, 'user_detail_id');
+  }
 
-
+  public function roles()
+  {
+    return $this->belongsToMany(Role::class, 'user_details');
+  }
 }

@@ -131,7 +131,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script>
-            @if(session('status') === 'logged_out')
+            @if (session('status') === 'logged_out')
                 Swal.fire({
                     title: 'Anda telah keluar',
                     text: 'Harap login kembali untuk mengakses halaman ini.',

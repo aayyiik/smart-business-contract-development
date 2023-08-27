@@ -36,7 +36,8 @@
         href="{{ asset('../../assets/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Datatable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css
     ">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/cr-1.5.5/date-1.1.2/fc-4.0.2/fh-3.2.2/kt-2.6.4/r-2.2.9/rg-1.1.4/rr-1.2.8/sc-2.0.5/sb-1.3.2/sp-2.0.0/sl-1.3.4/sr-1.1.0/datatables.min.css" />
@@ -52,8 +53,8 @@
     <link rel="icon" href="{{ asset('../../assets/img/logo.png') }}">
     <style>
         thead input {
-        width: 100%;
-    }
+            width: 100%;
+        }
     </style>
     @stack('styles')
     <title>Draft Kontrak Online</title>
@@ -70,7 +71,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                             class="fas fa-bars"></i></a>
                 </li>
-           
+
             </ul>
             <button class="btn btn-outline-second btn-xs" onclick="goBack()">
                 <i class="fas fa-arrow-left"></i>
@@ -112,20 +113,24 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <div class="profile text-center mt-4 mb-2">
-                        <img src="{{ asset('../../assets/img/user.png') }}" alt="Profile Picture" style="width: 30%; ">
-                        <h6 style="color: white; margin-top: 15px">{{ Auth::user()->name}}</h6>
+                        <img src="{{ asset('../../assets/img/user.png') }}" alt="Profile Picture"
+                            style="width: 30%; ">
+                        <h6 style="color: white; margin-top: 15px">{{ Auth::user()->name }}</h6>
                         @if (Auth::user()->userdetail->role->role == 'Buyer')
-                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->unit->unit}}</p>
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role }}
+                                {{ Auth::user()->userdetail->unit->unit }}</p>
                         @elseif(Auth::user()->userdetail->role->role == 'AVP')
-                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->unit->unit}}</p>
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role }}
+                                {{ Auth::user()->userdetail->unit->unit }}</p>
                         @elseif(Auth::user()->userdetail->role->role == 'VP')
-                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} {{ Auth::user()->userdetail->department->department}}</p>
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role }}
+                                {{ Auth::user()->userdetail->department->department }}</p>
                         @elseif(Auth::user()->userdetail->role->role == 'SVP')
-                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}} TEKNIK</p>
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role }} TEKNIK</p>
                         @elseif(Auth::user()->userdetail->role->role == 'DKU')
-                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role}}</p>
+                            <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role }}</p>
                         @elseif(Auth::user()->userdetail->role->role == 'Vendor')
-                            <p style="color: #F69016;">{{ Auth::user()->userdetail->vendor_user->vendor}}</p>
+                            <p style="color: #F69016;">{{ Auth::user()->userdetail->vendor_user->vendor }}</p>
                         @endif
                     </div>
                     <br>
@@ -381,7 +386,7 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                          
+
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">@yield('page-title')</h1>
@@ -508,7 +513,7 @@
         let tanggal = date.toLocaleDateString("id-ID", options);
         document.getElementById("date").innerHTML = tanggal;
     </script>
-    {{-- Back dan Next--}}
+    {{-- Back dan Next --}}
     <script>
         function goBack() {
             window.history.back();
@@ -520,7 +525,7 @@
     </script>
 
     {{-- Next --}}
-    
+
 
     <!-- Time -->
     <script>
@@ -574,75 +579,76 @@
     </script>
 
 
-{{-- Datatable new versi --}}
-<script>
+    {{-- Datatable new versi --}}
+    <script>
+        $(document).ready(function() {
 
-    $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#datatable thead tr')
+                .clone(true)
+                .addClass('filters')
+                .appendTo('#datatable thead');
 
-    // Setup - add a text input to each footer cell
-    $('#datatable thead tr')
-        .clone(true)
-        .addClass('filters')
-        .appendTo('#datatable thead');
- 
-    var table = $('#datatable').DataTable({
-        orderCellsTop: true,
-        fixedHeader: true,
-        initComplete: function () {
-            var api = this.api();
- 
-            // For each column
-            api
-                .columns()
-                .eq(0)
-                .each(function (colIdx) {
-                    // Set the header cell to contain the input element
-                    var cell = $('.filters th').eq(
-                        $(api.column(colIdx).header()).index()
-                    );
-                    var title = $(cell).text();
-                    $(cell).html('<input type="text" placeholder="' + title + '" />');
- 
-                    // On every keypress in this input
-                    $(
-                        'input',
-                        $('.filters th').eq($(api.column(colIdx).header()).index())
-                    )
-                        .off('keyup change')
-                        .on('change', function (e) {
-                            // Get the search value
-                            $(this).attr('title', $(this).val());
-                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
- 
-                            var cursorPosition = this.selectionStart;
-                            // Search the column for that value
-                            api
-                                .column(colIdx)
-                                .search(
-                                    this.value != ''
-                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
-                                        : '',
-                                    this.value != '',
-                                    this.value == ''
+            var table = $('#datatable').DataTable({
+                orderCellsTop: true,
+                fixedHeader: true,
+                initComplete: function() {
+                    var api = this.api();
+
+                    // For each column
+                    api
+                        .columns()
+                        .eq(0)
+                        .each(function(colIdx) {
+                            // Set the header cell to contain the input element
+                            var cell = $('.filters th').eq(
+                                $(api.column(colIdx).header()).index()
+                            );
+                            var title = $(cell).text();
+                            $(cell).html('<input type="text" placeholder="' + title + '" />');
+
+                            // On every keypress in this input
+                            $(
+                                    'input',
+                                    $('.filters th').eq($(api.column(colIdx).header()).index())
                                 )
-                                .draw();
-                        })
-                        .on('keyup', function (e) {
-                            e.stopPropagation();
- 
-                            $(this).trigger('change');
-                            $(this)
-                                .focus()[0]
-                                .setSelectionRange(cursorPosition, cursorPosition);
-                        });
-                });
-        },
-    });
-});
-</script>
+                                .off('keyup change')
+                                .on('change', function(e) {
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr =
+                                    '({search})'; //$(this).parents('th').find('select').val();
 
-{{-- data table Bisa dipakai kembali tapi jangan lupa destroy grid data table sebelumnya --}}
-{{-- <script type="text/javascript">
+                                    var cursorPosition = this.selectionStart;
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != '' ?
+                                            regexr.replace('{search}', '(((' + this.value +
+                                                ')))') :
+                                            '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+                                })
+                                .on('keyup', function(e) {
+                                    e.stopPropagation();
+
+                                    $(this).trigger('change');
+                                    $(this)
+                                        .focus()[0]
+                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                });
+                        });
+                },
+            });
+        });
+    </script>
+
+    {{-- data table Bisa dipakai kembali tapi jangan lupa destroy grid data table sebelumnya --}}
+    {{-- <script type="text/javascript">
     // DataTable
     $(function() {
         $('#pekerjaanTable .second-row th').each(function() {
@@ -677,9 +683,9 @@
         });
     });
 </script> --}}
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
 
 
 </body>

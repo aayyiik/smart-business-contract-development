@@ -41,12 +41,13 @@ class LegalController extends Controller
         return view('legal.contracts-review', compact('contracts'));
     }
 
-    public function review_contract(Contract $contract, Vendor $vendor){
+    public function review_contract(Contract $contract, Vendor $vendor)
+    {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
         $review_hukum = ReviewLegal::where('contract_vendor_id', $contracts->pivot->id)->get();
         return view('legal.contract-review', compact('contracts', 'contract', 'review_hukum'));
     }
-   
+
     public function contract_approval(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
     {
         // validate input
@@ -54,7 +55,7 @@ class LegalController extends Controller
             'review_contract' => 'required'
         ]);
 
-        if($request->has('process')){
+        if ($request->has('process')) {
             // get contract_detail id
             $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
 
@@ -79,8 +80,7 @@ class LegalController extends Controller
                 ]);
 
             $flasher->addSuccess('Berhasil memproses lanjut!');
-
-        }elseif($request->has('return')){
+        } elseif ($request->has('return')) {
             // get contract_detail id
             $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
 
@@ -100,9 +100,9 @@ class LegalController extends Controller
             ]);
 
             ContractVendor::where('contract_id', $contract->id)->where('vendor_id', $vendor->id)
-            ->update([
-                'status_id' => 2,
-            ]);
+                ->update([
+                    'status_id' => 2,
+                ]);
 
             $flasher->addSuccess('Berhasil mengembalikan draft kontrak!');
         }
@@ -165,7 +165,4 @@ class LegalController extends Controller
     {
         //
     }
-
-   
-
 }

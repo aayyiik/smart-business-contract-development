@@ -82,7 +82,8 @@
                     <div class="form-group row">
                         <label for="status" class="col-sm-2 col-form-label">Posisi</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="status" @if ($contracts->pivot->status_id == 1) value="REVIEW VENDOR"
+                            <input type="text" class="form-control" id="status"
+                                @if ($contracts->pivot->status_id == 1) value="REVIEW VENDOR"
                             @elseif ($contracts->pivot->status_id == 2)value="REVIEW BUYER"
                             @elseif ($contracts->pivot->status_id == 3)value="REVIEW HUKUM"
                             @elseif ($contracts->pivot->status_id == 4)value="APPROVE HUKUM"
@@ -93,7 +94,7 @@
                             @elseif ($contracts->pivot->status_id == 9)value="APPROVED"
                             @elseif ($contracts->pivot->status_id == 10)value="REVIEW REKANAN DAN TTD"
                             @elseif ($contracts->pivot->status_id == 11)value="FINAL KONTRAK" @endif
-                            readonly>
+                                readonly>
                         </div>
                     </div>
                 </form>
@@ -103,17 +104,21 @@
             <div class="card-header card-forestgreen">
                 <h6 class="card-title pt-1">Kontrak</h6>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool btn-xs pr-0" data-card-widget="maximize"><i class="fas fa-expand fa-xs icon-border-default"></i>
+                    <button type="button" class="btn btn-tool btn-xs pr-0" data-card-widget="maximize"><i
+                            class="fas fa-expand fa-xs icon-border-default"></i>
                     </button>
-                    <button type="button" class="btn btn-tool btn-xs" data-card-widget="collapse"><i class="fas fa-minus fa-xs icon-border-yellow"></i>
+                    <button type="button" class="btn btn-tool btn-xs" data-card-widget="collapse"><i
+                            class="fas fa-minus fa-xs icon-border-yellow"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body">
                 @if ($contracts->pivot->status_id >= 9)
-                    <embed src="{{ asset($contracts->pivot->qrcode) }}.pdf" width="100%" height="600px" type="application/pdf">
+                    <embed src="{{ asset($contracts->pivot->qrcode) }}.pdf" width="100%" height="600px"
+                        type="application/pdf">
                 @else
-                <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px" type="application/pdf">
+                    <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px"
+                        type="application/pdf">
                 @endif
             </div>
         </div>

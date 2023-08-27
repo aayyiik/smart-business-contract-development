@@ -98,7 +98,8 @@
                     <div class="form-group row">
                         <label for="status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="status" @if ($contracts->pivot->status_id == 1) value="REVIEW VENDOR"
+                            <input type="text" class="form-control" id="status"
+                                @if ($contracts->pivot->status_id == 1) value="REVIEW VENDOR"
                             @elseif ($contracts->pivot->status_id == 2)value="REVIEW BUYER"
                             @elseif ($contracts->pivot->status_id == 3)value="REVIEW HUKUM"
                             @elseif ($contracts->pivot->status_id == 4)value="APPROVE HUKUM"
@@ -109,7 +110,7 @@
                             @elseif ($contracts->pivot->status_id == 9)value="APPROVED"
                             @elseif ($contracts->pivot->status_id == 10)value="REVIEW REKANAN DAN TTD"
                             @elseif ($contracts->pivot->status_id == 11)value="FINAL KONTRAK" @endif
-                            readonly>
+                                readonly>
                         </div>
                     </div>
                 </form>
@@ -152,4 +153,3 @@
         </div>
     </div>
 @endsection
-

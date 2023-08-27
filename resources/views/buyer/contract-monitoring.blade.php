@@ -50,8 +50,8 @@
                                 value="{{ date('d/m/Y', strtotime($contract->created_at)) }}" readonly>
                         </div>
                     </div>
-                    <a href="{{ route('buyer.contract-delete', $contract->id) }}"
-                        class="btn btn-danger btn-xs"><b>Batal Kontrak</b></a>
+                    <a href="{{ route('buyer.contract-delete', $contract->id) }}" class="btn btn-danger btn-xs"><b>Batal
+                            Kontrak</b></a>
                 </form>
             </div>
         </div>
@@ -96,27 +96,27 @@
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;">
                                         @if ($contract->pivot->status_id == 1)
-                                        <span class="badge badge-success">REVIEW VENDOR</span>
+                                            <span class="badge badge-success">REVIEW VENDOR</span>
                                         @elseif ($contract->pivot->status_id == 2)
-                                        <span class="badge badge-success">REVIEW BUYER</span>
+                                            <span class="badge badge-success">REVIEW BUYER</span>
                                         @elseif ($contract->pivot->status_id == 3)
-                                        <span class="badge badge-success">REVIEW HUKUM</span>
+                                            <span class="badge badge-success">REVIEW HUKUM</span>
                                         @elseif ($contract->pivot->status_id == 4)
-                                        <span class="badge badge-success">APPROVE HUKUM</span>
+                                            <span class="badge badge-success">APPROVE HUKUM</span>
                                         @elseif ($contract->pivot->status_id == 5)
-                                        <span class="badge badge-success">REVIEW ASSISTANT VICE PRESIDENT</span>
+                                            <span class="badge badge-success">REVIEW ASSISTANT VICE PRESIDENT</span>
                                         @elseif ($contract->pivot->status_id == 6)
-                                        <span class="badge badge-success">VICE PRESIDENT</span>
+                                            <span class="badge badge-success">VICE PRESIDENT</span>
                                         @elseif ($contract->pivot->status_id == 7)
-                                        <span class="badge badge-success">REVIEW SENIOR VICE PRESIDENT</span>
+                                            <span class="badge badge-success">REVIEW SENIOR VICE PRESIDENT</span>
                                         @elseif ($contract->pivot->status_id == 8)
-                                        <span class="badge badge-success">REVIEW DIREKTUR KEUANGAN DAN UMUM</span>
+                                            <span class="badge badge-success">REVIEW DIREKTUR KEUANGAN DAN UMUM</span>
                                         @elseif ($contract->pivot->status_id == 9)
-                                        <span class="badge badge-success">APPROVED</span>
+                                            <span class="badge badge-success">APPROVED</span>
                                         @elseif ($contract->pivot->status_id == 10)
-                                        <span class="badge badge-success">REVIEW REKANAN DAN TTD</span>
+                                            <span class="badge badge-success">REVIEW REKANAN DAN TTD</span>
                                         @elseif ($contract->pivot->status_id == 11)
-                                        <span class="badge badge-success">FINAL KONTRAK</span>
+                                            <span class="badge badge-success">FINAL KONTRAK</span>
                                         @endif
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;"> <a

@@ -16,7 +16,6 @@ class AVPController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role:AVP');
-        
     }
 
     public function contracts()
@@ -34,7 +33,7 @@ class AVPController extends Controller
     {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
 
-     
+
         $approvals = Approval::where('contract_vendor_id', $contracts->pivot->id)->orderBy('created_at', 'DESC')->get();
 
         return view('avp.contract', compact('contracts', 'contract', 'approvals'));
@@ -47,7 +46,7 @@ class AVPController extends Controller
         $contracts = ContractVendor::whereHas('contract.userDetail', function ($query) use ($avpUnitId) {
             $query->where('unit_id', $avpUnitId)->where('status_id', '=', 5);
         })->get();
-        
+
         return view('avp.review-contracts', compact('contracts'));
     }
 

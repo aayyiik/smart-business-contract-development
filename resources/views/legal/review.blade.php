@@ -30,7 +30,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('contract.legal-approval', ['contract' => $contracts->first()->id, 'vendor' => $vendor->first()->id]) }}"
+                    <form
+                        action="{{ route('contract.legal-approval', ['contract' => $contracts->first()->id, 'vendor' => $vendor->first()->id]) }}"
                         method="POST">
                         @csrf
                         <div class="form-check">

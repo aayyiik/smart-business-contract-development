@@ -30,7 +30,7 @@ class SuperAdminController extends Controller
         $roles = Role::all();
         $departments = Departement::all();
         $units = Unit::all();
-        return view('superadmin.users.index', compact('users', 'roles','departments','units'));
+        return view('superadmin.users.index', compact('users', 'roles', 'departments', 'units'));
     }
 
     public function users_detail($id)
@@ -40,7 +40,7 @@ class SuperAdminController extends Controller
         $units = Unit::all();
         $users = User::all();
         $departments = Departement::all();
-        return view('superadmin.users.detail', ['usersdetail' => $usersdetail], compact('roles', 'units', 'departments','users'));
+        return view('superadmin.users.detail', ['usersdetail' => $usersdetail], compact('roles', 'units', 'departments', 'users'));
     }
 
     public function users_edit($id)
@@ -50,7 +50,7 @@ class SuperAdminController extends Controller
         $roles = Role::all();
         $units = Unit::all();
         $departments = Departement::all();
-        return view('superadmin.users.edit', compact('usersdetail','roles', 'units', 'departments','users'));
+        return view('superadmin.users.edit', compact('usersdetail', 'roles', 'units', 'departments', 'users'));
     }
 
     public function users_update(Request $request, $id)
@@ -66,7 +66,7 @@ class SuperAdminController extends Controller
         ]);
 
         $user = $usersdetail->user;
-        $user->update ([
+        $user->update([
             'name' => $request->name,
             'nik' => $request->nik,
             'status' => $request->status
@@ -75,7 +75,8 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.users-detail', ['id' => $usersdetail->id]);
     }
 
-    public function users_store(Request $request, FlasherInterface $flasher){
+    public function users_store(Request $request, FlasherInterface $flasher)
+    {
         // Membuat record pada tabel "users"
         $user = User::create([
             'name' => $request->name,
@@ -96,7 +97,6 @@ class SuperAdminController extends Controller
         $flasher->addSuccess('Berhasil menambahkan data pengguna!');
 
         return redirect()->route('superadmin.users');
-
     }
 
     //UNITS
@@ -119,8 +119,9 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.units');
     }
 
-    public function units_store(Request $request, FlasherInterface $flasher){
-      
+    public function units_store(Request $request, FlasherInterface $flasher)
+    {
+
         $units = Unit::create([
             'unit' => $request->unit,
         ]);
@@ -150,8 +151,9 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.departments');
     }
 
-    public function departments_store(Request $request, FlasherInterface $flasher){
-       
+    public function departments_store(Request $request, FlasherInterface $flasher)
+    {
+
         $departments = Departement::create([
             'department' => $request->department,
         ]);
@@ -181,8 +183,9 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.statuses');
     }
 
-    public function statuses_store(Request $request, FlasherInterface $flasher){
-       
+    public function statuses_store(Request $request, FlasherInterface $flasher)
+    {
+
         $statuses = Status::create([
             'status' => $request->status,
         ]);
@@ -212,8 +215,9 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.roles');
     }
 
-    public function roles_store(Request $request, FlasherInterface $flasher){
-       
+    public function roles_store(Request $request, FlasherInterface $flasher)
+    {
+
         $roles = Role::create([
             'role' => $request->role,
         ]);
@@ -247,8 +251,9 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.vendors');
     }
 
-    public function vendors_store(Request $request, FlasherInterface $flasher){
-       
+    public function vendors_store(Request $request, FlasherInterface $flasher)
+    {
+
         $vendors = Vendor::create([
             'vendor' => $request->vendor,
             'user_detail_id' => $request->user_detail_id,
@@ -283,8 +288,9 @@ class SuperAdminController extends Controller
         return redirect()->route('superadmin.templates');
     }
 
-    public function templates_store(Request $request, FlasherInterface $flasher){
-       
+    public function templates_store(Request $request, FlasherInterface $flasher)
+    {
+
         $templates = Template::create([
             'template' => $request->template,
             'unit' => $request->unit,

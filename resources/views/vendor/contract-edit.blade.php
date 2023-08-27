@@ -58,14 +58,13 @@
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="date_sp">Tanggal Terbit No SP</label>
                         <input type="date" class="form-control form-control-sm @error('date_sp') is-invalid @enderror"
-                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp"readonly >
+                            value="{{ $contracts->date_sp }}" id="date_sp" name="date_sp"readonly>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label col-form-label-xs" for="prosentase">Prosentase<span
                                 class="required">*</span></label>
                         <input type="number" class="form-control form-control-sm @error('prosentase') is-invalid @enderror"
-                            value="{{ $contract->pivot->prosentase }}" id="prosentase"
-                            name="prosentase" readonly>
+                            value="{{ $contract->pivot->prosentase }}" id="prosentase" name="prosentase" readonly>
                         @error('prosentase')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -135,7 +134,7 @@
                 <!-- /tool -->
             </div>
             <div class="card-body">
-              
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="state_rate">Wilayah Rate Pemuatan<span
                             class="required">*</span></label>
@@ -149,7 +148,8 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="minimum_transport">Minimal Angkutan</label>
-                    <input type="text" class="form-control form-control-sm @error('minimum_transport') is-invalid @enderror"
+                    <input type="text"
+                        class="form-control form-control-sm @error('minimum_transport') is-invalid @enderror"
                         id="minimum_transport" name="minimum_transport">
                     @error('minimum_transport')
                         <div class="invalid-feedback">
@@ -203,8 +203,7 @@
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="vendor">Nama Vendor<span
                             class="required">*</span></label>
-                    <input type="text"
-                        class="form-control form-control-sm @error('vendor') is-invalid @enderror"
+                    <input type="text" class="form-control form-control-sm @error('vendor') is-invalid @enderror"
                         id="vendor" name="vendor">
                     @error('vendor')
                         <div class="invalid-feedback">
@@ -224,7 +223,7 @@
                         </div>
                     @enderror
                 </div>
-              
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="end_date">Waktu Selesai<span
                             class="required">*</span></label>
@@ -236,7 +235,7 @@
                         </div>
                     @enderror
                 </div>
-               
+
                 <div class="form-group">
                     <label class="col-form-label col-form-label-xs" for="delivery_date">Berlaku Sampai<span
                             class="required">*</span></label>
@@ -310,11 +309,10 @@
                 if (endDate < startDate) {
                     alert(
                         'Tanggal Selesai tidak bisa dipilih sebelum Tanggal Mulai. Pilih tanggal dengan benar!'
-                        );
+                    );
                     $(this).val(''); // Menghapus nilai end date yang tidak valid
                 }
             });
         });
     </script>
-
 @endpush

@@ -33,56 +33,56 @@
                     <div class="mb-4">
                         <a href="{{ route('superadmin.users-edit', ['id' => $usersdetail->id]) }}"
                             class="btn btn-success btn-xs">Edit Data Pengguna</a>
-                            <form>
-                                <div class="form-group row">
-                                    <label for="number" class="col-sm-2 col-form-label">Nama Pengguna</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="text" value="{{ $usersdetail->user->name }}"
-                                            readonly>
-                                    </div>
+                        <form>
+                            <div class="form-group row">
+                                <label for="number" class="col-sm-2 col-form-label">Nama Pengguna</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="text"
+                                        value="{{ $usersdetail->user->name }}" readonly>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="number" class="col-sm-2 col-form-label">Role</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="number" value="{{ $usersdetail->role->role }}"
-                                            readonly>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="number" class="col-sm-2 col-form-label">Role</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="number"
+                                        value="{{ $usersdetail->role->role }}" readonly>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="prosentase" class="col-sm-2 col-form-label">Departemen</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="prosentase"
-                                            value="{{ $usersdetail->department ? $usersdetail->department->department : ' - ' }}"
-                                            readonly>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="prosentase" class="col-sm-2 col-form-label">Departemen</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="prosentase"
+                                        value="{{ $usersdetail->department ? $usersdetail->department->department : ' - ' }}"
+                                        readonly>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="number" class="col-sm-2 col-form-label">Unit</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="number"
-                                            value="{{ $usersdetail->unit ? $usersdetail->unit->unit : ' - ' }}" readonly>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="number" class="col-sm-2 col-form-label">Unit</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="number"
+                                        value="{{ $usersdetail->unit ? $usersdetail->unit->unit : ' - ' }}" readonly>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="director" class="col-sm-2 col-form-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="director" value="{{ $usersdetail->email }}"
-                                            readonly>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="director" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="director"
+                                        value="{{ $usersdetail->email }}" readonly>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="phone" class="col-sm-2 col-form-label">Kontak</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="phone" value="{{ $usersdetail->phone }}"
-                                            readonly>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone" class="col-sm-2 col-form-label">Kontak</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="phone"
+                                        value="{{ $usersdetail->phone }}" readonly>
                                 </div>
-                            </form>
+                            </div>
+                        </form>
                     </div>
                 @else
                     <p>User detail not found.</p>
                 @endif
-                
+
             </div>
         </div>
     </div>

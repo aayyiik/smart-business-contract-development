@@ -119,7 +119,7 @@ class SVPController extends Controller
         return redirect()->route('svp.review-contracts');
     }
 
-  
+
     private function generateQRCode($contract, $vendor)
     {
         $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
@@ -183,7 +183,7 @@ class SVPController extends Controller
     private function setImageValueInTemplate($templateProcessor, $field, $qrCodeData)
     {
         $templateProcessor->setImageValue($field, ['qrcode' => $qrCodeData, 'width' => 100, 'height' => 50]);
-    } 
+    }
 
     private function saveTemplateAsDocx($templateProcessor, $fileName)
     {

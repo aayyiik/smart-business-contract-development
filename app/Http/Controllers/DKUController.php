@@ -87,31 +87,31 @@ class DKUController extends Controller
             'description' => $request->description,
         ]);
 
-            $fileName = $this->generateFileName();
-            $date_dof = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->date_dof)->format('d-m-Y');
-            $date_sp = Carbon::createFromFormat('Y-m-d', $contract->date_sp)->format('d-m-Y');
-            $start_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->start_date)->format('d-m-Y');
-            $end_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->end_date)->format('d-m-Y');
+        $fileName = $this->generateFileName();
+        $date_dof = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->date_dof)->format('d-m-Y');
+        $date_sp = Carbon::createFromFormat('Y-m-d', $contract->date_sp)->format('d-m-Y');
+        $start_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->start_date)->format('d-m-Y');
+        $end_date = Carbon::createFromFormat('Y-m-d', $contract_detail->pivot->end_date)->format('d-m-Y');
 
-            $templateProcessor = $this->generateTemplateProcessor();
+        $templateProcessor = $this->generateTemplateProcessor();
 
-            $this->setValuesInTemplate($templateProcessor, $contract_detail, $date_dof, $date_sp, $start_date, $end_date);
+        $this->setValuesInTemplate($templateProcessor, $contract_detail, $date_dof, $date_sp, $start_date, $end_date);
 
-            // Generate QR Code data
-            $qrCodeData = $this->generateQRCode($contract, $vendor);
+        // Generate QR Code data
+        $qrCodeData = $this->generateQRCode($contract, $vendor);
 
-            $this->setImageValueInTemplate($templateProcessor, 'qrcode', $qrCodeData);
+        $this->setImageValueInTemplate($templateProcessor, 'qrcode', $qrCodeData);
 
-            $this->saveTemplateAsDocx($templateProcessor, $fileName);
+        $this->saveTemplateAsDocx($templateProcessor, $fileName);
 
-            $this->convertDocxToPdf($fileName);
+        $this->convertDocxToPdf($fileName);
 
-            $this->updateContractVendor($contract, $vendor, $fileName);
+        $this->updateContractVendor($contract, $vendor, $fileName);
 
-            $flasher->addSuccess('Draft Kontrak Approved!');
+        $flasher->addSuccess('Draft Kontrak Approved!');
 
-            return redirect()->route('dku.review-contracts');
-        
+        return redirect()->route('dku.review-contracts');
+
 
         return redirect()->route('dku.review-contracts');
     }

@@ -35,7 +35,8 @@
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $departments->department }}" name="department">
+                            <input type="text" class="form-control" id="text" value="{{ $departments->department }}"
+                                name="department">
                         </div>
                     </div>
                     <div class="row justify-content-end mr-0">

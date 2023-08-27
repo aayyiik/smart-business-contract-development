@@ -23,7 +23,6 @@ class VendorController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role:Vendor');
-
     }
 
     public function contracts()
@@ -74,34 +73,34 @@ class VendorController extends Controller
             5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
             9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember',
         ];
-        
+
         // Ubah tahun dalam angka menjadi kata-kata dalam bahasa Indonesia
         $indonesianYears = [
-          '2022' => 'Dua Ribu Dua Puluh Dua',
-          '2023' => 'Dua Ribu Dua Puluh Tiga',
-          '2024' => 'Dua Ribu Dua Puluh Empat',
-          '2025' => 'Dua Ribu Dua Puluh Lima',
-          '2026' => 'Dua Ribu Dua Puluh Enam',
-          '2027' => 'Dua Ribu Dua Puluh Tujuh'
-      ];
+            '2022' => 'Dua Ribu Dua Puluh Dua',
+            '2023' => 'Dua Ribu Dua Puluh Tiga',
+            '2024' => 'Dua Ribu Dua Puluh Empat',
+            '2025' => 'Dua Ribu Dua Puluh Lima',
+            '2026' => 'Dua Ribu Dua Puluh Enam',
+            '2027' => 'Dua Ribu Dua Puluh Tujuh'
+        ];
         $inputStartDate = Carbon::createFromFormat('Y-m-d', $request->start_date);
         // Format tanggal dengan format bahasa Indonesia
-        $date_sname = 'Tanggal '.terbilang($inputStartDate->day) . ' Bulan ' . $indonesianMonths[$inputStartDate->month] . ' Tahun ' . $indonesianYears[$inputStartDate->year];
-    
+        $date_sname = 'Tanggal ' . terbilang($inputStartDate->day) . ' Bulan ' . $indonesianMonths[$inputStartDate->month] . ' Tahun ' . $indonesianYears[$inputStartDate->year];
+
 
         $inputEndDate = Carbon::createFromFormat('Y-m-d', $request->end_date);
         // Format tanggal dengan format bahasa Indonesia
-        $date_ename = 'Tanggal '.terbilang($inputEndDate->day) . ' Bulan ' . $indonesianMonths[$inputEndDate->month] . ' Tahun ' . $indonesianYears[$inputEndDate->year];
-        
+        $date_ename = 'Tanggal ' . terbilang($inputEndDate->day) . ' Bulan ' . $indonesianMonths[$inputEndDate->month] . ' Tahun ' . $indonesianYears[$inputEndDate->year];
+
         $inputDateName = Carbon::createFromFormat('Y-m-d', $request->date_dof);
         // Format tanggal dengan format bahasa Indonesia
-        $date_name = 'Tanggal '.terbilang($inputDateName->day) . ' Bulan ' . $indonesianMonths[$inputDateName->month] . ' Tahun ' . $indonesianYears[$inputDateName->year];
+        $date_name = 'Tanggal ' . terbilang($inputDateName->day) . ' Bulan ' . $indonesianMonths[$inputDateName->month] . ' Tahun ' . $indonesianYears[$inputDateName->year];
 
         // $angkaTerbilang = require('@develoka/angka-terbilang-js');
         $rupiah = terbilang($request->performance_bond);
 
         $name_devdate = terbilang($request->delivery_date);
-    
+
         $contract->vendors()->updateExistingPivot($vendor->id, [
             'status_id' => 2,
             'no_dof' => $request->no_dof,
@@ -131,7 +130,7 @@ class VendorController extends Controller
             'filename' => $fileName,
         ]);
 
-       
+
         //mengubah date ('Y-m-d') ke ('d-m-Y)
         $date_dof = Carbon::createFromFormat('Y-m-d', $request->date_dof)->format('d-m-Y');
         $date_sp = Carbon::createFromFormat('Y-m-d', $request->date_sp)->format('d-m-Y');
@@ -192,12 +191,13 @@ class VendorController extends Controller
 
         return redirect()->route('vendor.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
     }
-    
-    function terbilang($nilai) {
+
+    function terbilang($nilai)
+    {
         $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
-        if($nilai==0){
+        if ($nilai == 0) {
             return "Kosong";
-        }elseif ($nilai < 12&$nilai!=0) {
+        } elseif ($nilai < 12 & $nilai != 0) {
             return "" . $huruf[$nilai];
         } elseif ($nilai < 20) {
             return Terbilang($nilai - 10) . " Belas ";
@@ -213,11 +213,11 @@ class VendorController extends Controller
             return Terbilang($nilai / 1000) . " Ribu " . Terbilang($nilai % 1000);
         } elseif ($nilai < 1000000000) {
             return Terbilang($nilai / 1000000) . " Juta " . Terbilang($nilai % 1000000);
-        }elseif ($nilai < 1000000000000) {
+        } elseif ($nilai < 1000000000000) {
             return Terbilang($nilai / 1000000000) . " Milyar " . Terbilang($nilai % 1000000000);
-        }elseif ($nilai < 100000000000000) {
+        } elseif ($nilai < 100000000000000) {
             return Terbilang($nilai / 1000000000000) . " Trilyun " . Terbilang($nilai % 1000000000000);
-        }elseif ($nilai <= 100000000000000) {
+        } elseif ($nilai <= 100000000000000) {
             return "Maaf Tidak Dapat di Prose Karena Jumlah nilai Terlalu Besar ";
         }
     }

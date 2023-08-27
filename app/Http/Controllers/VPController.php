@@ -52,7 +52,7 @@ class VPController extends Controller
         $contract_detail = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
 
         Approval::create([
-            'contract_vendor_id' => $contract_detail->pivot->id, 
+            'contract_vendor_id' => $contract_detail->pivot->id,
             'name' => Auth::user()->name,
             'status' => 2,
             'description' => $request->description,
@@ -115,7 +115,7 @@ class VPController extends Controller
         return redirect()->route('vp.review-contracts');
     }
 
-  
+
     private function generateQRCode($contract, $vendor)
     {
         $qrCodeText = route('vp.contract', ['contract' => $contract->id, 'vendor' => $vendor->id]);
@@ -179,7 +179,7 @@ class VPController extends Controller
     private function setImageValueInTemplate($templateProcessor, $field, $qrCodeData)
     {
         $templateProcessor->setImageValue($field, ['qrcode' => $qrCodeData, 'width' => 100, 'height' => 50]);
-    } 
+    }
 
     private function saveTemplateAsDocx($templateProcessor, $fileName)
     {

@@ -35,13 +35,15 @@
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Nama Template</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $templates->template }}" name="template">
+                            <input type="text" class="form-control" id="text" value="{{ $templates->template }}"
+                                name="template">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="number" class="col-sm-2 col-form-label">Nama Unit</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="text" value="{{ $templates->unit }}" name="unit">
+                            <input type="text" class="form-control" id="text" value="{{ $templates->unit }}"
+                                name="unit">
                         </div>
                     </div>
                     <div class="row justify-content-end mr-0">

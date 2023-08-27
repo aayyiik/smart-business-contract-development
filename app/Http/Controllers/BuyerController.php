@@ -39,7 +39,7 @@ class BuyerController extends Controller
         return view('buyer.contract-monitoring', compact('contract', 'contract_vendor'));
     }
 
-    public function contract_monitoring_create()    
+    public function contract_monitoring_create()
     {
         return view('buyer.contract-create', [
             "vendor" => Vendor::all(),
@@ -76,7 +76,7 @@ class BuyerController extends Controller
                 $data2 = array(
                     'contract_id' => $contract->id,
                     'vendor_id' => $vendorIds[$item],
-                    'prosentase'=> $prosentase[$item],
+                    'prosentase' => $prosentase[$item],
                     'status_id' => 1,
                 );
                 ContractVendor::create($data2);
@@ -101,7 +101,7 @@ class BuyerController extends Controller
     {
         $contracts = Contract::where('id', $contract->id)->first();
         $contract = $contracts->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
-        return view('buyer.contract-edit', compact('contract','contracts'));
+        return view('buyer.contract-edit', compact('contract', 'contracts'));
     }
 
     public function contract_update(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
@@ -157,7 +157,7 @@ class BuyerController extends Controller
         $templateProcessor->setValue('management_executives', $request->management_executives);
         $templateProcessor->setValue('management_job', $request->management_job);
         $templateProcessor->saveAs($fileName . '.docx');
-        
+
         // .pdf
         $domPdfPath = base_path('vendor/dompdf/dompdf');
         \PhpOffice\PhpWord\Settings::setPdfRendererPath($domPdfPath);
@@ -317,13 +317,13 @@ class BuyerController extends Controller
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
         $review_hukum = ReviewLegal::where('contract_vendor_id', $contracts->pivot->id)->get();
         $approvals = Approval::join('contract_vendor as b', 'approvals.contract_vendor_id', '=', 'b.id')
-        ->where('b.status_id', 9)
-        ->orderBy('approvals.created_at', 'DESC')
-        ->first();
+            ->where('b.status_id', 9)
+            ->orderBy('approvals.created_at', 'DESC')
+            ->first();
 
         // dd($approvals);
         // $approvals = Approval::where('contract_vendor_id', $contracts->pivot->id)->where('status_id','9')->where('created_at','desc')->first();
-        return view('buyer.contract-approval', compact('contracts', 'contract', 'review_hukum','approvals'));
+        return view('buyer.contract-approval', compact('contracts', 'contract', 'review_hukum', 'approvals'));
     }
 
     public function contract_send(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)
@@ -382,6 +382,4 @@ class BuyerController extends Controller
         $qrcode = QrCode::size(50)->generate(route('buyer.contract-final', ['contract' => $contract->id, 'vendor' => $vendor->id]));
         return view('buyer.contract-final', compact('contracts', 'contract', 'review_hukum', 'qrcode'));
     }
-
-
 }

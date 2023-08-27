@@ -112,18 +112,20 @@
                         </div>
                     </div>
                     <div class="form-group row md:col-span-5">
-                       
-                            <label for="status" class="col-sm-2 col-form-label">Status</label>
-                            <div class="form-check form-check-inline" >
-                                <input class="form-check-input" type="radio" name="status" id="active" value="1"{{ $usersdetail->user->status == '1' ? 'checked' : '' }} >
-                                <label class="form-check-label" for="active">Active</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status"  id="inactivate" value="0"{{ $usersdetail->user->status == '0' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="inactivate">Inactivate</label>
-                            </div>
-                      
-                    </div>	
+
+                        <label for="status" class="col-sm-2 col-form-label">Status</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="active"
+                                value="1"{{ $usersdetail->user->status == '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="active">Active</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="inactivate"
+                                value="0"{{ $usersdetail->user->status == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="inactivate">Inactivate</label>
+                        </div>
+
+                    </div>
                     <div class="row justify-content-end mr-0">
                         <button type="submit" class="btn btn-success btn-xs text-right" data-toggle="confirmation"
                             data-placement="left">Update</button>
@@ -133,4 +135,3 @@
         </div>
     </div>
 @endsection
-
