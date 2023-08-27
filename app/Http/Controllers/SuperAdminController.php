@@ -77,6 +77,12 @@ class SuperAdminController extends Controller
 
     public function users_store(Request $request, FlasherInterface $flasher)
     {
+
+        $request->validate([
+            'nik' => 'required|unique:users,nik',
+            'name' => 'required'
+        ]);
+
         // Membuat record pada tabel "users"
         $user = User::create([
             'name' => $request->name,
