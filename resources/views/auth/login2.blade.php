@@ -10,6 +10,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('../../assets/admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Sweetalert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -33,28 +37,16 @@
                         <div class="input-block">
                             <label for="nik" class="input-label">Username</label>
                             <div class="input-group">
-                            <input type="nik" name="nik" id="nik" placeholder="nik"
-                                class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik') }}">
+                                <input type="nik" name="nik" id="nik" placeholder="nik"
+                                    class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik') }}">
                             </div>
-                                @error('nik')
+                            @error('nik')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="password" class="input-label">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror">
-                            <span class="password-toggle" id="password-toggle">
-                                <i class="fa fa-eye"></i>
-                            </span>
-                            @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                         --}}
+
                         <div class="input-block">
                             <label for="password" class="input-label">Password</label>
                             <div class="input-group">
@@ -71,25 +63,6 @@
                                 </div>
                             @enderror
                         </div>
-
-                        {{-- <div class="input-block">
-                            <label for="password" class="input-label">Password</label>
-                            <div class="input-group">
-                                <input type="password" name="password" id="password" placeholder="Password"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    value="{{ old('password') }}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text password-toggle">
-                                            <i class="fas fa-eye" id="togglePassword"></i>
-                                        </span>
-                                    </div>
-                            </div>
-                            @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div> --}}
 
                         <div class="modal-buttons">
                             <a href="" class="">Forgot your password?</a>
@@ -147,15 +120,29 @@
         <script>
             const togglePassword = document.querySelector('.toggle-password');
             const passwordInput = document.querySelector('#password');
-        
-            togglePassword.addEventListener('click', function () {
+
+            togglePassword.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
                 this.classList.toggle('fa-eye');
                 this.classList.toggle('fa-eye-slash');
             });
         </script>
-           
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            @if(session('status') === 'logged_out')
+                Swal.fire({
+                    title: 'Anda telah keluar',
+                    text: 'Harap login kembali untuk mengakses halaman ini.',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        </script>
+
+
 </body>
 
 </html>

@@ -12,6 +12,7 @@ use App\Http\Controllers\SVPController;
 use App\Http\Controllers\DKUController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UrlHistoryController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,18 @@ Route::get('/', function () {
 })->name('login2');
 
 // Auth
+// versi login baru
 Route::post('/login', [AuthController::class, "login"])->name('signin');
-Route::get('/login2', [AuthController::class, "login2"])->name('signin-2');
+
+// versi login lama
+// Route::get('/login2', [AuthController::class, "login2"])->name('signin-2');
+
 Route::post('/logout', [AuthController::class, "logout"])->name('signout');
+
+
+    // Route::post('/logout', [AuthController::class, 'logout'])->name('signout');
+
+    // Route::middleware('guest')->group(function () {
 
 // Dashboard
 Route::get('/home', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -174,3 +184,4 @@ Route::get('/contract/{contract}/legal/edit', [ContractController::class, 'editL
 // coba barcode
 Route::get('generate-pdf', [BuyerController::class,'generatePdf'])->name('generate-pdf');
 
+    

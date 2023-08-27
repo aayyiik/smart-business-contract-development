@@ -9,8 +9,8 @@ color: rgba(0, 0, 0, 0.7);
 }
 
 .container {
-height: 200vh;
-background-image: url(../../assets/img/PETRO.jpg);
+height: 250vh;
+background-image: url(../../assets/img/bg_sintract_login_petro.png);
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
@@ -206,7 +206,7 @@ background-repeat: no-repeat;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: #fff;
+  color: #224038;
   font-size: 32px;
   font-weight: 800;
   transform: translate(-50%, -50%);

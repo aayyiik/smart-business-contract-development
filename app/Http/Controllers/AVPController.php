@@ -16,6 +16,7 @@ class AVPController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role:AVP');
+        
     }
 
     public function contracts()

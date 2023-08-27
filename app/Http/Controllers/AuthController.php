@@ -21,7 +21,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended('home');
-        }
+        } 
 
         session()->flash('message', 'NIK atau Password Salah!');
         return back();
@@ -46,7 +46,9 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+
         Auth::logout();
+        
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

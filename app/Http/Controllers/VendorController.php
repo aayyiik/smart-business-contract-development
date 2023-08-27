@@ -23,6 +23,7 @@ class VendorController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role:Vendor');
+
     }
 
     public function contracts()
