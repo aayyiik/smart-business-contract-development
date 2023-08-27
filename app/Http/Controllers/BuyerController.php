@@ -316,7 +316,14 @@ class BuyerController extends Controller
     {
         $contracts = $contract->vendors()->where('vendor_id', $vendor->id)->withPivot('id')->first();
         $review_hukum = ReviewLegal::where('contract_vendor_id', $contracts->pivot->id)->get();
-        return view('buyer.contract-approval', compact('contracts', 'contract', 'review_hukum'));
+        $approvals = Approval::join('contract_vendor as b', 'approvals.contract_vendor_id', '=', 'b.id')
+        ->where('b.status_id', 9)
+        ->orderBy('approvals.created_at', 'DESC')
+        ->first();
+
+        // dd($approvals);
+        // $approvals = Approval::where('contract_vendor_id', $contracts->pivot->id)->where('status_id','9')->where('created_at','desc')->first();
+        return view('buyer.contract-approval', compact('contracts', 'contract', 'review_hukum','approvals'));
     }
 
     public function contract_send(Request $request, Contract $contract, Vendor $vendor, FlasherInterface $flasher)

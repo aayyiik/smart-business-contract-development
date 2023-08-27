@@ -88,11 +88,11 @@
                                 <tr>
                                     <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
                                     <td style="vertical-align: middle;" class="text-uppercase">{{ $contract->vendor }}</td>
-                                    <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->number }}
+                                    <td class="text-center" style="vertical-align: middle;">{{ $contract->pivot->no_dof }}
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;">
                                         {{ $contract->pivot->prosentase }}%</td>
-                                    <td class="text-center" style="vertical-align: middle;">@currency($contract->pivot->nilai_kontrak)
+                                    <td class="text-center" style="vertical-align: middle;">@currency($contract->pivot->contract_amount)
                                     </td>
                                     <td class="text-center" style="vertical-align: middle;">
                                         @if ($contract->pivot->status_id == 1)

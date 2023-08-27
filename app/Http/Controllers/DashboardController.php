@@ -70,7 +70,6 @@ class DashboardController extends Controller
         $contracts_vp = DB::table('contract_vendor as a')
             ->join('contracts as b', 'a.contract_id', '=', 'b.id')
             ->where('a.status_id', '>=', 6)
-            ->where('b.oe', '<', 100000000)
             ->count();
 
     } elseif ($userRole == 'SVP') {
@@ -78,7 +77,7 @@ class DashboardController extends Controller
         $contracts_svp = DB::table('contract_vendor as a')
             ->join('contracts as b', 'a.contract_id', '=', 'b.id')
             ->where('a.status_id', '>=', 7)
-            ->whereBetween('b.oe', [100000000, 500000000])
+            ->where('b.oe', '>=','100000000')
             ->count();
 
     } elseif ($userRole == 'DKU') {
