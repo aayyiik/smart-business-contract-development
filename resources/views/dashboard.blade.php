@@ -268,7 +268,22 @@
                             <h4>Review Kontrak</h4>
                         </div>
                         <div class="card-body">
-                            {{ $review_hukum }}
+                            {{ $review_legal }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Kontrak Aktif</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $contracts_legal }}
                         </div>
                     </div>
                 </div>

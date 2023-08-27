@@ -131,6 +131,8 @@
                             <p style="color: #F69016;"> {{ Auth::user()->userdetail->role->role }}</p>
                         @elseif(Auth::user()->userdetail->role->role == 'Vendor')
                             <p style="color: #F69016;">{{ Auth::user()->userdetail->vendor_user->vendor }}</p>
+                        @elseif(Auth::user()->userdetail->role->role == 'Legal')
+                            <p style="color: #F69016;">{{ Auth::user()->userdetail->role->role }}</p>
                         @elseif(Auth::user()->userdetail->role->role == 'Super Admin')
                             <p style="color: #F69016;">{{ Auth::user()->userdetail->role->role }}</p>
                         @endif

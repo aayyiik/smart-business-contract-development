@@ -141,8 +141,13 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane show active" id="draft" role="tabpanel" aria-labelledby="draft-tab">
-                        <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px"
-                            type="application/pdf">
+                        @if ($contracts->pivot->status_id >= 9)
+                            <embed src="{{ asset($contracts->pivot->qrcode) }}.pdf" width="100%" height="600px"
+                                type="application/pdf">
+                        @else
+                            <embed src="{{ asset($contracts->pivot->filename) }}.pdf" width="100%" height="600px"
+                                type="application/pdf">
+                        @endif
                     </div>
                     <div class="tab-pane" id="vendor" role="tabpanel" aria-labelledby="vendor-tab">
                         <embed src="{{ asset('file_upload/' . $contracts->pivot->final_vendor) }}" width="100%"

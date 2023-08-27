@@ -137,7 +137,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="datatable"
+                <table
                     class="table table-sm table-hovered table-bordered table-hover table-striped datatable2">
                     <thead>
                         <tr>

@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $contract = $review_vendor = $approval = $review_hukum = $final = 0;
         $users = $units = $departments = $roles = $vendors = $templates = $statuses = 0;
         $active_tender = $sign_vendor = $final_vendor = $review = 0;
-        $contracts_avp = $review_avp = $contracts_vp = $review_vp = 0;
+        $contracts_avp = $review_avp = $contracts_vp = $review_vp = $contracts_legal = $review_legal = 0;
         $contracts_svp = $review_svp = $contracts_dku = $review_dku = 0;
 
         // Menemukan rolenya
@@ -81,6 +81,12 @@ class DashboardController extends Controller
                 ->where('a.status_id', '>=', 8)
                 ->where('b.oe', '>', 500000000)
                 ->count();
+        } elseif ($userRole == 'Legal') {
+            $review_legal = ContractVendor::where('status_id', '=', 3)->count();
+            $contracts_legal = DB::table('contract_vendor as a')
+                ->join('contracts as b', 'a.contract_id', '=', 'b.id')
+                ->where('a.status_id', '>=', 3)
+                ->count();
         }
 
         return view('dashboard', compact(
@@ -107,7 +113,9 @@ class DashboardController extends Controller
             'contracts_svp',
             'review_svp',
             'contracts_dku',
-            'review_dku'
+            'review_dku',
+            'review_legal',
+            'contracts_legal'
         ));
     }
 }
