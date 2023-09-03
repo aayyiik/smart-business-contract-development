@@ -50,7 +50,7 @@
     <!-- Pace-->
     <link rel="stylesheet" href="{{ asset('../../assets/pace/themes/red/pace-theme-flash.css') }}"> <!-- custom CSS -->
     <link href="{{ asset('../../assets/css/style.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{ asset('../../assets/img/logo.png') }}">
+    <link rel="icon" href="{{ asset('../../assets/img') }}">
     <style>
         thead input {
             width: 100%;
