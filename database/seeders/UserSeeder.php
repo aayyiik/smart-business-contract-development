@@ -21,49 +21,49 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Bagus Permadi Ardiansyah',
-                'nik' => '2325736',
+                'nik' => '1111111',
                 'password' => Hash::make('distribusi1'),
                 'status' => '1',
             ],
             [
                 'name' => 'Indra Riyan Permana',
-                'nik' => '2325738',
+                'nik' => '2222222',
                 'password' => Hash::make('distribusi1'),
                 'status' => '1'
             ],
             [
                 'name' => 'Faisal Z Nasrulloh',
-                'nik' => '2146191',
+                'nik' => '33333333',
                 'password' => Hash::make('distribusi1'),
                 'status' => '1'
             ],
             [
                 'name' => 'Karina Sari',
-                'nik' => '2084865',
+                'nik' => '4444444',
                 'password' => Hash::make('legal1'),
                 'status' => '1'
             ],
             [
                 'name' => 'Akhmad Ali Affandi',
-                'nik' => '2105091',
+                'nik' => '5555555',
                 'password' => Hash::make('avpdistribusi1'),
                 'status' => '1',
             ],
             [
                 'name' => 'Haris Sulistiyana',
-                'nik' => '2944780',
+                'nik' => '6666666',
                 'password' => Hash::make('vpjasa1'),
                 'status' => '1',
             ],
             [
                 'name' => 'I Gusti Manacika',
-                'nik' => '2944769',
+                'nik' => '7777777',
                 'password' => Hash::make('svpteknik1'),
                 'status' => '1',
             ],
             [
                 'name' => 'Budi Wahyu Soesilo',
-                'nik' => '2210019',
+                'nik' => '8888888',
                 'password' => Hash::make('dku1'),
                 'status' => '1',
             ],
