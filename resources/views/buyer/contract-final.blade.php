@@ -103,8 +103,11 @@
                                 readonly>
                         </div>
                     </div>
-                    <div>
-                        {!! $qrcode !!}
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Disetujui </label>
+                        <div class="col-sm-10">
+                            {!! $qrcode !!}
+                        </div>
                     </div>
                 </form>
             </div>
